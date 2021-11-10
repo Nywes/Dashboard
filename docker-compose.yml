@@ -27,8 +27,8 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
       #ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
 
-  dashboard:
+  server:
     build:
     ports:
-      - 3000:3000
+      - 3000:8080
       - 3001:3001
