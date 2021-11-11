@@ -1,7 +1,13 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const apiPort = 3000
+
+const port = process.env.DASHBOARD_SERVER_PORT;
+
+if (port == undefined)
+    port = undefined;
+
+const apiPort = port
 
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
