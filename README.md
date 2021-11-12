@@ -47,7 +47,7 @@ Run production environment (mongodb + server + client + mongo-express)
 
 At repository root:
 ```
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 **The development environment still needs the production environment to be running, because mongodb runs in the production container**
