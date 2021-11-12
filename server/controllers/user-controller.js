@@ -1,44 +1,45 @@
 const User = require('../models/user-model')
+const mongoose = require('mongoose');
 
 // ! create db users if not created
 // ! change db if the db is not currently on users
 // ! mongoose.connection.useDb('myDB'); // Switching happens here..
 
-// createUser = (req, res) => {
-//     const body = req.body
+createUser = (req, res) => {
+    const body = req.body
 
-//     // * empty or no body
-//     if (!body) {
-//         return res.status(400).json({
-//             success: false,
-//             error: 'You must provide a user',
-//         })
-//     }
+    // * empty or no body
+    if (!body) {
+        return res.status(400).json({
+            success: false,
+            error: 'You must provide a user',
+        })
+    }
 
-//     const user = new User(body)
+    const user = new User(body)
 
-//     // * if body provided is invalid
-//     if (!user) {
-//         return res.status(400).json({ success: false, error: err })
-//     }
+    // * if body provided is invalid
+    if (!user) {
+        return res.status(400).json({ success: false, error: err })
+    }
 
-//     // * add user to 
-//     user
-//         .save()
-//         .then(() => {
-//             return res.status(201).json({
-//                 success: true,
-//                 id: movie._id,
-//                 message: 'Movie created!',
-//             })
-//         })
-//         .catch(error => {
-//             return res.status(400).json({
-//                 error,
-//                 message: 'Movie not created!',
-//             })
-//         })
-// }
+    // * add user to
+    user
+        .save()
+        .then(() => {
+            return res.status(201).json({
+                success: true,
+                id: user._id,
+                message: 'User created!',
+            })
+        })
+        .catch(error => {
+            return res.status(400).json({
+                error,
+                message: 'User not created!',
+            })
+        })
+}
 
 // updateMovie = async (req, res) => {
 //     const body = req.body
@@ -123,10 +124,10 @@ const User = require('../models/user-model')
 //     }).catch(err => console.log(err))
 // }
 
-// module.exports = {
-//     createMovie,
-//     updateMovie,
-//     deleteMovie,
-//     getMovies,
-//     getMovieById,
-// }
+module.exports = {
+    createUser,
+    // updateMovie,
+    // deleteMovie,
+    // getMovies,
+    // getMovieById,
+}
