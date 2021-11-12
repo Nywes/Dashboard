@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "DASHBOARD_SERVER_PORT=3000 node_modules/.bin/nodemon index.js",
+    "dev": "DASHBOARD_SERVER_PORT=4000 node_modules/.bin/nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

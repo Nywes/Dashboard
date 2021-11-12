@@ -10,4 +10,4 @@ COPY . .
 # install server dependencies and run server
 RUN npm install --silent
 
-CMD ["node_modules/.bin/nodemon", "index.js"]
+CMD ["npm", "start"]

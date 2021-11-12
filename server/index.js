@@ -7,7 +7,7 @@ const db = require('./db');
 
 const app = express()
 if (port == undefined)
-    port = undefined;
+    port = 3000;
 
 const apiPort = port
 
