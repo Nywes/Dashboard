@@ -44,6 +44,7 @@ createUser = (req, res) => {
 // updateMovie = async (req, res) => {
 //     const body = req.body
 
+//     // * no body provided:
 //     if (!body) {
 //         return res.status(400).json({
 //             success: false,
@@ -51,7 +52,8 @@ createUser = (req, res) => {
 //         })
 //     }
 
-//     Movie.findOne({ _id: req.params.id }, (err, movie) => {
+//     // ! find based on our user_id
+//     User.findOne({ user_id: req.params.id }, (err, movie) => {
 //         if (err) {
 //             return res.status(404).json({
 //                 err,
