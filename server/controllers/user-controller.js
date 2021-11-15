@@ -1,8 +1,7 @@
 const User = require('../models/user-model')
 const mongoose = require('mongoose');
 
-// ! create db users if not created
-// ! change db if the db is not currently on users
+// ! the schema inserts itself automatically
 // ! mongoose.connection.useDb('myDB'); // Switching happens here..
 
 createUser = (req, res) => {
