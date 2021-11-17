@@ -2,36 +2,34 @@ import React, { Component } from 'react'
 
 import styled from 'styled-components';
 
-const Title = styled.h1.attrs({
-    className: 'h1',
-})``
+const Title = styled.h1`
+    margin: 0;
+`
 
-const Wrapper = styled.div.attrs({
-    className: 'form-group',
-})`
+const Wrapper = styled.div`
     margin: 0 30px;
+    text-align: center
 `
 
 const Label = styled.label`
     margin: 5px;
 `
 
-const InputText = styled.input.attrs({
-    className: 'form-control',
-})`
+const InputText = styled.input`
     margin: 5px;
 `
 
-const Button = styled.button.attrs({
-    className: `btn btn-primary`,
-})`
+const Button = styled.button`
     margin: 15px 15px 15px 5px;
 `
 
-const CancelButton = styled.a.attrs({
-    className: `btn btn-danger`,
-})`
+const CancelButton = styled.a`
     margin: 15px 15px 15px 5px;
+`
+
+const LoginButtons = styled.div`
+    margin-top: 5%;
+    color: blue;
 `
 
 class Login extends Component {
@@ -75,24 +73,24 @@ class Login extends Component {
             <Wrapper>
                 <Title>Log In</Title>
 
-                <Label>Name: </Label>
-                <InputText
-                    type="text"
-                    value={name}
-                    onChange={this.handleChangeInputName}
-                />
 
-                <Label>Password: </Label>
-                <InputText
-                    type="password"
-                    // value={rating}
-                    // onChange={this.handleChangeInputRating}
-                />
-
-                <Button onClick={this.handleLogin}>Login</Button>
-                {/* <CancelButton href={'/movies/list'}>Cancel</CancelButton> */}
-                {/* <Button href={'/signup'}>Sign Up</Button> */}
-
+                <LoginButtons>
+                    <Label>Name: </Label>
+                    <InputText
+                        type="text"
+                        value={name}
+                        onChange={this.handleChangeInputName}
+                    />
+                    <Label>Password: </Label>
+                    <InputText
+                        type="password"
+                        // value={rating}
+                        // onChange={this.handleChangeInputRating}
+                    />
+                    <Button onClick={this.handleLogin}>Login</Button>
+                    {/* <CancelButton href={'/movies/list'}>Cancel</CancelButton> */}
+                    {/* <Button href={'/signup'}>Sign Up</Button> */}
+                </LoginButtons>
             </Wrapper>
         )
     }
