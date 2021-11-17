@@ -1,0 +1,11 @@
+name: server_test
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: docker-compose up -d --build
+    - run: cd server && npm run test
+
