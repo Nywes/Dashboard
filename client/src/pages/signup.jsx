@@ -1,36 +1,71 @@
 import React, { Component } from 'react'
-
-import {Wrapper, Title, HorBar, Button, FormButtons} from "../style/form-style";
+import api from '../api'
+import {Wrapper, Title, InputText, HorBar, Button, FormButtons} from "../style/form-style";
 
 class SignUp extends Component {
     constructor({props}) {
         super(props)
         this.state = {
-            name: ''
+            displayName: '',
+            userName: '',
+            password: '',
+            confirmPass: ''
         }
     }
 
-    handleChangeInputName = async event => {
-        const name = event.target.value
-        this.setState({ name })
+    handleChangeInputDisplayName = async event => {
+        const displayName = event.target.value;
+        this.setState({ displayName })
     }
 
+    handleChangeInputUserName = async event => {
+        const userName = event.target.value;
+        this.setState({ userName })
+    }
+
+    handleChangePassword = async event => {
+        const password = event.target.value
+        this.setState({ password })
+    }
+
+    handleChangeConfirmPassword = async event => {
+        const confirmPass = event.target.value
+
+        if (confirmPass != this.state.password) {
+            // todo mettre le champ en rouge et dire que les mdp sont pas les memes
+        }
+        this.setState({ confirmPass })
+    }
 
     handleSignUp = async () => {
 
-        // const { id, name, rating, time } = this.state
-        // const arrayTime = time.split('/')
-        // const payload = { name, rating, time: arrayTime }
+        const { userName, displayName, password, confirmPass } = this.state
 
-        // await api.updateMovieById(id, payload).then(res => {
-        //     window.alert(`Movie updated successfully`)
-        //     this.setState({
-        //         name: '',
-        //         rating: '',
-        //         time: '',
-        //     })
-        // })
-        // window.location.href = "/movies/list";
+        const payload = { userName, displayName, password };
+
+        if (password != confirmPass) {
+            alert("Passwords do not match");
+            return;
+        }
+
+        // * find one by the userName:
+        // * if exists: -> denied
+
+        await api.createUser(payload)
+        .then(res => {
+            if (res.status == 200) {
+                window.alert(`User created successfully`)
+                window.location.href = "/";
+            } else {
+                window.alert(`Failed to create user`)
+            }
+            this.setState({
+                userName: '',
+                displayName: '',
+                password: '',
+                confirmPass: ''
+            })
+        })
     }
 
     // * basically an "init" function
@@ -43,7 +78,31 @@ class SignUp extends Component {
             <Wrapper>
                 <Title>Sign In</Title>
                 <FormButtons>
-                    <Button onClick={this.handleLogin}>Log In</Button>
+                    <InputText
+                        type="text"
+                        placeholder="UserName"
+                        value={name}
+                        onChange={this.handleChangeInputUserName}
+                    />
+                    <InputText
+                        type="text"
+                        placeholder="DisplayName"
+                        value={name}
+                        onChange={this.handleChangeInputDisplayName}
+                    />
+                    <InputText
+                        type="password"
+                        placeholder="Password"
+                        onChange={this.handleChangePassword}
+                    />
+                    <InputText
+                        type="password"
+                        placeholder="Confirm Password"
+                        onChange={this.handleChangeConfirmPassword}
+                    />
+                    <Button onClick={this.handleSignUp}>Sign Up</Button>
+                    <Button onClick={event => window.location.href='/login'}>Log in</Button>
+
                 </FormButtons>
                 <HorBar/>
             </Wrapper>

@@ -31,7 +31,7 @@ class Login extends Component {
         //         time: '',
         //     })
         // })
-        // window.location.href = "/movies/list";
+        window.location.href = "/";
     }
 
     // * basically an "init" function
@@ -60,8 +60,8 @@ class Login extends Component {
                     />
                     <Button onClick={this.handleLogin}>Log In</Button>
                     {/* <CancelButton href={'/movies/list'}>Cancel</CancelButton> */}
-                    {/* <Button href={'/signup'}>Sign Up</Button> */}
-                    <Button onClick={this.handleLogin}>Sign Up</Button>
+
+                    <Button onClick={event => window.location.href='/signup'}>Sign Up</Button>
                 </FormButtons>
                 <HorBar/>
             </Wrapper>
