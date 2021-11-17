@@ -6,7 +6,8 @@
   "scripts": {
     "start": "DASHBOARD_SERVER_PORT=3000 node_modules/.bin/nodemon index.js",
     "dev": "DASHBOARD_SERVER_PORT=4000 node_modules/.bin/nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "DASHBOARD_SERVER_PORT=3000 node_modules/.bin/jest",
+    "devtest": "DASHBOARD_SERVER_PORT=4000 node_modules/.bin/jest"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +19,10 @@
     "express": "^4.17.1",
     "mongoose": "^6.0.12",
     "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "frisby": "^2.1.3",
+    "jest": "^27.3.1",
+    "joi": "^17.4.2"
   }
 }
