@@ -7,7 +7,7 @@ const Schema = mongoose.Schema
 const User = new Schema(
     {
         name: { type: String, required: true, unique: true},
-        password: { type: String, required: true },
+        password: { type: String, required: true }, // todo type is a hash
         user_id: { type: Number, required: true, unique: true, dropDups: true }
     },
     //{ timestamps: true },

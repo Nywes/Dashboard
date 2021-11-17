@@ -15,7 +15,7 @@ createUser = (req, res) => {
         })
     }
 
-    const user = new User(body)
+    const user = new User(body);
 
     // * if body provided is invalid
     if (!user) {
@@ -40,95 +40,100 @@ createUser = (req, res) => {
         })
 }
 
+// * Update User region
+//#region UpdateUser
 // updateMovie = async (req, res) => {
-//     const body = req.body
+    //     const body = req.body
+    
+    //     // * no body provided:
+    //     if (!body) {
+        //         return res.status(400).json({
+            //             success: false,
+            //             error: 'You must provide a body to update',
+            //         })
+            //     }
+            
+            //     // ! find based on our user_id
+            //     User.findOne({ user_id: req.params.id }, (err, movie) => {
+                //         if (err) {
+                    //             return res.status(404).json({
+                        //                 err,
+                        //                 message: 'Movie not found!',
+                        //             })
+                        //         }
+                        //         movie.name = body.name
+                        //         movie.time = body.time
+                        //         movie.rating = body.rating
+                        //         movie
+                        //             .save()
+                        //             .then(() => {
+                            //                 return res.status(200).json({
+                                //                     success: true,
+                                //                     id: movie._id,
+                                //                     message: 'Movie updated!',
+                                //                 })
+                                //             })
+                                //             .catch(error => {
+                                    //                 return res.status(404).json({
+                                        //                     error,
+                                        //                     message: 'Movie not updated!',
+                                        //                 })
+                                        //             })
+                                        //     })
+                                        // }
+//#endregion
 
-//     // * no body provided:
-//     if (!body) {
-//         return res.status(400).json({
-//             success: false,
-//             error: 'You must provide a body to update',
-//         })
-//     }
+deleteUser = async (req, res) => {
+    await User.findOneAndDelete({ user_id: req.params.user_id }, (err, user) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
 
-//     // ! find based on our user_id
-//     User.findOne({ user_id: req.params.id }, (err, movie) => {
-//         if (err) {
-//             return res.status(404).json({
-//                 err,
-//                 message: 'Movie not found!',
-//             })
-//         }
-//         movie.name = body.name
-//         movie.time = body.time
-//         movie.rating = body.rating
-//         movie
-//             .save()
-//             .then(() => {
-//                 return res.status(200).json({
-//                     success: true,
-//                     id: movie._id,
-//                     message: 'Movie updated!',
-//                 })
-//             })
-//             .catch(error => {
-//                 return res.status(404).json({
-//                     error,
-//                     message: 'Movie not updated!',
-//                 })
-//             })
-//     })
-// }
+        if (!user) {
+            return res
+                .status(404)
+                .json({ success: false, error: `User not found` })
+        }
 
-// deleteMovie = async (req, res) => {
-//     await Movie.findOneAndDelete({ _id: req.params.id }, (err, movie) => {
-//         if (err) {
-//             return res.status(400).json({ success: false, error: err })
-//         }
+        return res.status(200).json({ success: true, data: user })
+    }).catch(err => console.log(err))
+}
 
-//         if (!movie) {
-//             return res
-//                 .status(404)
-//                 .json({ success: false, error: `Movie not found` })
-//         }
+// todo make a getUserByName, can it be the same function but with different params ?
 
-//         return res.status(200).json({ success: true, data: movie })
-//     }).catch(err => console.log(err))
-// }
+getUserById = async (req, res) => {
+    await User.findOne({ user_id: req.params.user_id }, (err, user) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
 
-// getMovieById = async (req, res) => {
-//     await Movie.findOne({ _id: req.params.id }, (err, movie) => {
-//         if (err) {
-//             return res.status(400).json({ success: false, error: err })
-//         }
+        if (!user) {
+            return res
+                .status(404)
+                .json({ success: false, error: `User not found` })
+        }
+        return res.status(200).json({ success: true, data: user })
+    }).catch(err => console.log(err));
+}
 
-//         if (!movie) {
-//             return res
-//                 .status(404)
-//                 .json({ success: false, error: `Movie not found` })
-//         }
-//         return res.status(200).json({ success: true, data: movie })
-//     }).catch(err => console.log(err))
-// }
-
-// getMovies = async (req, res) => {
-//     await Movie.find({}, (err, movies) => {
-//         if (err) {
-//             return res.status(400).json({ success: false, error: err })
-//         }
-//         if (!movies.length) {
-//             return res
-//                 .status(404)
-//                 .json({ success: false, error: `Movie not found` })
-//         }
-//         return res.status(200).json({ success: true, data: movies })
-//     }).catch(err => console.log(err))
-// }
+getUsers = async (req, res) => {
+    await User.find({}, (err, users) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+        if (!users.length) {
+            return res
+                .status(404)
+                .json({ success: false, error: `Users not found` })
+        }
+        return res.status(200).json({ success: true, data: users })
+    }).catch(err => console.log(err))
+}
 
 module.exports = {
     createUser,
     // updateMovie,
-    // deleteMovie,
-    // getMovies,
-    // getMovieById,
+    deleteUser,
+    getUsers,
+    getUserById,
 }
