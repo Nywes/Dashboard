@@ -1,36 +1,7 @@
 import React, { Component } from 'react'
 
 import styled from 'styled-components';
-
-const Title = styled.h1`
-    margin: 0;
-`
-
-const Wrapper = styled.div`
-    margin: 0 30px;
-    text-align: center
-`
-
-const Label = styled.label`
-    margin: 5px;
-`
-
-const InputText = styled.input`
-    margin: 5px;
-`
-
-const Button = styled.button`
-    margin: 15px 15px 15px 5px;
-`
-
-const CancelButton = styled.a`
-    margin: 15px 15px 15px 5px;
-`
-
-const LoginButtons = styled.div`
-    margin-top: 5%;
-    color: blue;
-`
+import {Wrapper, Title, InputText, Button, FormButtons, HorBar} from "../style/form-style";
 
 class Login extends Component {
     constructor({props}) {
@@ -74,23 +45,25 @@ class Login extends Component {
                 <Title>Log In</Title>
 
 
-                <LoginButtons>
-                    <Label>Name: </Label>
+                <FormButtons>
                     <InputText
                         type="text"
+                        placeholder="Name"
                         value={name}
                         onChange={this.handleChangeInputName}
                     />
-                    <Label>Password: </Label>
                     <InputText
                         type="password"
+                        placeholder="Password"
                         // value={rating}
                         // onChange={this.handleChangeInputRating}
                     />
-                    <Button onClick={this.handleLogin}>Login</Button>
+                    <Button onClick={this.handleLogin}>Log In</Button>
                     {/* <CancelButton href={'/movies/list'}>Cancel</CancelButton> */}
                     {/* <Button href={'/signup'}>Sign Up</Button> */}
-                </LoginButtons>
+                    <Button onClick={this.handleLogin}>Sign Up</Button>
+                </FormButtons>
+                <HorBar/>
             </Wrapper>
         )
     }

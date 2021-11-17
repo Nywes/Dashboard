@@ -31,7 +31,7 @@
 .background-div {
   background: url("https://images.unsplash.com/photo-1622711768193-945e72bcf118?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format") repeat;
   min-height: 100%;
-  display: block;
+  display: inline-block;
 }
 
 @keyframes App-logo-spin {
