@@ -49,14 +49,17 @@ class SignUp extends Component {
             return;
         }
 
+        // TODO check for non-empty username!!!
+
         // * find one by the userName:
         // * if exists: -> denied
         var userExists = false;
 
         await api.findUserByUserName(userName)
         .then(res => {
-            console.log("Res status = " + res.status);
-            if (res.status == 200) { // * found user, deny signup
+            console.log("Res status = ");
+
+            if (res.status == 200 && res.data.data.length > 0) { // * found user, deny signup
                 alert("This userName is already taken");
                 console.log("Username is already taken");
                 userExists = true;

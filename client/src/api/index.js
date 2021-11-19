@@ -4,7 +4,7 @@ var serverPort = process.env.REACT_APP_SERVER_PORT;
 
 console.log("Server port " + serverPort);
 // ! needs a port environment
-const api = axios.create({
+const api = axios.create ({
     baseURL: `http://localhost:${serverPort}/api`,
 });
 
@@ -15,10 +15,16 @@ export const createUser = payload => api.post(`/user`, payload)
 export const findUserById = id => api.get(`/user/by_id/${id}`)
 export const findUserByUserName = userName => api.get(`/user/by_username/${userName}`)
 
+export const authenticateUser = payload => api.post(`/authenticate_user`, payload)
+
+
+// * jwt api
+
 const apis = {
     createUser,
     findUserById,
-    findUserByUserName
+    findUserByUserName,
+    authenticateUser
     // getAllMovies,
     // updateMovieById,
     // deleteMovieById,

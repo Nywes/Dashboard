@@ -1,37 +1,53 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import api from '../api';
 import {Wrapper, Title, InputText, Button, FormButtons, HorBar} from "../style/form-style";
 
 class Login extends Component {
     constructor({props}) {
         super(props)
         this.state = {
-            name: ''
+            userName: '',
+            password: ''
         }
     }
 
     handleChangeInputName = async event => {
-        const name = event.target.value
-        this.setState({ name })
+        const userName = event.target.value
+        this.setState({ userName })
     }
 
+    handleChangePassword = async event => {
+        const password = event.target.value
+        this.setState({ password })
+    }
 
     handleLogin = async () => {
 
-        // const { id, name, rating, time } = this.state
-        // const arrayTime = time.split('/')
-        // const payload = { name, rating, time: arrayTime }
+        const { userName, password } = this.state;
+        const payload = { userName, password }
 
-        // await api.updateMovieById(id, payload).then(res => {
-        //     window.alert(`Movie updated successfully`)
-        //     this.setState({
-        //         name: '',
-        //         rating: '',
-        //         time: '',
-        //     })
-        // })
-        window.location.href = "/";
+        await api.authenticateUser(payload)
+        .then(res => {
+            // * depending on res, redirect
+            if (res.status == 200) {
+                console.log("Logged in correctly: " + res);
+                // * store the JWT in localstorage
+                // window.location.href = "/";
+
+            } else {
+                alert("Invalid credentials");
+
+                this.setState({
+                    userName: '',
+                    password: ''
+                })
+            }
+        })
+        .catch(err => {
+            console.log("Error " + err);
+        })
     }
 
     // * basically an "init" function
@@ -39,7 +55,7 @@ class Login extends Component {
     }
 
     render() {
-        const { name } = this.state
+        const { userName, password } = this.state
         return (
             <Wrapper>
                 <Title>Log In</Title>
@@ -48,15 +64,15 @@ class Login extends Component {
                 <FormButtons>
                     <InputText
                         type="text"
-                        placeholder="Name"
-                        value={name}
+                        placeholder="userName"
+                        value={userName}
                         onChange={this.handleChangeInputName}
                     />
                     <InputText
                         type="password"
                         placeholder="Password"
-                        // value={rating}
-                        // onChange={this.handleChangeInputRating}
+                        value={password}
+                        onChange={this.handleChangePassword}
                     />
                     <Button onClick={this.handleLogin}>Log In</Button>
                     {/* <CancelButton href={'/movies/list'}>Cancel</CancelButton> */}

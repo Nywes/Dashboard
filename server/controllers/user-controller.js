@@ -1,4 +1,6 @@
 const User = require('../models/user-model')
+const jwtCtrl = require('./jwt-controller')
+
 const mongoose = require('mongoose');
 
 // ! the schema inserts itself automatically
@@ -99,7 +101,51 @@ deleteUser = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
-// todo make a getUserByName, can it be the same function but with different params ?
+authenticateUser = async(req, res) => {
+
+    const body = req.body;
+    if (!body) {
+        return res.status(400).json({
+            success: false,
+            error: 'You must provide user credentials',
+        })
+    }
+
+    // * find by name
+    await User.distinct('userName', { userName: {$eq: body.userName} }, async (err, user) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!user) {
+            return res
+                .status(404)
+                .json({ success: false, error: `User not found` })
+        }
+
+        var matchedPassword = false;
+
+        // * decrypt password
+        await User.methods.comparePassword(body.password, (err, isMatch) => {
+            if (err) {
+                return res.status(400).json({ success: false, error: err })
+            } else {
+                matchedPassword = isMatch;
+            }
+        });
+
+        if (!matchedPassword) {
+            return (res.status(400).json({success: false, error: "Password is incorrect"}));
+        }
+
+        // * create token
+        var jwt = await jwtCtrl.createJWT(user);
+        // * return jwt
+        return res.status(200).json({ success: true, data: user, token: jwt })
+
+    })
+    .catch(err => console.log(err));
+}
 
 getUserByName = async (req, res) => {
     await User.distinct('userName', { userName: {$eq: req.params.userName} }, (err, user) => {
@@ -112,8 +158,10 @@ getUserByName = async (req, res) => {
                 .status(404)
                 .json({ success: false, error: `User not found` })
         }
+
         return res.status(200).json({ success: true, data: user })
-    }).catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
 }
 
 getUserById = async (req, res) => {
@@ -150,5 +198,6 @@ module.exports = {
     deleteUser,
     getUsers,
     getUserById,
-    getUserByName
+    getUserByName,
+    authenticateUser
 }
