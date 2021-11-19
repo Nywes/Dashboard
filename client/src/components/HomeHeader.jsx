@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { AccountCircle, Widgets } from '@mui/icons-material';
 import { grey } from '@mui/material/colors';
 import styles from "../style/HomePage.module.css"
-import { fontSize } from '@mui/system';
 
 class LogoButton extends Component {
     render() {

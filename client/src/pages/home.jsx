@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Wrapper, Container } from "../style";
+import { Wrapper, Container, Item, ItemW } from "../style";
 import { Header, HeaderHomePage } from '../components/HomeHeader';
 
 class Home extends Component {
@@ -19,7 +19,14 @@ class Home extends Component {
             <Wrapper>
                 <HeaderHomePage/>
                 <Container>
-
+                    <Item/>
+                    <Item/>
+                    <Item/>
+                    <Item/>
+                    <Item/>
+                    <Item/>
+                    <Item/>
+                    <Item/>
                 </Container>
             </Wrapper>
         )

@@ -9,6 +9,10 @@ const Wrapper = styled.div`
     padding: 0;
 `
 const Container = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
     height: 90vh;
     width:95vw;
     background-color: black;
@@ -16,4 +20,24 @@ const Container = styled.div`
     border-radius: 15px;
 `
 
-export { Wrapper, Container }
+const Item = styled.div`
+    height: 20vh;
+    width: 25vw;
+    background-color: pink;
+    opacity: 0.6;
+    border-radius: 15px;
+    margin: 40px;
+    padding: 10px;
+`
+
+const ItemW = styled.div`
+    height: 60vh;
+    width: 25vw;
+    background-color: blueviolet;
+    opacity: 0.6;
+    border-radius: 15px;
+    margin: 40px;
+    padding: 10px;
+`
+
+export { Wrapper, Container, Item, ItemW }
