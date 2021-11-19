@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `
 const Container = styled.div`
     height: 90vh;
-    width:90vw;
+    width:95vw;
     background-color: black;
     opacity: 0.8;
     border-radius: 15px;

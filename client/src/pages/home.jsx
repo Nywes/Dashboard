@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Wrapper, Container } from "../style/home-page-style";
-import { Header } from '../components/HomeHeader';
+import { Wrapper, Container } from "../style";
+import { Header, HeaderHomePage } from '../components/HomeHeader';
 
 class Home extends Component {
     constructor({props}) {
@@ -17,7 +17,7 @@ class Home extends Component {
     render() {
         return (
             <Wrapper>
-                <Header/>
+                <HeaderHomePage/>
                 <Container>
 
                 </Container>
