@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {Wrapper, Title, InputText, Button, FormButtons, HorBar} from "../style/form-style";
 
@@ -60,8 +60,9 @@ class Login extends Component {
                     />
                     <Button onClick={this.handleLogin}>Log In</Button>
                     {/* <CancelButton href={'/movies/list'}>Cancel</CancelButton> */}
-
-                    <Button onClick={event => window.location.href='/signup'}>Sign Up</Button>
+                    <Link to={'/signup'}>
+                        <Button >Sign Up</Button>
+                    </Link>
                 </FormButtons>
                 <HorBar/>
             </Wrapper>
