@@ -84,7 +84,7 @@ createUser = (req, res) => {
 //#endregion
 
 deleteUser = async (req, res) => {
-    await User.findOneAndDelete({ user_id: req.params.user_id }, (err, user) => {
+    await User.findOneAndDelete({ _id: req.params.id }, (err, user) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -101,8 +101,23 @@ deleteUser = async (req, res) => {
 
 // todo make a getUserByName, can it be the same function but with different params ?
 
+getUserByName = async (req, res) => {
+    await User.distinct('userName', { userName: {$eq: req.params.userName} }, (err, user) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!user) {
+            return res
+                .status(404)
+                .json({ success: false, error: `User not found` })
+        }
+        return res.status(200).json({ success: true, data: user })
+    }).catch(err => console.log(err));
+}
+
 getUserById = async (req, res) => {
-    await User.findOne({ user_id: req.params.user_id }, (err, user) => {
+    await User.findOne({ _id: req.params.id }, (err, user) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -132,8 +147,8 @@ getUsers = async (req, res) => {
 
 module.exports = {
     createUser,
-    // updateMovie,
     deleteUser,
     getUsers,
     getUserById,
+    getUserByName
 }

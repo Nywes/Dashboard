@@ -51,6 +51,30 @@ class SignUp extends Component {
 
         // * find one by the userName:
         // * if exists: -> denied
+        var userExists = false;
+
+        await api.findUserByUserName(userName)
+        .then(res => {
+            console.log("Res status = " + res.status);
+            if (res.status == 200) { // * found user, deny signup
+                alert("This userName is already taken");
+                console.log("Username is already taken");
+                userExists = true;
+            }
+        })
+        .catch(res => {
+            console.log("No user found, or error, proceed");
+        })
+
+        if (userExists) {
+            this.setState({
+                userName: '',
+                displayName: '',
+                password: '',
+                confirmPass: ''
+            })
+            return;
+        }
 
         await api.createUser(payload)
         .then(res => {
@@ -74,7 +98,7 @@ class SignUp extends Component {
     }
 
     render() {
-        const { name } = this.state
+        const { userName, displayName, password, confirmPass } = this.state
         return (
             <Wrapper>
                 <Title>Sign In</Title>
@@ -82,23 +106,25 @@ class SignUp extends Component {
                     <InputText
                         type="text"
                         placeholder="UserName"
-                        value={name}
+                        value={userName}
                         onChange={this.handleChangeInputUserName}
                     />
                     <InputText
                         type="text"
                         placeholder="DisplayName"
-                        value={name}
+                        value={displayName}
                         onChange={this.handleChangeInputDisplayName}
                     />
                     <InputText
                         type="password"
                         placeholder="Password"
+                        value={password}
                         onChange={this.handleChangePassword}
                     />
                     <InputText
                         type="password"
                         placeholder="Confirm Password"
+                        value={confirmPass}
                         onChange={this.handleChangeConfirmPassword}
                     />
                     <Button onClick={this.handleSignUp}>Sign Up</Button>
