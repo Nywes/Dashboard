@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import api from '../api'
 import {Wrapper, Title, InputText, HorBar, Button, FormButtons} from "../style/form-style";
 
@@ -101,7 +102,9 @@ class SignUp extends Component {
                         onChange={this.handleChangeConfirmPassword}
                     />
                     <Button onClick={this.handleSignUp}>Sign Up</Button>
-                    <Button onClick={event => window.location.href='/login'}>Log in</Button>
+                    <Link to="/login">
+                        <Button>Log in</Button>
+                    </Link>
 
                 </FormButtons>
                 <HorBar/>
