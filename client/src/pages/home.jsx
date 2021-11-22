@@ -2,20 +2,19 @@ import React, { Component } from 'react'
 import { Wrapper, Container, Item, WidgetManager } from "../style";
 import { LogoButton } from '../components/HomeHeader';
 import { AccountCircle, Widgets, Visibility } from '@mui/icons-material';
-import { grey } from '@mui/material/colors';
 import styles from "../style/HomePage.module.css";
 
 class Home extends Component {
     constructor({props}) {
         super(props)
         this.state = {
-            display: false,
+            display: true,
             name: ''
         }
     }
 
     state = {
-        divcont: false,
+        divcont: true,
     }
     // * basically an "init" function
     componentDidMount = async () => {
@@ -30,7 +29,7 @@ class Home extends Component {
         return (
             <Wrapper className="App">
                 <header className={styles.HeaderHomePage}>
-                    <Widgets onClick={handlechange} sx={{ color: grey[900], fontSize: 60, padding: 0.8 }}/>
+                    <Widgets onClick={handlechange} className={styles.HeaderIcon}/>
                     <LogoButton path={ '/login' } icon={AccountCircle}/>
                 </header>
                 <Container>

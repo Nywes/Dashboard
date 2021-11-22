@@ -8,7 +8,7 @@ class LogoButton extends Component {
     render() {
         return (
             <Link to={this.props.path}>
-                <this.props.icon sx={{ color: grey[900], fontSize: 60, padding: 0.8 }}/>
+                <this.props.icon className={styles.HeaderIcon}/>
             </Link>
         )
     }

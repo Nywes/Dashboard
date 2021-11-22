@@ -11,3 +11,9 @@
     font-size: 15vh !important;
     padding: 0.8 !important;
 }
+
+.HeaderIcon {
+    color: black;
+    font-size: 6vh;
+    padding: 0.8
+}
