@@ -9,5 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: docker-compose up -d --build
-    - run: cd server && npm install --silent && npm run test
+    - run: cd server && npm install --silent
+    - run: echo "DASHBOARD_SERVER_PORT=${{ secrets.DASHBOARD_PRODUCTION_SERVER_PORT }}" >> .env.production # create env file with github secrets
+    - run: npm run test
 

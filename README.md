@@ -20,20 +20,37 @@ git commit -m "server/ - U: Created user schema"
 ## Developer environment
 ---
 
-production server port: 3000 (**3000 is also the default port**)
 
-production client port: 3001
+### Environment files
 
-development server port: 4000
+At the root of /server and /client, make two environment files:
 
-development client port: 4001
+.env.production
 
+.env.development
+
+### Client environment
+
+Both files must contain values for the following keys:
+
+<ul>
+    <li>PORT=XXXX</li>
+    <li>REACT_APP_SERVER_PORT=XXXX</li>
+</ul>
+
+### Server environment
+
+Both files must contain values for the following keys:
+
+<ul>
+    <li>DASHBOARD_SERVER_PORT=XXXX</li>
+</ul>
 
 Run development server:
 ```
 cd ./server
 
-DASHBOARD_SERVER_PORT=4000 node_modules/.bin/nodemon index.js
+npm run dev
 ```
 
 Run development client:
