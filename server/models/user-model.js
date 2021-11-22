@@ -44,6 +44,27 @@ User.pre('save', function(next)
     });
 });
 
+User.statics.comparePassword = function(hashedPassword, loginPassword, callBack) {
+
+    var passwordMatch = false;
+
+    bcrypt.compare(loginPassword, hashedPassword, function(err, isMatch) {
+        if (err)
+            return (callBack(err));
+
+        passwordMatch = isMatch;
+        callBack(null, isMatch);
+    });
+
+    // ! IMPORTANT TO STOP THE MAIN THREAD
+    return (new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, 1000);
+    }));
+};
+
+
 User.methods.comparePassword = function(candidatePassword, callBack) {
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
         if (err)

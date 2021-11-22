@@ -10,6 +10,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
+    "dotenv": "^8.2.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.2",
     "react-dom": "^17.0.2",
@@ -19,8 +20,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "PORT=3001 REACT_APP_SERVER_PORT=3000 react-scripts start",
-    "dev": "PORT=4001 REACT_APP_SERVER_PORT=4000 react-scripts start",
+    "start": "dotenv -f .env.production run ./node_modules/.bin/react-scripts start",
+    "dev": "dotenv -f .env.development run ./node_modules/.bin/react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

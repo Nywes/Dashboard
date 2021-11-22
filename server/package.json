@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "DASHBOARD_SERVER_PORT=3000 node_modules/.bin/nodemon index.js",
-    "dev": "DASHBOARD_SERVER_PORT=4000 node_modules/.bin/nodemon index.js",
-    "test": "DASHBOARD_SERVER_PORT=3000 node_modules/.bin/jest",
-    "devtest": "DASHBOARD_SERVER_PORT=4000 node_modules/.bin/jest"
+    "start": "dotenv -f .env.production run node_modules/.bin/nodemon index.js",
+    "dev": "dotenv -f .env.development run node_modules/.bin/nodemon index.js",
+    "test": "dotenv -f .env.production run node_modules/.bin/jest",
+    "devtest": "dotenv -f .env.development run node_modules/.bin/jest"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.12",
     "nodemon": "^2.0.15"

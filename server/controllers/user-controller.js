@@ -108,25 +108,32 @@ authenticateUser = async(req, res) => {
         return res.status(400).json({
             success: false,
             error: 'You must provide user credentials',
-        })
+        });
     }
 
     // * find by name
-    await User.distinct('userName', { userName: {$eq: body.userName} }, async (err, user) => {
+    //await User.distinct('userName', { userName: {$eq: body.userName} }, async (err, user) => {
+    await User.find({ userName: body.userName }, async (err, user) => {
+
         if (err) {
+            console.log(err);
             return res.status(400).json({ success: false, error: err })
         }
 
-        if (!user) {
+        if (!user || user.length == 0) {
+            console.log("User not found");
+
             return res
                 .status(404)
                 .json({ success: false, error: `User not found` })
         }
 
         var matchedPassword = false;
+        console.log("Result in user.distinct: ");
+        console.log(user);
 
         // * decrypt password
-        await User.methods.comparePassword(body.password, (err, isMatch) => {
+        await User.comparePassword(user[0].password, body.password, (err, isMatch) => {
             if (err) {
                 return res.status(400).json({ success: false, error: err })
             } else {
@@ -134,15 +141,19 @@ authenticateUser = async(req, res) => {
             }
         });
 
+        console.log("Password correct ? = " + matchedPassword);
+
         if (!matchedPassword) {
-            return (res.status(400).json({success: false, error: "Password is incorrect"}));
+            console.log("Password is wrong");
+            return (res.status(401).json({success: false, error: "Password is incorrect"}));
         }
 
         // * create token
+        // ! beware await, return a promise
         var jwt = await jwtCtrl.createJWT(user);
+
         // * return jwt
         return res.status(200).json({ success: true, data: user, token: jwt })
-
     })
     .catch(err => console.log(err));
 }

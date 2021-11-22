@@ -28,6 +28,11 @@ class Login extends Component {
         const { userName, password } = this.state;
         const payload = { userName, password }
 
+        if (userName.length == 0 || password.length == 0) {
+            alert("Please fill out all the fields");
+            return;
+        }
+
         await api.authenticateUser(payload)
         .then(res => {
             // * depending on res, redirect
