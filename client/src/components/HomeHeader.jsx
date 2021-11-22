@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import { AccountCircle, Widgets } from '@mui/icons-material';
+import { AccountCircle, Widgets, Logout } from '@mui/icons-material';
 import { grey } from '@mui/material/colors';
 import styles from "../style/HomePage.module.css"
 import api from '../api'
@@ -16,13 +16,12 @@ class ProfileButton extends Component {
 
         var connectButton = (
             <Link to={this.props.loginPath}>
-                <AccountCircle sx={{ color: grey[900], fontSize: 60, padding: 0.8 }}/>
+                <AccountCircle className={styles.HeaderIcon}/>
             </Link>
         );
         var disconnectButton = (
             <div>
-                {/* Une icone ou qque chose autour ? */}
-                <button onclick={this.DeleteSession}  sx={{ color: grey[900], fontSize: 60, padding: 0.8 }}>Log out</button>
+                <Logout className={styles.HeaderIcon}/>
             </div>
         );
 
