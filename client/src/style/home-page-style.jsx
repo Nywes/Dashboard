@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import React from 'react';
 
 const Wrapper = styled.div`
     display: flex;
@@ -21,23 +22,26 @@ const Container = styled.div`
 `
 
 const Item = styled.div`
-    height: 20vh;
+    height: 22vh;
     width: 25vw;
     background-color: pink;
     opacity: 0.6;
     border-radius: 15px;
-    margin: 40px;
-    padding: 10px;
+    margin: 2vh;
+    padding: 1vh;
 `
 
-const ItemW = styled.div`
-    height: 60vh;
+const WidgetManager = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22vh;
     width: 25vw;
-    background-color: blueviolet;
-    opacity: 0.6;
+    background-color: grey;
+    opacity: 1;
     border-radius: 15px;
-    margin: 40px;
-    padding: 10px;
+    margin: 2vh;
+    padding: 1vh;
 `
 
-export { Wrapper, Container, Item, ItemW }
+export { Wrapper, Container, Item, WidgetManager }

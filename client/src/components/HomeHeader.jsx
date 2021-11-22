@@ -123,4 +123,4 @@ class HeaderHomePage extends Component {
     }
 }
 
-export {HeaderHomePage}
+export {HeaderHomePage, LogoButton}
