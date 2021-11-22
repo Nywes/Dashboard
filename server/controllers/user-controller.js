@@ -150,10 +150,11 @@ authenticateUser = async(req, res) => {
 
         // * create token
         // ! beware await, return a promise
-        var jwt = await jwtCtrl.createJWT(user);
+        var jwt = jwtCtrl.createJWT(user[0]);
 
+        console.log("Got JWT " + jwt);
         // * return jwt
-        return res.status(200).json({ success: true, data: user, token: jwt })
+        return res.status(200).json({ success: true, data: user[0], token: jwt })
     })
     .catch(err => console.log(err));
 }

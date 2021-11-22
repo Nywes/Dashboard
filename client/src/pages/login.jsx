@@ -37,9 +37,12 @@ class Login extends Component {
         .then(res => {
             // * depending on res, redirect
             if (res.status == 200) {
-                console.log("Logged in correctly: " + res);
+
+                var jwt = res.data.token;
                 // * store the JWT in localstorage
-                // window.location.href = "/";
+                document.cookie = "dashboard_jwt=" + jwt;
+
+                //window.location.href = "/";
 
             } else {
                 alert("Invalid credentials");
