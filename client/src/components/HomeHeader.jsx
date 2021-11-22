@@ -14,15 +14,4 @@ class LogoButton extends Component {
     }
 }
 
-class HeaderHomePage extends Component {
-    render() {
-        return (
-            <header className={styles.HeaderHomePage}>
-                <LogoButton path={ '/' } icon={Widgets}/>
-                <LogoButton path={ '/login' } icon={AccountCircle}/>
-            </header>
-        )
-    }
-}
-
-export {HeaderHomePage}
+export {LogoButton}

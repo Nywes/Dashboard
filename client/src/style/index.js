@@ -1,4 +1,4 @@
-import { Wrapper, Container, Item, ItemW } from './home-page-style'
+import { Wrapper, Container, Item, WidgetManager } from './home-page-style'
 
 
-export { Wrapper, Container, Item, ItemW }
+export { Wrapper, Container, Item, WidgetManager }
