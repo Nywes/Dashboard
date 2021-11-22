@@ -5,6 +5,8 @@ const port = process.env.DASHBOARD_SERVER_PORT;
 
 const db = require('./db');
 const userRouter = require('./routes/user-router')
+const jwtRouter = require('./routes/jwt-router')
+
 
 const app = express()
 if (port == undefined)
@@ -22,6 +24,9 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.use('/api', userRouter);
+// app.use('/api', userRouter);
+// app.use('/jwt', jwtRouter);
+app.use(userRouter, jwtRouter);
+
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))

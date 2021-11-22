@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import api from '../api';
 import {Wrapper, Title, InputText, Button, FormButtons, HorBar} from "../style/form-style";
 
@@ -28,7 +27,7 @@ class Login extends Component {
         const { userName, password } = this.state;
         const payload = { userName, password }
 
-        if (userName.length == 0 || password.length == 0) {
+        if (userName.length === 0 || password.length === 0) {
             alert("Please fill out all the fields");
             return;
         }
@@ -36,13 +35,15 @@ class Login extends Component {
         await api.authenticateUser(payload)
         .then(res => {
             // * depending on res, redirect
-            if (res.status == 200) {
+            if (res.status === 200) {
 
                 var jwt = res.data.token;
                 // * store the JWT in localstorage
-                document.cookie = "dashboard_jwt=" + jwt;
+                //document.cookie = "dashboard_jwt=" + jwt;
+                localStorage.setItem('dashboard_jwt', jwt);
 
-                //window.location.href = "/";
+
+                window.location.href = "/";
 
             } else {
                 alert("Invalid credentials");
@@ -60,6 +61,28 @@ class Login extends Component {
 
     // * basically an "init" function
     componentDidMount = async () => {
+        // if logged in (IE jwt_token exists, redirect to home)
+        const jwt_token = localStorage.getItem('dashboard_jwt');
+
+        if (jwt_token == null) {
+            return;
+        }
+        console.log("Jwt token = " + jwt_token);
+        // check if you can authenticate with it
+
+        await api.validateJWT(jwt_token)
+        .then(res => {
+            if (res.status === 200) {
+
+                // if you can, redirect to home
+                var isValid = res.data.validated;
+                if (isValid)
+                    window.location.href = "/";
+            }
+        })
+        .catch(err => {
+            console.log("Error " + err);
+        })
     }
 
     render() {
