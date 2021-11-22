@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import api from '../api';
 import {Wrapper, Title, InputText, Button, FormButtons, HorBar} from "../style/form-style";
+import { GoogleLogin } from 'react-google-login';
 
 class Login extends Component {
     constructor({props}) {
@@ -85,8 +86,24 @@ class Login extends Component {
         })
     }
 
+    googleSuccessLogin = (response) => {
+        console.log("Google log in success", response.profileObj);
+
+        // * maybe create/log a user with email address ?
+        // * definitely create a jwt token from the email address if you have it
+    }
+
+    googleFailLogin = (response) => {
+        console.log("Google login failed ", response);
+    }
+
+
     render() {
-        const { userName, password } = this.state
+        const { userName, password } = this.state;
+
+        const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+        console.log("Got client id = ", googleClientID);
+
         return (
             <Wrapper>
                 <Title>Log In</Title>
@@ -112,6 +129,23 @@ class Login extends Component {
                     </Link>
                 </FormButtons>
                 <HorBar/>
+                {/* {googleClientID !== undefined ?
+                    <GoogleLogin
+                        clientId={googleClientID}
+                        buttonText="Login"
+                        onSuccess={this.googleSuccessLogin}
+                        onFailure={this.googleFailLogin}
+                        cookiePolicy={'single_host_origin'}
+                    />
+                : <div/>} */}
+                <GoogleLogin
+                    clientId={googleClientID}
+                    buttonText="Login with google"
+                    onSuccess={this.googleSuccessLogin}
+                    onFailure={this.googleFailLogin}
+                    // cookiePolicy={'single_host_origin'}
+                />
+
             </Wrapper>
         )
     }

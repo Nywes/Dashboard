@@ -51,6 +51,11 @@ class SignUp extends Component {
 
         // TODO check for non-empty username!!!
 
+        if (password.length === 0 || userName.length === 0 || displayName.length === 0 || confirmPass.length === 0) {
+            alert("Please fill out all the fields");
+            return;
+        }
+
         // * find one by the userName:
         // * if exists: -> denied
         var userExists = false;

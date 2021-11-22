@@ -36,6 +36,8 @@ Both files must contain values for the following keys:
 <ul>
     <li>PORT=XXXX</li>
     <li>REACT_APP_SERVER_PORT=XXXX</li>
+    <li>GOOGLE_CLIENT_ID=X</li>
+
 </ul>
 
 ### Server environment
