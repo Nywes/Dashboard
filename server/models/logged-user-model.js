@@ -1,16 +1,19 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
+const baseUserModel = require('./base-user-model')
 
 bcrypt = require('bcrypt');
 SALT_WORK_FACTOR = 10;
 
-const User = new Schema(
+const LoggedUser = new Schema(
     {
-        userName: { type: String, required: true, unique: true},
-        displayName: {type: String, required: true},
         password: { type: String, required: true },
         //user_id: { type: Number, required: true, unique: true, dropDups: true }
     },
+    {
+        collection: "users",
+        discriminatorKey: "loginType"
+    }
     //{ timestamps: true },
 )
 
@@ -18,7 +21,7 @@ const User = new Schema(
 // *  https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
 
 // ? what the hell is *next* look up mongoose docs
-User.pre('save', function(next)
+LoggedUser.pre('save', function(next)
 {
     var user = this;
 
@@ -44,7 +47,7 @@ User.pre('save', function(next)
     });
 });
 
-User.statics.comparePassword = function(hashedPassword, loginPassword, callBack) {
+LoggedUser.statics.comparePassword = function(hashedPassword, loginPassword, callBack) {
 
     var passwordMatch = false;
 
@@ -64,8 +67,7 @@ User.statics.comparePassword = function(hashedPassword, loginPassword, callBack)
     }));
 };
 
-
-User.methods.comparePassword = function(candidatePassword, callBack) {
+LoggedUser.methods.comparePassword = function(candidatePassword, callBack) {
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
         if (err)
             return (callBack(err));
@@ -73,4 +75,5 @@ User.methods.comparePassword = function(candidatePassword, callBack) {
     });
 };
 
-module.exports = mongoose.model('users', User)
+
+module.exports = baseUserModel.discriminator('loggedUser', LoggedUser)

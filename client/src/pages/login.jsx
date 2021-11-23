@@ -86,11 +86,45 @@ class Login extends Component {
         })
     }
 
-    googleSuccessLogin = (response) => {
+    googleSuccessLogin = async (response) => {
         console.log("Google log in success", response.profileObj);
 
-        // * maybe create/log a user with email address ?
-        // * definitely create a jwt token from the email address if you have it
+        await api.findUserByUserName(response.profileObj.givenName)
+        .then(async (res) => {
+            if (res.status === 200) {
+                console.log("User found ", res);
+
+                await api.connectGoogleUser(response.email)
+                .then(res => {
+                    var jwt = res.data.token;
+
+                    localStorage.setItem('dashboard_jwt', jwt);
+                    window.location.href = "/";
+                })
+            }
+        })
+        .catch(async (err) => {
+            console.log("Caught error while finding user ", err.response.status);
+            if (err.response.status == 404) {
+                console.log("User not found, creating google user");
+                var payload = {"displayName": response.profileObj.givenName, "userName": response.profileObj.email}
+                await api.createGoogleUser(payload)
+                .then(res => {
+                    var jwt = res.data.token;
+                    localStorage.setItem('dashboard_jwt', jwt);
+                    window.location.href = "/";
+                })
+                .catch(err => {
+                    console.log("Error creating user " + err);
+                })
+            }
+        })
+
+        // * api.searchUser
+            // * if found
+                // * connectGoogle(response.email)
+            // * else
+                // * createGoogle(customPayload)
     }
 
     googleFailLogin = (response) => {

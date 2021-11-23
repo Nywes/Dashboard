@@ -1,7 +1,7 @@
 const frisby = require('frisby');
 const Joi = require('joi');
 
-const User = require('../models/user-model');
+const LoggedUser = require('../models/user-model');
 
 const serverPort = process.env.DASHBOARD_SERVER_PORT;
 

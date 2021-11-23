@@ -30,7 +30,7 @@ validateJWT = (req, res) => {
     try {
         var decoded = jwt.verify(token, secret);
 
-        return (res.status(200).json({ success: true, validated: true }));
+        return (res.status(200).json({ success: true, validated: true, decodedToken: decoded }));
     } catch(err) {
         // err
         console.log("Error decoding token " + err);

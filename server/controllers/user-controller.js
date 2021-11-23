@@ -1,4 +1,5 @@
-const User = require('../models/user-model')
+const BaseUser = require('../models/base-user-model')
+const LoggedUser = require('../models/logged-user-model')
 const jwtCtrl = require('./jwt-controller')
 
 const mongoose = require('mongoose');
@@ -17,7 +18,7 @@ createUser = (req, res) => {
         })
     }
 
-    const user = new User(body);
+    const user = new LoggedUser(body);
 
     // * if body provided is invalid
     if (!user) {
@@ -31,18 +32,18 @@ createUser = (req, res) => {
             return res.status(200).json({
                 success: true,
                 id: user._id,
-                message: 'User created!',
+                message: 'LoggedUser created!',
             })
         })
         .catch(error => {
             return res.status(400).json({
                 error,
-                message: 'User not created!',
+                message: 'LoggedUser not created!',
             })
         })
 }
 
-// * Update User region
+// * Update LoggedUser region
 //#region UpdateUser
 // updateMovie = async (req, res) => {
     //     const body = req.body
@@ -56,7 +57,7 @@ createUser = (req, res) => {
             //     }
             
             //     // ! find based on our user_id
-            //     User.findOne({ user_id: req.params.id }, (err, movie) => {
+            //     LoggedUser.findOne({ user_id: req.params.id }, (err, movie) => {
                 //         if (err) {
                     //             return res.status(404).json({
                         //                 err,
@@ -86,7 +87,7 @@ createUser = (req, res) => {
 //#endregion
 
 deleteUser = async (req, res) => {
-    await User.findOneAndDelete({ _id: req.params.id }, (err, user) => {
+    await LoggedUser.findOneAndDelete({ _id: req.params.id }, (err, user) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -94,7 +95,7 @@ deleteUser = async (req, res) => {
         if (!user) {
             return res
                 .status(404)
-                .json({ success: false, error: `User not found` })
+                .json({ success: false, error: `LoggedUser not found` })
         }
 
         return res.status(200).json({ success: true, data: user })
@@ -112,8 +113,8 @@ authenticateUser = async(req, res) => {
     }
 
     // * find by name
-    //await User.distinct('userName', { userName: {$eq: body.userName} }, async (err, user) => {
-    await User.find({ userName: body.userName }, async (err, user) => {
+    //await LoggedUser.distinct('userName', { userName: {$eq: body.userName} }, async (err, user) => {
+    await LoggedUser.find({ userName: body.userName }, async (err, user) => {
 
         if (err) {
             console.log(err);
@@ -121,11 +122,11 @@ authenticateUser = async(req, res) => {
         }
 
         if (!user || user.length == 0) {
-            console.log("User not found");
+            console.log("LoggedUser not found");
 
             return res
                 .status(404)
-                .json({ success: false, error: `User not found` })
+                .json({ success: false, error: `LoggedUser not found` })
         }
 
         var matchedPassword = false;
@@ -133,7 +134,7 @@ authenticateUser = async(req, res) => {
         console.log(user);
 
         // * decrypt password
-        await User.comparePassword(user[0].password, body.password, (err, isMatch) => {
+        await LoggedUser.comparePassword(user[0].password, body.password, (err, isMatch) => {
             if (err) {
                 return res.status(400).json({ success: false, error: err })
             } else {
@@ -160,15 +161,15 @@ authenticateUser = async(req, res) => {
 }
 
 getUserByName = async (req, res) => {
-    await User.distinct('userName', { userName: {$eq: req.params.userName} }, (err, user) => {
+    await BaseUser.find({ userName: req.params.userName }, (err, user) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
 
-        if (!user) {
+        if (!user || user.length === 0) {
             return res
                 .status(404)
-                .json({ success: false, error: `User not found` })
+                .json({ success: false, error: `BaseUser not found` })
         }
 
         return res.status(200).json({ success: true, data: user })
@@ -177,7 +178,7 @@ getUserByName = async (req, res) => {
 }
 
 getUserById = async (req, res) => {
-    await User.findOne({ _id: req.params.id }, (err, user) => {
+    await LoggedUser.findOne({ _id: req.params.id }, (err, user) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -185,14 +186,14 @@ getUserById = async (req, res) => {
         if (!user) {
             return res
                 .status(404)
-                .json({ success: false, error: `User not found` })
+                .json({ success: false, error: `LoggedUser not found` })
         }
         return res.status(200).json({ success: true, data: user })
     }).catch(err => console.log(err));
 }
 
 getUsers = async (req, res) => {
-    await User.find({}, (err, users) => {
+    await BaseUser.find({}, (err, users) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }

@@ -18,19 +18,25 @@ export const createUser = payload => api.post(`/user`, payload)
 // export const deleteMovieById = id => api.delete(`/movie/${id}`)
 export const findUserById = id => api.get(`/user/by_id/${id}`)
 export const findUserByUserName = userName => api.get(`/user/by_username/${userName}`)
-
 export const authenticateUser = payload => api.post(`/authenticate_user`, payload)
 
-export const validateJWT = token => jwt.get(`/validate_jwt/${token}`);
+// * google
+
+export const createGoogleUser = payload => api.post(`/google_user`, payload)
+export const connectGoogleUser = email => api.get(`/google_connect/${email}`)
 
 // * jwt api
+export const validateJWT = token => jwt.get(`/validate_jwt/${token}`);
+
 
 const apis = {
     createUser,
     findUserById,
     findUserByUserName,
     authenticateUser,
-    validateJWT
+    validateJWT,
+    createGoogleUser,
+    connectGoogleUser
     // getAllMovies,
     // updateMovieById,
     // deleteMovieById,

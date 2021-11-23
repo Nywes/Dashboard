@@ -87,7 +87,7 @@ class SignUp extends Component {
         await api.createUser(payload)
         .then(res => {
             if (res.status === 200) {
-                window.alert(`User created successfully`)
+                window.alert(`LoggedUser created successfully`)
                 window.location.href = "/";
             } else {
                 window.alert(`Failed to create user`)
