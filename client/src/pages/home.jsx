@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Wrapper, Container, Item, WidgetManager } from "../style";
-import { LogoButton } from '../components/HomeHeader';
+import { HeaderHomePage, LogoButton } from '../components/HomeHeader';
 import { AccountCircle, Widgets, Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from "../style/HomePage.module.css";
 
@@ -54,27 +54,30 @@ class Home extends Component {
     componentDidMount = async () => {
     }
 
+    handlechange()
+    {
+        this.setState({divcont:!this.state.divcont})
+    }
+
     render() {
-        var handlechange = () =>
-        {
-            this.setState({divcont:!this.state.divcont})
-        }
+        const { divcont } = this.state;
         return (
             <Wrapper className="App">
-                <header className={styles.HeaderHomePage}>
+                {/* <header className={styles.HeaderHomePage}>
                     <Widgets onClick={handlechange} className={styles.HeaderIcon}/>
                     <LogoButton path={ '/login' } icon={AccountCircle}/>
-                </header>
+                </header> */}
+                <HeaderHomePage toggleWidgetsButton={() => this.handlechange()} />
                 <Container>
-                    <WidgetInterface isManager={this.state.divcont}/>
-                    <WidgetInterface isManager={this.state.divcont}/>
-                    <WidgetInterface isManager={this.state.divcont}/>
-                    <WidgetInterface isManager={this.state.divcont}/>
-                    <WidgetInterface isManager={this.state.divcont}/>
-                    <WidgetInterface isManager={this.state.divcont}/>
-                    <WidgetInterface isManager={this.state.divcont}/>
-                    <WidgetInterface isManager={this.state.divcont}/>
-                    <WidgetInterface isManager={this.state.divcont}/>
+                    <WidgetInterface isManager={divcont}/>
+                    <WidgetInterface isManager={divcont}/>
+                    <WidgetInterface isManager={divcont}/>
+                    <WidgetInterface isManager={divcont}/>
+                    <WidgetInterface isManager={divcont}/>
+                    <WidgetInterface isManager={divcont}/>
+                    <WidgetInterface isManager={divcont}/>
+                    <WidgetInterface isManager={divcont}/>
+                    <WidgetInterface isManager={divcont}/>
                 </Container>
             </Wrapper>
         )
