@@ -16,16 +16,13 @@ const Container = styled.div`
     align-content: center;
     height: 90vh;
     width:95vw;
-    background-color: black;
-    opacity: 0.8;
-    border-radius: 15px;
 `
 
 const Item = styled.div`
     height: 22vh;
     width: 25vw;
-    background-color: pink;
-    opacity: 0.6;
+    background-color: black;
+    opacity: 0.5;
     border-radius: 15px;
     margin: 2vh;
     padding: 1vh;
@@ -38,7 +35,7 @@ const WidgetManager = styled.div`
     height: 22vh;
     width: 25vw;
     background-color: grey;
-    opacity: 1;
+    opacity: 0.8;
     border-radius: 15px;
     margin: 2vh;
     padding: 1vh;

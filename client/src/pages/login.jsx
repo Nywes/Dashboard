@@ -128,6 +128,7 @@ class Login extends Component {
     }
 
     googleFailLogin = (response) => {
+
         console.log("Google login failed ", response);
     }
 

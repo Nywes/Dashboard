@@ -12,6 +12,10 @@ const jwt = axios.create({
     baseURL: `http://localhost:${serverPort}/jwt_api`,
 });
 
+const nbaapi = axios.create({
+    baseURL: `http://localhost:${serverPort}/nba_api`,
+});
+
 export const createUser = payload => api.post(`/user`, payload)
 // export const getAllMovies = () => api.get(`/movies`)
 // export const updateMovieById = (id, payload) => api.put(`/movie/${id}`, payload)
@@ -28,6 +32,9 @@ export const connectGoogleUser = email => api.get(`/google_connect/${email}`)
 // * jwt api
 export const validateJWT = token => jwt.get(`/validate_jwt/${token}`);
 
+// * nba api
+export const getNBATeam = teamname => nbaapi.get(`/teams/${teamname}`);
+
 
 const apis = {
     createUser,
@@ -36,7 +43,8 @@ const apis = {
     authenticateUser,
     validateJWT,
     createGoogleUser,
-    connectGoogleUser
+    connectGoogleUser,
+    getNBATeam,
     // getAllMovies,
     // updateMovieById,
     // deleteMovieById,
