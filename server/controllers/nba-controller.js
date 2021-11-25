@@ -66,7 +66,7 @@ getNBATeam = async (req, res) =>
         console.log(response.data);
         return res.status(200).json({
             success: true,
-            data: response.data,
+            team: response.data,
             message: 'Found team(s)!',
         });
     }).catch(function (error) {
