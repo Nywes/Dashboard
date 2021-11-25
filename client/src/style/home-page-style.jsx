@@ -19,8 +19,8 @@ const Container = styled.div`
 `
 
 const Item = styled.div`
-    height: 22vh;
-    width: 25vw;
+    height: 24vh;
+    width: 28vw;
     background-color: black;
     opacity: 0.5;
     border-radius: 15px;
@@ -32,8 +32,8 @@ const WidgetManager = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 22vh;
-    width: 25vw;
+    height: 24vh;
+    width: 28vw;
     background-color: grey;
     opacity: 0.8;
     border-radius: 15px;
