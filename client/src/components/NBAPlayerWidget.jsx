@@ -57,7 +57,18 @@ class NBAPlayerWidget extends Component {
                         });
                     })
                     .catch(err => {
-                        console.log(err);
+                        this.setState({
+                            searchWord: '',
+                            first_name: player.first_name,
+                            height_feet: player.height_feet === null ? "?" : player.height_feet,
+                            height_inches: player.height_inches === null ? "?" : player.height_inches,
+                            last_name: player.last_name,
+                            position: player.position === "" ? "?" : player.position,
+                            name: player.name,
+                            team_full_name: player.team.full_name == null ? "?" : player.team.full_name,
+                            weight_pounds: player.weight_pounds === null ? "?" : player.weight_pounds,
+                            img_url: "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/1040x760/logoman.png"
+                        });
                     })
 
 
@@ -116,13 +127,13 @@ class NBAPlayerWidget extends Component {
                     onKeyPress={this.handleKeyPress}
                 />
                 <div/>
-                <img src={img_url} style={{width: "10vw", height:"10vh" }}/>
-                <ul>
-                    <li>Full name: {`${first_name} ${last_name}`}</li>
-                    <li>Height: {height_feet === "?" ? "?" : `${height_feet}\' ${height_inches}\"`}</li>
-                    <li>Position: {position}</li>
-                    <li>Team: {team_full_name}</li>
-                    <li>Weight: {weight_pounds}</li>
+                <img src={img_url} style={{ width: '12vw', height: '16vh'}}/>
+                <ul className={styles.NBATeamInfo}>
+                    <p className={styles.NBAFullName}>Full name: {`${first_name} ${last_name}`}</p>
+                    <p>Height: {height_feet === "?" ? "?" : `${height_feet}\' ${height_inches}\"`}</p>
+                    <p>Position: {position}</p>
+                    <p>Team: {team_full_name}</p>
+                    <p>Weight: {weight_pounds}</p>
                 </ul>
 
             </div>

@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import styles from "../style/HomePage.module.css";
 import api from '../api';
+import { height } from '@mui/system';
 
 class NBATeamWidget extends Component {
     constructor(props) {
@@ -85,15 +86,14 @@ class NBATeamWidget extends Component {
                     onChange={this.handleSearchBarInput}
                     onKeyPress={this.handleKeyPress}
                 />
-                <div/>
-                <img src={imgLink} style={{width: "10vw", height:"10vh" }}/>
-                <ul>
-                    <li>Abbreviation: {abbreviation}</li>
-                    <li>City: {city}</li>
-                    <li>Conference: {conference}</li>
-                    <li>Division: {division}</li>
-                    <li>Full name: {full_name}</li>
-                    <li>Name: {name}</li>
+                <img src={imgLink} className={styles.NBATeamLogo} style={{width: "80%", height:"80%"}}/>
+                <ul className={styles.NBATeamInfo}>
+                    <p>City: {city}</p>
+                    <p>Name: {name}</p>
+                    <p>Abbreviation: {abbreviation}</p>
+                    <p>Conference: {conference}</p>
+                    <p>Division: {division}</p>
+                    <p className={styles.NBAFullName}>Full name: {full_name}</p>
                 </ul>
 
             </div>
