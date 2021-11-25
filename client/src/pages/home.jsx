@@ -1,8 +1,24 @@
 import React, { Component } from 'react'
 import { Wrapper, Container, Item, WidgetManager } from "../style";
-import { HeaderHomePage, LogoButton } from '../components/HomeHeader';
-import { AccountCircle, Widgets, Visibility, VisibilityOff } from '@mui/icons-material';
-import styles from "../style/HomePage.module.css";
+import { HeaderHomePage } from '../components/HomeHeader';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import styles from "../style/HomePage.module.css"; 
+
+class NBAWidget extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
+
+    render() {
+        return (
+            <div className={this.props.widgetStyle}>
+                <input type="text" placeholder="Search..." className={styles.SearchBar}/>
+            </div>
+        )
+    }
+}
 
 class WidgetInterface extends Component {
     constructor(props) {
@@ -20,7 +36,7 @@ class WidgetInterface extends Component {
     render() {
         let seekManager = <WidgetManager onClick={this.handlechange}><Visibility className={styles.VisibilityIcon}/></WidgetManager>;
         let hiddenManager = <WidgetManager onClick={this.handlechange}><VisibilityOff className={styles.VisibilityIcon}/></WidgetManager>;
-        let seekWidget = <Item/>;
+        let seekWidget = this.props.item;
 
         let temp = this.props.isManager;
         let tempDisplay = this.state.display;
@@ -69,15 +85,15 @@ class Home extends Component {
                 </header> */}
                 <HeaderHomePage toggleWidgetsButton={() => this.handlechange()} />
                 <Container>
-                    <WidgetInterface isManager={divcont}/>
-                    <WidgetInterface isManager={divcont}/>
-                    <WidgetInterface isManager={divcont}/>
-                    <WidgetInterface isManager={divcont}/>
-                    <WidgetInterface isManager={divcont}/>
-                    <WidgetInterface isManager={divcont}/>
-                    <WidgetInterface isManager={divcont}/>
-                    <WidgetInterface isManager={divcont}/>
-                    <WidgetInterface isManager={divcont}/>
+                    <WidgetInterface item={<NBAWidget widgetStyle={styles.WidgetItem}/>} isManager={divcont}/>
+                    <WidgetInterface item={<Item/>} isManager={divcont}/>
+                    <WidgetInterface item={<Item/>} isManager={divcont}/>
+                    <WidgetInterface item={<Item/>} isManager={divcont}/>
+                    <WidgetInterface item={<Item/>} isManager={divcont}/>
+                    <WidgetInterface item={<Item/>} isManager={divcont}/>
+                    <WidgetInterface item={<Item/>} isManager={divcont}/>
+                    <WidgetInterface item={<Item/>} isManager={divcont}/>
+                    <WidgetInterface item={<Item/>} isManager={divcont}/>
                 </Container>
             </Wrapper>
         )

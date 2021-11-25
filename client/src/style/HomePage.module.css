@@ -17,3 +17,23 @@
     font-size: 6vh !important;
     padding: 0.8 !important;
 }
+
+.WidgetItem {
+    height: 22vh;
+    width: 25vw;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 15px;
+    margin: 2vh;
+    padding: 1vh;
+}
+
+.SearchBar {
+    width: 8vw;
+    height: 2vh;
+    background-color: rgba(0,0,0,0.9);
+    color: white;
+    padding-left: 0.5vh;
+    border-radius: 5px;
+    border-color: blue;
+    border-width: 0.15vw;
+}
