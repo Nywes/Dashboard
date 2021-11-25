@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { Wrapper, Container, Item, WidgetManager } from "../style";
 import { HeaderHomePage } from '../components/HomeHeader';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -8,13 +8,25 @@ class NBAWidget extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            searchWord: '',
         }
+    }
+
+    handleSearchBarInput = async event => {
+        const searchWord = event.target.value
+        this.setState({ searchWord })
     }
 
     render() {
         return (
             <div className={this.props.widgetStyle}>
-                <input type="text" placeholder="Search..." className={styles.SearchBar}/>
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    className={styles.SearchBar}
+                    value={this.state.searchWord}
+                    onChange={this.handleSearchBarInput}
+                />
             </div>
         )
     }
