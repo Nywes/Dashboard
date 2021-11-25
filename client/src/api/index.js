@@ -39,6 +39,7 @@ export const validateJWT = token => jwt.get(`/validate_jwt/${token}`);
 // * nba api
 export const getNBATeam = teamname => nbaapi.get(`/teams/${teamname}`);
 export const getNBAPlayer = playername => nbaapi.get(`/players/${playername}`);
+export const getNBAPlayerImageUrl = playername => nbaapi.get(`/player_url/${playername}`);
 
 // * crypto api
 // * take a payload, and use the params option of axios params: {...}
@@ -58,8 +59,9 @@ const apis = {
     // * nba
     getNBATeam,
     getNBAPlayer,
+    getNBAPlayerImageUrl,
     // * crypto
-    getCryptoValue
+    getCryptoValue,
 }
 
 export default apis
