@@ -38,19 +38,15 @@ const teamDict = {
 };
 const NBAAPIKey = process.env.NBA_API_KEY;
 
-getNBATeam = (req, res) =>
+getNBATeam = async (req, res) =>
 {
     var name = req.params.teamname;
     // créer les options
     name = name.toLowerCase();
 
-    // * boucler sur tout le dictionnaire et faire un filter "LIKE" name
-
-    var id = teamDict[name];
-
     const options = {
         method: 'GET',
-        url: `https://free-nba.p.rapidapi.com/teams/${id}`,
+        url: `https://free-nba.p.rapidapi.com/teams`,
         params: {page: '0'}, // * useless
         headers: {
           'x-rapidapi-host': 'free-nba.p.rapidapi.com',
@@ -58,13 +54,23 @@ getNBATeam = (req, res) =>
         }
     };
 
-    axios.request(options)
+    if (name === "all") {
+        options.url = "https://free-nba.p.rapidapi.com/teams";
+    } else {
+        // * boucler sur tout le dictionnaire et faire un filter "LIKE" name
+        var id = teamDict[name];
+
+        options.url += `/${id}`;
+    }
+
+    // ! await ??
+    await axios.request(options)
     .then(function (response) {
         console.log(response.data);
         return res.status(200).json({
             success: true,
             data: response.data,
-            message: 'Found team!',
+            message: 'Found team(s)!',
         });
     }).catch(function (error) {
         console.error(error);
@@ -73,11 +79,54 @@ getNBATeam = (req, res) =>
             message: error,
         });
     });
-
 }
 
-// todo search player
+
+getNBAPlayer = async (req, res) =>
+{
+    // * get player name (separated by + character ??)
+    var name = req.params.playername;
+
+    name = name.replace("+", " ");
+    // créer les options
+    name = name.toLowerCase();
+
+    var options = {
+      method: 'GET',
+      url: 'https://free-nba.p.rapidapi.com/players',
+      params: {page: '0', per_page: '25'},
+      headers: {
+        'x-rapidapi-host': 'free-nba.p.rapidapi.com',
+        'x-rapidapi-key': NBAAPIKey
+      }
+    };
+
+    if (name === "all") {
+        // plein de requetes en boucle pour remplir un tableau de 3739 joueurs ??
+    } else {
+        options.params = {page: '0', per_page: '25', search: name};
+    }
+
+    // ! await ??
+    await axios.request(options).then(function (response) {
+        console.log(response.data);
+        return res.status(200).json({
+            success: true,
+            data: response.data,
+            message: 'Found player(s)!',
+        });
+
+    }).catch(function (error) {
+        console.error(error);
+        return res.status(400).json({
+            success: false,
+            message: error,
+        });
+    });
+}
+
 
 module.exports = {
-    getNBATeam
+    getNBATeam,
+    getNBAPlayer
 }

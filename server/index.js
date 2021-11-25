@@ -8,7 +8,6 @@ const userRouter = require('./routes/user-router')
 const jwtRouter = require('./routes/jwt-router')
 const nbaRouter = require('./routes/nba-router')
 
-
 const app = express()
 if (port == undefined)
     port = 3000;

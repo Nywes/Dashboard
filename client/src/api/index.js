@@ -34,6 +34,7 @@ export const validateJWT = token => jwt.get(`/validate_jwt/${token}`);
 
 // * nba api
 export const getNBATeam = teamname => nbaapi.get(`/teams/${teamname}`);
+export const getNBAPlayer = playername => nbaapi.get(`/players/${playername}`);
 
 
 const apis = {
@@ -45,10 +46,7 @@ const apis = {
     createGoogleUser,
     connectGoogleUser,
     getNBATeam,
-    // getAllMovies,
-    // updateMovieById,
-    // deleteMovieById,
-    // getMovieById,
+    getNBAPlayer
 }
 
 export default apis
