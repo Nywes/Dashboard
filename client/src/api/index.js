@@ -16,6 +16,10 @@ const nbaapi = axios.create({
     baseURL: `http://localhost:${serverPort}/nba_api`,
 });
 
+const cryptoapi = axios.create({
+    baseURL: `http://localhost:${serverPort}/crypto_api`,
+})
+
 export const createUser = payload => api.post(`/user`, payload)
 // export const getAllMovies = () => api.get(`/movies`)
 // export const updateMovieById = (id, payload) => api.put(`/movie/${id}`, payload)
@@ -36,17 +40,26 @@ export const validateJWT = token => jwt.get(`/validate_jwt/${token}`);
 export const getNBATeam = teamname => nbaapi.get(`/teams/${teamname}`);
 export const getNBAPlayer = playername => nbaapi.get(`/players/${playername}`);
 
+// * crypto api
+// * take a payload, and use the params option of axios params: {...}
+export const getCryptoValue = params => cryptoapi.get(`/currencies/`, {params: {cryptoID: params.cryptoID, targetCurrency: params.targetCurrency}});
 
 const apis = {
+    // * user
     createUser,
     findUserById,
     findUserByUserName,
     authenticateUser,
+    // *jwt
     validateJWT,
+    //* google
     createGoogleUser,
     connectGoogleUser,
+    // * nba
     getNBATeam,
-    getNBAPlayer
+    getNBAPlayer,
+    // * crypto
+    getCryptoValue
 }
 
 export default apis

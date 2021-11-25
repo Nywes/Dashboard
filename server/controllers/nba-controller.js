@@ -1,6 +1,3 @@
-//import axios from 'axios'
-
-
 var axios = require("axios");
 
 // ! put in nba-model ??
