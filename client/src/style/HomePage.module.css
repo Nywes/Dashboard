@@ -19,8 +19,8 @@
 }
 
 .WidgetItem {
-    height: 22vh;
-    width: 25vw;
+    height: 24vh;
+    width: 28vw;
     background-color: rgba(0,0,0,0.5);
     border-radius: 15px;
     margin: 2vh;
