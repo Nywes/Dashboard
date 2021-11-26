@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import styles from "../style/HomePage.module.css";
+import styles from "../style/NBAWidgets.module.css";
 import api from '../api';
 import { height } from '@mui/system';
 
@@ -86,7 +86,7 @@ class NBATeamWidget extends Component {
                     onChange={this.handleSearchBarInput}
                     onKeyPress={this.handleKeyPress}
                 />
-                <img src={imgLink} className={styles.NBATeamLogo} style={{width: "80%", height:"80%"}}/>
+                <img src={imgLink} className={styles.NBATeamLogo} style={{width: "12vw", height:"17vh"}}/>
                 <ul className={styles.NBATeamInfo}>
                     <p>City: {city}</p>
                     <p>Name: {name}</p>

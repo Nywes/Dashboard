@@ -1,0 +1,81 @@
+.ValueBar {
+    grid-row: 2;
+    grid-column: 1;
+    place-self: center;
+    width: 90%;
+}
+
+.FirstBar {
+    grid-row: 3;
+    grid-column: 1;
+    place-self: center;
+    width: 90%
+}
+
+.SecondBar {
+    grid-row: 3;
+    grid-column: 3;
+    place-self: center;
+    width: 90%
+}
+
+.FirstComparator {
+    grid-row: 4;
+    grid-column: 1;
+    justify-self: end;
+    align-self: center;
+}
+
+.Equal {
+    grid-row: 4;
+    grid-column: 2;
+    place-self: center;
+}
+
+.SecondComparator {
+    grid-row: 4;
+    grid-column: 3;
+    justify-self: start;
+    align-self: center;
+}
+
+.Title {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    place-self: center;
+}
+
+.InvertButton {
+    grid-row: 3;
+    grid-column: 2;
+    background-color: blue;
+    border: 2px solid rgb(0, 0, 200);
+    border-radius: 15px;
+}
+
+.InvertButton:hover {
+    border: 2px solid white;
+}
+
+.InvertButton:active {
+    background-color: rgb(0, 0, 133);
+    border: 2px solid grey;
+}
+
+.ValidateButton {
+    grid-column: 2 / span 2;
+    grid-row: 5;
+    width: 50%;
+    background-color: red;
+    border: 2px solid rgb(200, 0, 0);
+    border-radius: 10px;
+}
+
+.ValidateButton:hover {
+    border: 2px solid white;
+}
+
+.ValidateButton:active {
+    background-color: rgb(161, 0, 0);
+    border: 2px solid grey;
+  }

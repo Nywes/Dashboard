@@ -18,7 +18,7 @@
     padding: 0.8 !important;
 }
 
-.WidgetItem {
+.NBAWidgetItem {
     display: grid;
     grid-template-columns: 1fr minmax(auto, 50%);
     height: 24vh;
@@ -29,39 +29,14 @@
     padding: 1vh;
 }
 
-.SearchBar {
-    height: 2vh;
-    background-color: rgba(0,0,0,0.9);
-    color: white;
-    padding-left: 0.5vh;
-    border-radius: 5px;
-    border-color: blue;
-    border-width: 0.15vw;
-    grid-row: 1; 
-    grid-column: 1;
-}
-
-.SearchBar:hover {
-    border-color: red;
-}
-
-.NBATeamLogo {
-    grid-row: 2; 
-    grid-column: 1;
-}
-
-.NBATeamInfo {
-    grid-row: 2;
-    grid-column: 2;
-    margin: unset;
-    padding: unset;
-    font-size: 2vh;
-    overflow: hidden;
-    line-height: 0.4;
-    text-align: left;
-    font-weight: 800;
-}
-
-.NBAFullName {
-    line-height: 1;
+.CryptoWidgetItem {
+    display: grid;
+    grid-template-columns: auto 10% auto;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    height: 24vh;
+    width: 28vw;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 15px;
+    margin: 2vh;
+    padding: 1vh;
 }

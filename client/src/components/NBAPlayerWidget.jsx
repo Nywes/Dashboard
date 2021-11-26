@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import styles from "../style/HomePage.module.css";
+import styles from "../style/NBAWidgets.module.css";
 import api from '../api';
 
 class NBAPlayerWidget extends Component {
@@ -127,7 +127,7 @@ class NBAPlayerWidget extends Component {
                     onKeyPress={this.handleKeyPress}
                 />
                 <div/>
-                <img src={img_url} style={{ width: '12vw', height: '16vh'}}/>
+                <img src={img_url} style={{ width: '12vw', height: '17vh'}}/>
                 <ul className={styles.NBATeamInfo}>
                     <p className={styles.NBAFullName}>Full name: {`${first_name} ${last_name}`}</p>
                     <p>Height: {height_feet === "?" ? "?" : `${height_feet}\' ${height_inches}\"`}</p>

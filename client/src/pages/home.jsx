@@ -4,6 +4,7 @@ import { HeaderHomePage } from '../components/HomeHeader';
 import { WidgetInterface } from '../components/WidgetInterface';
 import { NBATeamWidget } from '../components/NBATeamWidget';
 import { NBAPlayerWidget } from '../components/NBAPlayerWidget';
+import { CryptoConverterWidget } from '../components/CryptoConverterWidget';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from "../style/HomePage.module.css";
 
@@ -34,10 +35,10 @@ class Home extends Component {
                 </header> */}
                 <HeaderHomePage toggleWidgetsButton={() => this.handlechange()} />
                 <Container>
-                    <WidgetInterface item={<NBATeamWidget widgetStyle={styles.WidgetItem}/>} isManager={divcont}/>
-                    <WidgetInterface item={<NBAPlayerWidget widgetStyle={styles.WidgetItem}/>} isManager={divcont}/>
+                    <WidgetInterface item={<NBATeamWidget widgetStyle={styles.NBAWidgetItem}/>} isManager={divcont}/>
+                    <WidgetInterface item={<NBAPlayerWidget widgetStyle={styles.NBAWidgetItem}/>} isManager={divcont}/>
                     <WidgetInterface item={<Item/>} isManager={divcont}/>
-                    <WidgetInterface item={<Item/>} isManager={divcont}/>
+                    <WidgetInterface item={<CryptoConverterWidget widgetStyle={styles.CryptoWidgetItem}/>} isManager={divcont}/>
                     <WidgetInterface item={<Item/>} isManager={divcont}/>
                     <WidgetInterface item={<Item/>} isManager={divcont}/>
                     <WidgetInterface item={<Item/>} isManager={divcont}/>
