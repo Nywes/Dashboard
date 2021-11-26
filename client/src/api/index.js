@@ -24,6 +24,10 @@ const unsplashapi = axios.create({
     baseURL: `http://localhost:${serverPort}/unsplash_api`,
 });
 
+const hearthstoneapi = axios.create({
+    baseURL: `http://localhost:${serverPort}/hs_api`,
+});
+
 export const createUser = payload => api.post(`/user`, payload)
 // export const getAllMovies = () => api.get(`/movies`)
 // export const updateMovieById = (id, payload) => api.put(`/movie/${id}`, payload)
@@ -52,6 +56,9 @@ export const getCryptoValue = params => cryptoapi.get(`/currencies/`, {params: {
 // * unsplash api
 export const searchPictures = query => unsplashapi.get(`/pictures/${query}`);
 
+// * hearthstone api
+export const searchCard = query => hearthstoneapi.get(`/cards/${query}`);
+
 const apis = {
     // * user
     createUser,
@@ -70,7 +77,9 @@ const apis = {
     // * crypto
     getCryptoValue,
     // * unsplash
-    searchPictures
+    searchPictures,
+    // * hearthstone
+    searchCard
 }
 
 export default apis

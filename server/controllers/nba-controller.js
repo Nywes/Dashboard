@@ -34,7 +34,7 @@ const teamDict = {
     "jazz": 29,
     "wizards": 30
 };
-const NBAAPIKey = process.env.NBA_API_KEY;
+const NBAAPIKey = process.env.RAPID_API_KEY;
 
 getNBATeam = async (req, res) =>
 {

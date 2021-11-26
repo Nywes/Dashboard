@@ -47,7 +47,10 @@ Both files must contain values for the following keys:
 <ul>
     <li>DASHBOARD_SERVER_PORT=XXXX</li>
     <li>JWT_SECRET="XXXX"</li>
-    <li>NBA_API_KEY="XXXX"</li>
+    <li>RAPID_API_KEY="XXXX"</li>
+    <li>CRYPTO_API_KEY="XXXX"</li>
+    <li>UNSPLASH_ACCESS_KEY="XXXX"</li>
+    <li>UNSPLASH_SECRET_KEY="XXXX"</li>
 
 </ul>
 
