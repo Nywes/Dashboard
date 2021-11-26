@@ -55,7 +55,8 @@ export const getNBAPlayerImageUrl = playername => nbaapi.get(`/player_url/${play
 
 // * crypto api
 // * take a payload, and use the params option of axios params: {...}
-export const getCryptoValue = params => cryptoapi.get(`/currencies/`, {params: {cryptoID: params.cryptoID, targetCurrency: params.targetCurrency}});
+export const getCryptoValue = params => cryptoapi.get(`/currencies/${params.cryptoID}&${params.targetCurrencyID}`);
+export const getCurrencyOptions = () => cryptoapi.get(`/currencyOptions`);
 
 // * unsplash api
 export const searchPictures = query => unsplashapi.get(`/pictures/${query}`);
@@ -83,12 +84,13 @@ const apis = {
     getNBAPlayerImageUrl,
     // * crypto
     getCryptoValue,
+    getCurrencyOptions,
     // * unsplash
     searchPictures,
     // * hearthstone
     searchCard,
     // * quotes
-    searchQuote
+    searchQuote,
 }
 
 export default apis

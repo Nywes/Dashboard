@@ -1,8 +1,12 @@
 import React, { Component, useState } from 'react';
 import api from '../api';
 import styles from "../style/CryptoWidget.module.css";
+import Select from 'react-select';
 
 class CryptoConverterWidget extends Component {
+
+    //options = [];
+
     constructor(props) {
         super(props);
 
@@ -10,9 +14,12 @@ class CryptoConverterWidget extends Component {
             searchWord: '',
             amountToConvert: '1',
             firstComparator: 'Bitcoin (BTC)',
+            firstComparatorLabel: 'Bitcoin (BTC)',
             secondComparator: 'Bitcoin (BTC)',
+            secondComparatorLabel: 'Bitcoin (BTC)',
             firstComparatorResult: '1 Bitcoin (BTC)',
             secondComparatorResult: '1 Bitcoin (BTC)',
+            options: []
         }
     }
 
@@ -22,13 +29,14 @@ class CryptoConverterWidget extends Component {
     }
 
     handleFirstComparatorInput = async event => {
-        const firstComparator = event.target.value;
-        this.setState({ firstComparator });
+        console.log("Event", event);
+        this.setState({ firstComparator: event.value, firstComparatorLabel:event.label });
+
     }
 
     handleSecondComparatorInput = async event => {
-        const secondComparator = event.target.value;
-        this.setState({ secondComparator });
+        console.log("Event", event);
+        this.setState({ secondComparator: event.value, secondComparatorLabel:event.label });
     }
 
     invertValues = () => {
@@ -37,8 +45,63 @@ class CryptoConverterWidget extends Component {
         this.setState({ firstComparator: firstComparator, secondComparator: secondComparator });
     }
 
+    componentDidMount = async () => {
+        // * query server to get the options
+        await api.getCurrencyOptions()
+        .then(res => {
+            console.log("Got options", res.data.options);
+            this.setState({
+                options: res.data.options
+            })
+        });
+        // * can't really fail so no catch
+
+    }
+
+    convertValue = async () => {
+            // * get team from name
+
+            var params = {cryptoID: this.state.firstComparator, targetCurrencyID: this.state.secondComparator}
+
+            await api.getCryptoValue(params)
+            .then(res => {
+                if (res.status === 200) {
+
+                    var cryptoData = res.data.data;
+                    // todo here you would create a crypto model taking cryptoData as its constructor!
+
+                    console.log("Got crypto data", cryptoData);
+                    this.setState({
+                        firstComparatorResult: `${this.state.amountToConvert} ${this.state.firstComparator}`,
+                        // ! may need to round this or something
+                        secondComparatorResult: `${cryptoData[0].price} ${this.state.secondComparator}`
+                    })
+                } else {
+                    alert("Error");
+
+                    this.setState({
+                        firstComparator: "",
+                        secondComparator: "",
+                        firstComparatorResult: "-",
+                        secondComparatorResult: "-"
+                    })
+                }
+            })
+            .catch(err => {
+                alert("Invalid currency");
+                console.log("Error " + err);
+                this.setState({
+                    firstComparator: "",
+                    secondComparator: "",
+                    firstComparatorResult: "-",
+                    secondComparatorResult: "-"
+                })
+            });
+            console.log("After await");
+    }
+
     render() {
-        const {amountToConvert, firstComparator, secondComparator, firstComparatorResult, secondComparatorResult} = this.state
+        const {amountToConvert, firstComparator, secondComparator, firstComparatorLabel, secondComparatorLabel, firstComparatorResult, secondComparatorResult, options} = this.state
         const title = "Crypto-currency converter calculator"
 
         return (
@@ -54,22 +117,38 @@ class CryptoConverterWidget extends Component {
                     onChange={this.handleAmountToConvertBar}
                     //onKeyPress={?} pas sur de faire quelque chose
                 />
-                <input
+                {/* <input
                     type="text"
                     placeholder="First Value"
                     className={styles.FirstBar}
                     value={firstComparator}
                     onChange={this.handleFirstComparatorInput}
                     //onKeyPress={?} pas sur de faire quelque chose
+                /> */}
+                {/* //todo https://react-select.com/home */}
+                <Select
+                    placeholder={firstComparatorLabel}
+                    options={options}
+                    className={styles.FirstBar}
+                    value={firstComparatorLabel}
+                    onChange={this.handleFirstComparatorInput}
                 />
-                <input
+
+                <Select
+                    placeholder={secondComparatorLabel}
+                    options={options}
+                    className={styles.SecondBar}
+                    value={secondComparatorLabel}
+                    onChange={this.handleSecondComparatorInput}
+                />
+                {/* <input
                     type="text"
                     placeholder="Second Value"
                     className={styles.SecondBar}
                     value={secondComparator}
                     onChange={this.handleSecondComparatorInput}
                     //onKeyPress={?} pas sur de faire quelque chose
-                />
+                /> */}
                 <input
                     type="button"
                     placeholder="="
@@ -90,6 +169,7 @@ class CryptoConverterWidget extends Component {
                     type="submit"
                     placeholder="="
                     className={styles.ValidateButton}
+                    onClick={this.convertValue}
                 />
             </div>
         )

@@ -140,7 +140,6 @@ getPlayerImageUrl = async (req, res) =>
     // * get player name (separated by + character ??)
     var name = req.params.playername;
 
-
     name = name.replace("+", " ");
     // créer les options
     name = name.toLowerCase();

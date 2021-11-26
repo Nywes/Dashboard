@@ -1,16 +1,54 @@
 var axios = require("axios");
+fs = require('fs');
 
 const CRYPTO_API_KEY = process.env.CRYPTO_API_KEY;
 
 // * we can provide a list of most popular cryptos maybe ?
 // * or copy paste them into a json ?
 
+getCryptoOptions = async (req, res) =>
+{
+    // * {value: x, label: y}
+    var totalOptions = []
+
+    // * open file
+    await fs.readFile(require('path').resolve(__dirname, '../resources/cryptocurrencies.json'), 'utf8', async function (err, data) {
+        if (!err) {
+            var cryptoCurrenciesJSON = JSON.parse(data);
+
+            for (const [abbreviation, cryptocurrency] of Object.entries(cryptoCurrenciesJSON)) {
+                totalOptions.push({value: abbreviation, label: cryptocurrency});
+            }
+        }
+
+        console.log("Finished cryptos");
+
+        await fs.readFile(require('path').resolve(__dirname, '../resources/currencies.json'), 'utf8', function (err, data) {
+            if (!err) {
+                var currenciesJSON = JSON.parse(data);
+
+                for (let i = 0; i < currenciesJSON.length; i++) {
+                    const element = currenciesJSON[i];
+                    totalOptions.push({value:element.abbreviation, label:element.currency});
+                }
+            }
+
+            console.log("Finished currencies");
+            console.log("After awaits");
+            return res.status(200).json({
+                success: totalOptions.length > 0 ? true : false,
+                options: totalOptions,
+            });
+        });
+
+    });
+
+}
+
 getCryptoValue = async (req, res) =>
 {
     var cryptoID = req.params.cryptoID;
-    var convertedValueCurrency = req.params.targetCurrency;
-
-    // todo convert crypto name to crypto ID ?
+    var convertedValueCurrency = req.params.targetCurrencyID;
 
     // * cf: https://nomics.com/docs/#operation/getCurrenciesTicker
     const options = {
@@ -50,5 +88,6 @@ getCryptoValue = async (req, res) =>
 }
 
 module.exports = {
-    getCryptoValue
+    getCryptoValue,
+    getCryptoOptions
 }
