@@ -10,6 +10,8 @@ getCryptoValue = async (req, res) =>
     var cryptoID = req.params.cryptoID;
     var convertedValueCurrency = req.params.targetCurrency;
 
+    // todo convert crypto name to crypto ID ?
+
     // * cf: https://nomics.com/docs/#operation/getCurrenciesTicker
     const options = {
         method: 'GET',

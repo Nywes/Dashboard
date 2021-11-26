@@ -4,11 +4,11 @@ const cors = require('cors')
 const port = process.env.DASHBOARD_SERVER_PORT;
 
 const db = require('./db');
-const userRouter = require('./routes/user-router')
-const jwtRouter = require('./routes/jwt-router')
-const nbaRouter = require('./routes/nba-router')
-const cryptoRouter = require('./routes/crypto-router')
-
+const userRouter = require('./routes/user-router');
+const jwtRouter = require('./routes/jwt-router');
+const nbaRouter = require('./routes/nba-router');
+const cryptoRouter = require('./routes/crypto-router');
+const unsplashRouter = require('./routes/unsplash-router');
 
 const app = express()
 if (port == undefined)
@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 
 // app.use('/api', userRouter);
 // app.use('/jwt', jwtRouter);
-app.use(userRouter, jwtRouter, nbaRouter, cryptoRouter);
+app.use(userRouter, jwtRouter, nbaRouter, cryptoRouter, unsplashRouter);
 
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))

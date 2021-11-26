@@ -18,7 +18,11 @@ const nbaapi = axios.create({
 
 const cryptoapi = axios.create({
     baseURL: `http://localhost:${serverPort}/crypto_api`,
-})
+});
+
+const unsplashapi = axios.create({
+    baseURL: `http://localhost:${serverPort}/unsplash_api`,
+});
 
 export const createUser = payload => api.post(`/user`, payload)
 // export const getAllMovies = () => api.get(`/movies`)
@@ -45,6 +49,9 @@ export const getNBAPlayerImageUrl = playername => nbaapi.get(`/player_url/${play
 // * take a payload, and use the params option of axios params: {...}
 export const getCryptoValue = params => cryptoapi.get(`/currencies/`, {params: {cryptoID: params.cryptoID, targetCurrency: params.targetCurrency}});
 
+// * unsplash api
+export const searchPictures = query => unsplashapi.get(`/pictures/${query}`);
+
 const apis = {
     // * user
     createUser,
@@ -62,6 +69,8 @@ const apis = {
     getNBAPlayerImageUrl,
     // * crypto
     getCryptoValue,
+    // * unsplash
+    searchPictures
 }
 
 export default apis
