@@ -28,6 +28,10 @@ const hearthstoneapi = axios.create({
     baseURL: `http://localhost:${serverPort}/hs_api`,
 });
 
+const quotesapi = axios.create({
+    baseURL: `http://localhost:${serverPort}/quotes_api`,
+});
+
 export const createUser = payload => api.post(`/user`, payload)
 // export const getAllMovies = () => api.get(`/movies`)
 // export const updateMovieById = (id, payload) => api.put(`/movie/${id}`, payload)
@@ -59,6 +63,9 @@ export const searchPictures = query => unsplashapi.get(`/pictures/${query}`);
 // * hearthstone api
 export const searchCard = query => hearthstoneapi.get(`/cards/${query}`);
 
+//* quotes api
+export const searchQuote = query => quotesapi.get(`/quotes/${query}`);
+
 const apis = {
     // * user
     createUser,
@@ -79,7 +86,9 @@ const apis = {
     // * unsplash
     searchPictures,
     // * hearthstone
-    searchCard
+    searchCard,
+    // * quotes
+    searchQuote
 }
 
 export default apis
