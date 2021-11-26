@@ -24,12 +24,14 @@
     grid-column: 1;
     justify-self: end;
     align-self: center;
+    font-size: 2.5vmin;
 }
 
 .Equal {
     grid-row: 4;
     grid-column: 2;
     place-self: center;
+    font-size: 2.5vmin;
 }
 
 .SecondComparator {
@@ -37,12 +39,14 @@
     grid-column: 3;
     justify-self: start;
     align-self: center;
+    font-size: 2.5vmin;
 }
 
 .Title {
     grid-column: 1 / span 3;
     grid-row: 1;
     place-self: center;
+    font-size: 2.5vmin;
 }
 
 .InvertButton {
@@ -51,6 +55,8 @@
     background-color: blue;
     border: 2px solid rgb(0, 0, 200);
     border-radius: 15px;
+    color: white;
+    font-size: 150%;
 }
 
 .InvertButton:hover {

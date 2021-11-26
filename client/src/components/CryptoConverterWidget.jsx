@@ -8,23 +8,39 @@ class CryptoConverterWidget extends Component {
 
         this.state = {
             searchWord: '',
-            firstComparator: '1 Bitcoin (BTC)',
-            secondComparator: '1 Bitcoin (BTC)',
+            amountToConvert: '1',
+            firstComparator: 'Bitcoin (BTC)',
+            secondComparator: 'Bitcoin (BTC)',
+            firstComparatorResult: '1 Bitcoin (BTC)',
+            secondComparatorResult: '1 Bitcoin (BTC)',
         }
     }
 
-    handleSearchBarInput = async event => {
-        const searchWord = event.target.value;
-        this.setState({ searchWord });
+    handleAmountToConvertBar = async event => {
+        const amountToConvert = event.target.value;
+        this.setState({ amountToConvert });
+    }
 
+    handleFirstComparatorInput = async event => {
+        const firstComparator = event.target.value;
+        this.setState({ firstComparator });
+    }
+
+    handleSecondComparatorInput = async event => {
+        const secondComparator = event.target.value;
+        this.setState({ secondComparator });
+    }
+
+    invertValues = () => {
+        const firstComparator = this.state.secondComparator;
+        const secondComparator = this.state.firstComparator;
+        this.setState({ firstComparator: firstComparator, secondComparator: secondComparator });
     }
 
     render() {
-        const {firstComparator, secondComparator} = this.state
+        const {amountToConvert, firstComparator, secondComparator, firstComparatorResult, secondComparatorResult} = this.state
         const title = "Crypto-currency converter calculator"
-        //getCryptoValue()
-        //getCryptoValue = params => cryptoapi.get(`/currencies/`, {params: {cryptoID: params.cryptoID, targetCurrency: params.targetCurrency}});
-        {}
+
         return (
             <div className={this.props.widgetStyle}>
                 <p className={styles.Title}>
@@ -34,37 +50,41 @@ class CryptoConverterWidget extends Component {
                     type="text"
                     placeholder="Enter amount to convert"
                     className={styles.ValueBar}
-                    value={this.state.searchWord}
-                    onChange={this.handleSearchBarInput}
-                    //onKeyPress={this.handleKeyPress}
+                    value={amountToConvert}
+                    onChange={this.handleAmountToConvertBar}
+                    //onKeyPress={?} pas sur de faire quelque chose
                 />
                 <input
                     type="text"
                     placeholder="First Value"
                     className={styles.FirstBar}
-                    value={this.state.searchWord}
-                    onChange={this.handleSearchBarInput}
+                    value={firstComparator}
+                    onChange={this.handleFirstComparatorInput}
+                    //onKeyPress={?} pas sur de faire quelque chose
                 />
                 <input
                     type="text"
                     placeholder="Second Value"
                     className={styles.SecondBar}
-                    value={this.state.searchWord}
-                    onChange={this.handleSearchBarInput}
+                    value={secondComparator}
+                    onChange={this.handleSecondComparatorInput}
+                    //onKeyPress={?} pas sur de faire quelque chose
                 />
                 <input
                     type="button"
                     placeholder="="
                     className={styles.InvertButton}
+                    value="⇆"
+                    onClick={this.invertValues}
                 />
                 <p className={styles.FirstComparator}>
-                    {firstComparator}
+                    {firstComparatorResult}
                 </p>
                 <p className={styles.Equal}>
                     =
                 </p>
                 <p className={styles.SecondComparator}>
-                    {secondComparator}
+                    {secondComparatorResult}
                 </p>
                 <button
                     type="submit"
