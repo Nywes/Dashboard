@@ -4,8 +4,8 @@ import { HeaderHomePage } from '../components/HomeHeader';
 import { WidgetInterface } from '../components/WidgetInterface';
 import { NBATeamWidget } from '../components/NBATeamWidget';
 import { NBAPlayerWidget } from '../components/NBAPlayerWidget';
+import { BackgroundWidget } from '../components/BackgroundWidget';
 import { CryptoConverterWidget } from '../components/CryptoConverterWidget';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from "../style/HomePage.module.css";
 
 class Home extends Component {
@@ -39,7 +39,7 @@ class Home extends Component {
                     <WidgetInterface item={<NBAPlayerWidget widgetStyle={styles.NBAWidgetItem}/>} isManager={divcont}/>
                     <WidgetInterface item={<Item/>} isManager={divcont}/>
                     <WidgetInterface item={<CryptoConverterWidget widgetStyle={styles.CryptoWidgetItem}/>} isManager={divcont}/>
-                    <WidgetInterface item={<Item/>} isManager={divcont}/>
+                    <WidgetInterface item={<BackgroundWidget widgetStyle={styles.BackgroundWidgetItem}/>} isManager={divcont}/>
                     <WidgetInterface item={<Item/>} isManager={divcont}/>
                     <WidgetInterface item={<Item/>} isManager={divcont}/>
                     <WidgetInterface item={<Item/>} isManager={divcont}/>

@@ -120,7 +120,7 @@ class NBAPlayerWidget extends Component {
             <div className={this.props.widgetStyle}>
                 <input
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Search a NBA player..."
                     className={styles.SearchBar}
                     value={searchWord}
                     onChange={this.handleSearchBarInput}
