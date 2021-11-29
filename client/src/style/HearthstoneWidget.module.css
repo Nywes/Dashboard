@@ -1,0 +1,48 @@
+.HSLogo {
+    grid-row: 1;
+    grid-column: 1;
+    width: 75%;
+    height: 100%;
+    place-self: center;
+}
+
+.SearchBar {
+    grid-column: 1;
+    grid-row: 2;
+    height: 2vh;
+    background-color: rgba(0,0,0,0.9);
+    color: white;
+    align-self: center;
+    padding-left: 0.5vh;
+    border-radius: 5px;
+    border-color: blue;
+    border-width: 0.15vw;
+}
+
+.SearchBar:hover {
+    border-color: red;
+}
+
+.cardDescription {
+    grid-column: 1;
+    grid-row: 3 / span 2;
+    place-self: center;
+    font-style : italic;
+    border-radius: 8px;
+    background-image: url("https://d2vkoy1na2a6o6.cloudfront.net/_next/static/media/wood_middle_repeat.b4458ce9f1d0c41bb51b9b8385c0943f.png");
+    overflow-x: hidden;
+    box-shadow: 6px 6px 6px black;
+    padding: 1em;
+    font-size: 100%;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 3px black, 0 0 0.3em gold;
+}
+
+.cardImage {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    width: 70%;
+    height: 100%;
+    place-self: center;
+}

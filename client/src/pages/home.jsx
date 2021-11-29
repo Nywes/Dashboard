@@ -6,6 +6,8 @@ import { NBATeamWidget } from '../components/NBATeamWidget';
 import { NBAPlayerWidget } from '../components/NBAPlayerWidget';
 import { BackgroundWidget } from '../components/BackgroundWidget';
 import { CryptoConverterWidget } from '../components/CryptoConverterWidget';
+import { HearthstoneWidget } from '../components/HearthstoneWidget';
+import { QuoteWidget } from '../components/QuoteWidget';
 import styles from "../style/HomePage.module.css";
 
 class Home extends Component {
@@ -33,7 +35,7 @@ class Home extends Component {
                     <Widgets onClick={handlechange} className={styles.HeaderIcon}/>
                     <LogoButton path={ '/login' } icon={AccountCircle}/>
                 </header> */}
-                <HeaderHomePage toggleWidgetsButton={() => this.handlechange()} />
+                <HeaderHomePage toggleWidgetsButton={() => this.handlechange()}/>
                 <Container>
                     <WidgetInterface item={<NBATeamWidget widgetStyle={styles.NBAWidgetItem}/>} isManager={divcont}/>
                     <WidgetInterface item={<NBAPlayerWidget widgetStyle={styles.NBAWidgetItem}/>} isManager={divcont}/>
@@ -41,8 +43,8 @@ class Home extends Component {
                     <WidgetInterface item={<CryptoConverterWidget widgetStyle={styles.CryptoWidgetItem}/>} isManager={divcont}/>
                     <WidgetInterface item={<BackgroundWidget widgetStyle={styles.BackgroundWidgetItem}/>} isManager={divcont}/>
                     <WidgetInterface item={<Item/>} isManager={divcont}/>
-                    <WidgetInterface item={<Item/>} isManager={divcont}/>
-                    <WidgetInterface item={<Item/>} isManager={divcont}/>
+                    <WidgetInterface item={<HearthstoneWidget widgetStyle={styles.HearthstoneWidgetItem}/>} isManager={divcont}/>
+                    <WidgetInterface item={<QuoteWidget widgetStyle={styles.QuoteWidgetItem}/>} isManager={divcont}/>
                     <WidgetInterface item={<Item/>} isManager={divcont}/>
                 </Container>
             </Wrapper>
