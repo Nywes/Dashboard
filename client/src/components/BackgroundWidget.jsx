@@ -92,6 +92,7 @@ class BackgroundWidget extends Component {
     render() {
         const title = "Small Title please";
         const { searchWord, currentImg } = this.state;
+        let boolean = true;
         //<img src={imgLink1} className={styles.Img}/>
 
         return (
@@ -116,6 +117,9 @@ class BackgroundWidget extends Component {
                     className={styles.rightButton}
                     onClick={this.changeToRightImg}
                 >&gt;</button>
+                {boolean?<button 
+                    className={ styles.Quit }
+                >X</button>:null}
             </div>
         )
     }
