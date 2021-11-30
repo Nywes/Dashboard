@@ -133,7 +133,7 @@ class NBAPlayerWidget extends Component {
                     <p>Height: {height_feet === "?" ? "?" : `${height_feet}\' ${height_inches}\"`}</p>
                     <p>Position: {position}</p>
                     <p>Team: {team_full_name}</p>
-                    <p>Weight: {weight_pounds}</p>
+                    <p>Weight: {weight_pounds} lbs</p>
                 </ul>
 
             </div>

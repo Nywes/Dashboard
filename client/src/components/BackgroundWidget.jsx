@@ -5,7 +5,7 @@ import Select from 'react-select';
 import { style } from '@mui/system';
 
 class BackgroundWidget extends Component {
-    
+
     constructor(props) {
         super(props);
         var imgLink1 = `https://www.costarica-voyage.com/wp-content/uploads/foret-riviere-1280x800.jpg`;
@@ -17,6 +17,46 @@ class BackgroundWidget extends Component {
             receiptImg: [imgLink1, imgLink2, imgLink3],
             currentImg: 'https://www.costarica-voyage.com/wp-content/uploads/foret-riviere-1280x800.jpg',
         }
+    }
+
+    handleKeyPress = async event => {
+        if (event.key === 'Enter') {
+
+            // * get team from name
+            await api.searchPictures(event.target.value)
+            .then(res => {
+                if (res.status === 200) {
+                    // todo model creation would go here, to hold author name etc
+                    console.log("Got images");
+
+                    var imageUrls = [];
+
+                    for (let i = 0; i < res.data.pictures.length; i++) {
+                        const element = res.data.pictures[i].url;
+
+                        imageUrls.push(element);
+                    }
+
+                    this.setState({
+                        receiptImg: imageUrls,
+                        currentIndex: 0,
+                        currentImg: imageUrls[0]
+                    });
+
+                } else {
+                    alert("No images found");
+
+                    this.setState({
+                        searchWord: ''
+                    })
+                }
+            })
+            .catch(err => {
+                alert("No images found");
+                console.log("Error " + err);
+            });
+        }
+
     }
 
     handleSearchBarInput = async event => {
@@ -63,7 +103,7 @@ class BackgroundWidget extends Component {
                     className={styles.SearchBar}
                     value={searchWord}
                     onChange={this.handleSearchBarInput}
-                    //onKeyPress={this.handleKeyPress}
+                    onKeyPress={this.handleKeyPress}
                 />
                 <p className={styles.Title}>
                     {title}
