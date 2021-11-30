@@ -22,7 +22,6 @@ class BackgroundWidget extends Component {
     handleKeyPress = async event => {
         if (event.key === 'Enter') {
 
-            // * get team from name
             await api.searchPictures(event.target.value)
             .then(res => {
                 if (res.status === 200) {

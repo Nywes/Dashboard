@@ -11,8 +11,37 @@ class HearthstoneWidget extends Component {
         super(props);
         this.state = {
             searchWord: '',
-            hearthstoneLogo: HearthstoneLogo,
             cardImage: 'https://www.hearthstone-decks.com/upload/carte/59.jpg',
+            cardFlavor: "Au moins, il a un poulet furieux"
+        }
+    }
+
+    handleKeyPress = async event => {
+        if (event.key === 'Enter') {
+
+            // * get hearthstone card
+            await api.searchCard(event.target.value)
+            .then(res => {
+                if (res.status === 200) {
+                    // todo model creation would go here
+                    console.log("Got card");
+
+                    this.setState({
+                        cardImage: res.data.card[0].img,
+                        cardFlavor: res.data.card[0].flavor
+                    })
+                } else {
+                    alert("No card found");
+
+                    this.setState({
+                        searchWord: ''
+                    })
+                }
+            })
+            .catch(err => {
+                alert("No card found");
+                console.log("Error " + err);
+            });
         }
     }
 
@@ -23,20 +52,21 @@ class HearthstoneWidget extends Component {
 
     render() {
 
-        const { searchWord, hearthstoneLogo, cardImage } = this.state;
+        const { searchWord, cardImage, cardFlavor } = this.state;
 
         return (
             <div className={this.props.widgetStyle}>
-                <img src={this.state.hearthstoneLogo} className={styles.HSLogo} />
+                <img src={HearthstoneLogo} className={styles.HSLogo} />
                 <input
                     type="text"
                     placeholder="Search..."
                     className={styles.SearchBar}
                     value={searchWord}
                     onChange={this.handleSearchBarInput}
+                    onKeyPress={this.handleKeyPress}
                 />
                 <p className={styles.cardDescription}>
-                    "Au moins, il a un poulet furieux."
+                    {cardFlavor}
                 </p>
                 <img src={cardImage} className={styles.cardImage}/>
             </div>
