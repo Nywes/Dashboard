@@ -1,10 +1,8 @@
 var axios = require("axios");
+const { Promise } = require("mongoose");
 fs = require('fs');
 
 const CRYPTO_API_KEY = process.env.CRYPTO_API_KEY;
-
-// * we can provide a list of most popular cryptos maybe ?
-// * or copy paste them into a json ?
 
 getCryptoOptions = async (req, res) =>
 {
@@ -42,7 +40,35 @@ getCryptoOptions = async (req, res) =>
         });
 
     });
+}
 
+getCryptoValueRawData = async (currencyA, currencyB, callback) =>
+{
+    // * cf: https://nomics.com/docs/#operation/getCurrenciesTicker
+    const options = {
+        method: 'GET',
+        url: `https://api.nomics.com/v1/currencies/ticker`,
+        params: {
+            key: CRYPTO_API_KEY,
+            ids: "BTC", // comma separated list of cryptos (BTC, ETH, XTZ, SOL, ...)
+            convert: "EUR", // fiat currency (USD, EUR, AUD, ...), can also be a crypto currency !
+            status: "active", // active, inactive, or dead
+        }
+    };
+
+    if (currencyA != null && currencyA != "") {
+        options.params.ids = currencyA;
+    }
+    if (currencyB != null && currencyB != "") {
+        options.params.convert = currencyB;
+    }
+
+    await axios.request(options)
+    .then(function (response) {
+        callback(response);
+    }).catch(function (error) {
+        callback(null);
+    });
 }
 
 getCryptoValue = async (req, res) =>
@@ -89,5 +115,6 @@ getCryptoValue = async (req, res) =>
 
 module.exports = {
     getCryptoValue,
-    getCryptoOptions
+    getCryptoOptions,
+    getCryptoValueRawData
 }

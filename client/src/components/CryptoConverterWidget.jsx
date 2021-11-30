@@ -2,6 +2,10 @@ import React, { Component, useState } from 'react';
 import api from '../api';
 import styles from "../style/CryptoWidget.module.css";
 import Select from 'react-select';
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+
+const webSocketPort = process.env.REACT_APP_WEBSOCKET_PORT;
+const client = new W3CWebSocket(`ws://127.0.0.1:${webSocketPort}`);
 
 class CryptoConverterWidget extends Component {
 
@@ -43,9 +47,34 @@ class CryptoConverterWidget extends Component {
         const firstComparator = this.state.secondComparator;
         const secondComparator = this.state.firstComparator;
         this.setState({ firstComparator: firstComparator, secondComparator: secondComparator });
+
+        this.updateValues();
+    }
+
+    updateValues = async () => {
+
+        client.send(JSON.stringify({
+            currencyA: this.state.firstComparator,
+            currencyB: this.state.secondComparator
+        }));
     }
 
     componentDidMount = async () => {
+
+        client.onopen = () => {
+            console.log('WebSocket Client Connected');
+        };
+
+        client.onmessage = (message) => {
+            console.log("Message from server ", JSON.parse(message.data));
+            const dataFromServer = JSON.parse(message.data);
+
+            this.setState({
+                firstComparatorResult: `${this.state.amountToConvert} ${this.state.firstComparator}`,
+                secondComparatorResult: `${parseInt(this.state.amountToConvert) * parseFloat(dataFromServer.price)} ${this.state.secondComparator}`
+            })
+        };
+
         // * query server to get the options
         await api.getCurrencyOptions()
         .then(res => {
@@ -74,7 +103,7 @@ class CryptoConverterWidget extends Component {
                     this.setState({
                         firstComparatorResult: `${this.state.amountToConvert} ${this.state.firstComparator}`,
                         // ! may need to round this or something
-                        secondComparatorResult: `${cryptoData[0].price} ${this.state.secondComparator}`
+                        secondComparatorResult: `${parseInt(this.state.amountToConvert) * parseFloat(cryptoData[0].price)} ${this.state.secondComparator}`
                     })
                 } else {
                     alert("Error");
@@ -163,7 +192,7 @@ class CryptoConverterWidget extends Component {
                     =
                 </p>
                 <p className={styles.SecondComparator}>
-                    {secondComparatorResult}
+                    {`${Math.round((parseFloat(secondComparatorResult) + Number.EPSILON) * 100) / 100} ${secondComparatorLabel}`}
                 </p>
                 <button
                     type="submit"

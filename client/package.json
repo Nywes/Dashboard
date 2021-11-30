@@ -19,7 +19,8 @@
     "react-scripts": "4.0.3",
     "react-select": "^5.2.1",
     "styled-components": "^5.3.3",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "websocket": "^1.0.34"
   },
   "scripts": {
     "start": "dotenv -f .env.production run ./node_modules/.bin/react-scripts start",

@@ -12,7 +12,9 @@ const unsplashRouter = require('./routes/unsplash-router');
 const hearthstoneRouter = require('./routes/hearthstone-router');
 const quotesRouter = require('./routes/quotes-router');
 
-const app = express()
+const cryptoSocket = require('./controllers/crypto-socket');
+
+const app = express();
 if (port == undefined)
     port = 3000;
 
