@@ -1,5 +1,35 @@
 var axios = require("axios");
 
+getQuotesByTag = async (req, res) =>
+{
+    var tag = req.params.tag;
+
+    const options = {
+        method: 'GET',
+        url: `https://api.quotable.io/quotes`,
+        params: {tags:tag, page: '1'},
+    };
+
+    // ! await ??
+    await axios.request(options)
+    .then(function (response) {
+        console.log(response.data);
+
+        quoteInfo = response.data;
+        return res.status(200).json({
+            success: true,
+            quotes: quoteInfo,
+            message: 'Found quote(s)!',
+        });
+    }).catch(function (error) {
+        console.error(error);
+        return res.status(400).json({
+            success: false,
+            message: error,
+        });
+    });
+}
+
 searchQuote = async (req, res) =>
 {
     var userQuery = req.params.query;
@@ -48,4 +78,5 @@ searchQuote = async (req, res) =>
 
 module.exports = {
     searchQuote,
+    getQuotesByTag
 }

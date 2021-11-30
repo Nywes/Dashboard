@@ -66,6 +66,7 @@ export const searchCard = query => hearthstoneapi.get(`/cards/${query}`);
 
 //* quotes api
 export const searchQuote = query => quotesapi.get(`/quotes/${query}`);
+export const searchQuoteByTag = tag => quotesapi.get(`/quotes-tag/${tag}`);
 
 const apis = {
     // * user
@@ -91,6 +92,7 @@ const apis = {
     searchCard,
     // * quotes
     searchQuote,
+    searchQuoteByTag
 }
 
 export default apis
