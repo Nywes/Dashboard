@@ -127,7 +127,7 @@ class NBAPlayerWidget extends Component {
                     onKeyPress={this.handleKeyPress}
                 />
                 <div/>
-                <img src={img_url} style={{ width: '12vw', height: '17vh'}}/>
+                <img src={img_url} className={ styles.playerImg } style={{ width: '12vw', height: '17vh'}}/>
                 <ul className={styles.NBATeamInfo}>
                     <p className={styles.NBAFullName}>Full name: {`${first_name} ${last_name}`}</p>
                     <p>Height: {height_feet === "?" ? "?" : `${height_feet}\' ${height_inches}\"`}</p>

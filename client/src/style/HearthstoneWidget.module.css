@@ -46,3 +46,9 @@
     height: 100%;
     place-self: center;
 }
+
+.Quit {
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: end;
+}

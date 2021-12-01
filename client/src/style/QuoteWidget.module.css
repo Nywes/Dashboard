@@ -50,3 +50,9 @@
     color: white;
     text-shadow: 2px 2px 3px black;
 }
+
+.Quit {
+    grid-row: 1;
+    grid-column: 4;
+    justify-self: end;
+}

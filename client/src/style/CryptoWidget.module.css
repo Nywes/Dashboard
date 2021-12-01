@@ -89,4 +89,10 @@
 .ValidateButton:active {
     background-color: rgb(161, 0, 0);
     border: 2px solid grey;
-  }
+}
+
+.Quit {
+    grid-row: 1;
+    grid-column: 3;
+    justify-self: end;
+}
