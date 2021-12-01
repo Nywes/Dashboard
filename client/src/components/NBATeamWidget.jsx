@@ -99,7 +99,7 @@ class NBATeamWidget extends Component {
                     <p>Division: {division}</p>
                     <p className={styles.NBAFullName}>Full name: {full_name}</p>
                 </ul>
-
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
             </div>
         )
     }

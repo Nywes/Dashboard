@@ -57,7 +57,9 @@ const onDragEnd = (result, columns, setColumns) => {
     const [removed] = sourceItems.splice(source.index, 1);
     destItems.splice(destination.index, 0, removed);
 
-    ToggleWidgetSelection(destItems[destination.index].id);
+    if (SelectedWidgets.includes(destItems[destination.index].id)) {
+      ToggleWidgetSelection(destItems[destination.index].id);
+    }
 
     setColumns({
       ...columns,
@@ -87,90 +89,77 @@ const onDragEnd = (result, columns, setColumns) => {
 
 function DeleteWidget(widgetID, columns, setColumns)
 {
-  console.log("Deleting widget id ", widgetID);
   var found = false;
 
-  for (let i = 0; i < items1FromBackend.length; i++) {
-    const element = items1FromBackend[i];
+  var sourceColumn = null;
+  var indexToSplice = 0;
 
-    if (element.id === widgetID) {
-      items1FromBackend.splice(i, 1);
-      found = true;
-      break;
+  columns.forEach(column => {
+    for (let i = 0; i < column.items.length; i++) {
+      const item = column.items[i];
+
+      if (item.id === widgetID) {
+        indexToSplice = i;
+        sourceColumn = column;
+        break;
+      }
     }
-  }
-  for (let i = 0; i < items2FromBackend.length; i++) {
-    const element = items2FromBackend[i];
-
-    if (found)
-      break;
-    if (element.id === widgetID) {
-      items2FromBackend.splice(i, 1);
-      found = true;
-      break;
-    }
-  }
-  for (let i = 0; i < items3FromBackend.length; i++) {
-    const element = items3FromBackend[i];
-
-    if (found)
-      break;
-    if (element.id === widgetID) {
-      items3FromBackend.splice(i, 1);
-      found = true;
-      break;
-    }
-  }
-
-  // * update all columns
-  setColumns({
-    ...columns,
-    [columnID_1]: {
-      ...columns[columnID_1],
-      items: items1FromBackend,
-    },
-    [columnID_2]: {
-      ...columns[columnID_2],
-      items: items2FromBackend,
-    },
-    [columnID_3]: {
-      ...columns[columnID_3],
-      items: items3FromBackend,
-    },
   });
+
+  if (sourceColumn != null) {
+
+    const sourceItems = [...sourceColumn.items];
+    sourceItems.splice(indexToSplice, 1);
+
+    setColumns({
+      ...columns,
+      [columnID_1]: {
+        ...sourceColumn,
+        items: sourceItems,
+      },
+    });
+  }
 }
 
 function AddWidget(index, columns, setColumns)
 {
   var newID = uuid();
+  console.log("Creating new widget with ID:", newID);
+
+  var item = null;
+
   switch (index) {
     case 0:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<NBATeamWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> });
+        item = { id: newID, content: <WidgetInterface item={<NBATeamWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> };
       break;
     case 1:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<NBAPlayerWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> });
+        item = { id: newID, content: <WidgetInterface item={<NBAPlayerWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> };
       break;
     case 2:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<CryptoConverterWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> });
+        item ={ id: newID, content: <WidgetInterface item={<CryptoConverterWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> };
       break;
     case 3:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<BackgroundWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> });
+        item = { id: newID, content: <WidgetInterface item={<BackgroundWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> };
       break;
     case 4:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<HearthstoneWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> });
+        item = { id: newID, content: <WidgetInterface item={<HearthstoneWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> };
       break;
     case 5:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<QuoteWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> });
+        item = { id: newID, content: <WidgetInterface item={<QuoteWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> };
       break;
     default:
       break;
   }
 
+  const destColumn = columns[columnID_1];
+  const destItems = [...destColumn.items];
+  destItems.splice(0, 0, item);
+
   setColumns({
     ...columns,
     [columnID_1]: {
-      ...columns[columnID_1],
-      items: items1FromBackend,
+      ...destColumn,
+      items: destItems,
     },
   });
 }
@@ -196,6 +185,7 @@ function DeleteSelectedWidgets(columns, setColumns)
 
     DeleteWidget(element, columns, setColumns);
   }
+  SelectedWidgets = [];
 }
 
 function Home() {

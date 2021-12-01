@@ -135,7 +135,7 @@ class NBAPlayerWidget extends Component {
                     <p>Team: {team_full_name}</p>
                     <p>Weight: {weight_pounds} lbs</p>
                 </ul>
-
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
             </div>
         )
     }

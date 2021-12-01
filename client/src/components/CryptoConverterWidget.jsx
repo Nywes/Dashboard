@@ -200,6 +200,7 @@ class CryptoConverterWidget extends Component {
                     className={styles.ValidateButton}
                     onClick={this.convertValue}
                 />
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
             </div>
         )
     }

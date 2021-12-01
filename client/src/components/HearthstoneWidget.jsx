@@ -69,6 +69,7 @@ class HearthstoneWidget extends Component {
                     {cardFlavor}
                 </p>
                 <img src={cardImage} className={styles.cardImage}/>
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
             </div>
         )
 

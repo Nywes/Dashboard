@@ -83,7 +83,6 @@ class QuoteWidget extends Component {
 
         const { selection, selectionLabel, currentQuote, currentAuthor } = this.state;
 
-        // ! need to handle input of the select
         return (
             <div className={this.props.widgetStyle}>
                 <Select
@@ -99,6 +98,7 @@ class QuoteWidget extends Component {
                 <p className={styles.author}>
                    {currentAuthor}
                 </p>
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
             </div>
         )
 
