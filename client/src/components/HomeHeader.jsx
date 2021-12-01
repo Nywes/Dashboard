@@ -21,7 +21,8 @@ class HeaderHomePage extends Component {
         super(props);
 
         this.state = {
-            loggedIn: false
+            loggedIn: false,
+            widgetManager: false,
         }
     }
 
@@ -62,16 +63,62 @@ class HeaderHomePage extends Component {
         })
     }
 
+    changeWidgetManagerState = async () => {
+        this.setState({
+            widgetManager: !this.state.widgetManager
+          });
+    }
+
     render() {
 
-        const { loggedIn } = this.state;
+        const { loggedIn, widgetManager } = this.state;
 
         return (
             <header className={styles.HeaderHomePage}>
-                <Delete onClick={() => this.props.DeleteSelectedWidgets()} className={styles.HeaderIcon}/>
+                {widgetManager?<p className= { styles.widgetText }> Click on a Logo to add a Widget </p>:null}
+                {widgetManager?<img
+                    src='https://assets.materialup.com/uploads/347c48be-3ed3-4e80-87a0-3353405f0239/0x0ss-85.jpg'
+                    className={ styles.widgetManager }
+                    onClick={() => this.props.toggleWidgetsButton(0)}
+                />:null}
+                {widgetManager?<p className= { styles.widgetText }>NBA Team</p>:null}
 
-                <Widgets onClick={() => this.props.toggleWidgetsButton(0)} className={styles.HeaderIcon}/>
-                <button className={ styles.HeaderIcon }></button>
+                {widgetManager?<img
+                    src='https://assets.materialup.com/uploads/347c48be-3ed3-4e80-87a0-3353405f0239/0x0ss-85.jpg'
+                    className={ styles.widgetManager }
+                    onClick={() => this.props.toggleWidgetsButton(1)}
+                ></img>:null}
+                {widgetManager?<p className= { styles.widgetText }>NBA Player</p>:null}
+
+                {widgetManager?<img
+                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1024px-Bitcoin.svg.png'
+                    className={ styles.widgetManager }
+                    onClick={() => this.props.toggleWidgetsButton(2)}
+                />:null}
+                {widgetManager?<p className= { styles.widgetText }>Cryptocurrencies</p>:null}
+
+                {widgetManager?<img
+                    src='https://icon-library.com/images/ios-gallery-icon/ios-gallery-icon-29.jpg'
+                    className={ styles.widgetManager }
+                    onClick={() => this.props.toggleWidgetsButton(3)}
+                />:null}
+                {widgetManager?<p className= { styles.widgetText }>Background</p>:null}
+
+                {widgetManager?<img
+                    src='https://objectifsmartphone.fr/wp-content/uploads/2020/06/hearthstonelogo-bb3x.png'
+                    className={ styles.widgetManager }
+                    onClick={() => this.props.toggleWidgetsButton(4)}
+                />:null}
+                {widgetManager?<p className= { styles.widgetText }>Hearthstone</p>:null}
+
+                {widgetManager?<img
+                    src='https://image.flaticon.com/icons/png/512/61/61961.png'
+                    className={ styles.widgetManager }
+                    onClick={() => this.props.toggleWidgetsButton(5)}
+                />:null}
+                {widgetManager?<p className= { styles.widgetText }>Quote</p>:null}
+
+                <Widgets onClick={() => this.changeWidgetManagerState()} className={styles.HeaderIcon}/>
                 {/* <ProfileButton loginPath={'/login'}/> */}
 
                 {loggedIn ? <Logout onClick={this.DeleteSession} className={styles.HeaderIcon} /> : <LogoButton path={ '/login' } icon={AccountCircle}/>}

@@ -263,7 +263,7 @@ function Home() {
                                           userSelect: "none",
                                           padding: 1,
                                           minHeight: "50px",
-                                          color: "white",
+                                          color: "black",
                                           ...provided.draggableProps.style,
                                         }}
                                       >
