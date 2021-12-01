@@ -15,7 +15,7 @@ if (mongoHost == undefined || mongoHost == "") {
 }
 
 // ! env variable for database name ?
-
+// ! env variable for mongo user/password
 mongoose
     .connect(`mongodb://root:root@${/*127.0.0.1*/mongoHost}:27017/dashboard`, { useNewUrlParser: true, authSource: "admin"})
     .catch(e => {

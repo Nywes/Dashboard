@@ -68,7 +68,7 @@ class HeaderHomePage extends Component {
 
         return (
             <header className={styles.HeaderHomePage}>
-                <LogoButton onClick={() => this.props.toggleWidgetsButton()} path={ '/' } icon={Widgets}/>
+                <Widgets onClick={() => this.props.toggleWidgetsButton(0)} className={styles.HeaderIcon}/>
                 {/* <ProfileButton loginPath={'/login'}/> */}
 
                 {loggedIn ? <Logout onClick={this.DeleteSession} className={styles.HeaderIcon} /> : <LogoButton path={ '/login' } icon={AccountCircle}/>}

@@ -15,23 +15,22 @@ import uuid from "uuid/v4";
 const items1FromBackend = [
   { id: uuid(), content: <WidgetInterface item={<NBATeamWidget widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> },
   { id: uuid(), content: <WidgetInterface item={<NBAPlayerWidget widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> },
-  { id: uuid(), content: <WidgetInterface item={<Item />} isManager={true} /> },
 ];
 
 const items2FromBackend = [
   { id: uuid(), content: <WidgetInterface item={<CryptoConverterWidget widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> },
   { id: uuid(), content: <WidgetInterface item={<BackgroundWidget widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> },
-  { id: uuid(), content: <WidgetInterface item={<Item />} isManager={true} /> },
 ];
 
 const items3FromBackend = [
   { id: uuid(), content: <WidgetInterface item={<HearthstoneWidget widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> },
   { id: uuid(), content: <WidgetInterface item={<QuoteWidget widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> },
-  { id: uuid(), content: <WidgetInterface item={<Item />} isManager={true} /> },
 ];
 
+const columnID_1 = uuid();
+
 const columnsFromBackend = {
-  [uuid()]: {
+  [columnID_1]: {
     items: items1FromBackend,
   },
   [uuid()]: {
@@ -79,11 +78,48 @@ const onDragEnd = (result, columns, setColumns) => {
   }
 };
 
+function AddWidget(index, columns, setColumns)
+{
+  var newID = uuid();
+  switch (index) {
+    case 0:
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<NBATeamWidget widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> });
+      break;
+    case 1:
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<NBAPlayerWidget widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> });
+      break;
+    case 2:
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<CryptoConverterWidget widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> });
+      break;
+    case 3:
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<BackgroundWidget widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> });
+      break;
+    case 4:
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<HearthstoneWidget widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> });
+      break;
+    case 5:
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<QuoteWidget widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> });
+      break;
+    default:
+      break;
+  }
+
+  setColumns({
+    ...columns,
+    [columnID_1]: {
+      ...columns[columnID_1],
+      items: items1FromBackend,
+    },
+  });
+
+  console.log("Updated items1FromBackend", items1FromBackend);
+}
+
 function Home() {
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
     <Wrapper className="App">
-      <HeaderHomePage toggleWidgetsButton={() => this.handlechange()} />
+      <HeaderHomePage toggleWidgetsButton={(index) => AddWidget(index, columns, setColumns)} />
       <Container>
         <div
           style={{
