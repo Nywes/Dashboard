@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import { AccountCircle, Widgets, Logout } from '@mui/icons-material';
+import { AccountCircle, Widgets, Logout, Delete } from '@mui/icons-material';
 import { grey } from '@mui/material/colors';
 import styles from "../style/HomePage.module.css"
 import api from '../api'
@@ -68,7 +68,10 @@ class HeaderHomePage extends Component {
 
         return (
             <header className={styles.HeaderHomePage}>
+                <Delete onClick={() => this.props.DeleteSelectedWidgets()} className={styles.HeaderIcon}/>
+
                 <Widgets onClick={() => this.props.toggleWidgetsButton(0)} className={styles.HeaderIcon}/>
+                <button className={ styles.HeaderIcon }></button>
                 {/* <ProfileButton loginPath={'/login'}/> */}
 
                 {loggedIn ? <Logout onClick={this.DeleteSession} className={styles.HeaderIcon} /> : <LogoButton path={ '/login' } icon={AccountCircle}/>}

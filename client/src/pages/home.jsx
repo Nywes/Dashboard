@@ -12,31 +12,35 @@ import styles from "../style/HomePage.module.css";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from "uuid/v4";
 
+const initialItemIDs = [uuid(), uuid(), uuid(), uuid(), uuid(), uuid()]
+
 const items1FromBackend = [
-  { id: uuid(), content: <WidgetInterface item={<NBATeamWidget widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> },
-  { id: uuid(), content: <WidgetInterface item={<NBAPlayerWidget widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> },
+  { id: initialItemIDs[0], content: <WidgetInterface item={<NBATeamWidget WidgetID={initialItemIDs[0]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> },
+  { id: initialItemIDs[1], content: <WidgetInterface item={<NBAPlayerWidget WidgetID={initialItemIDs[1]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> },
 ];
 
 const items2FromBackend = [
-  { id: uuid(), content: <WidgetInterface item={<CryptoConverterWidget widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> },
-  { id: uuid(), content: <WidgetInterface item={<BackgroundWidget widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> },
+  { id: initialItemIDs[2], content: <WidgetInterface item={<CryptoConverterWidget WidgetID={initialItemIDs[2]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> },
+  { id: initialItemIDs[3], content: <WidgetInterface item={<BackgroundWidget WidgetID={initialItemIDs[3]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> },
 ];
 
 const items3FromBackend = [
-  { id: uuid(), content: <WidgetInterface item={<HearthstoneWidget widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> },
-  { id: uuid(), content: <WidgetInterface item={<QuoteWidget widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> },
+  { id: initialItemIDs[4], content: <WidgetInterface item={<HearthstoneWidget WidgetID={initialItemIDs[4]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> },
+  { id: initialItemIDs[5], content: <WidgetInterface item={<QuoteWidget WidgetID={initialItemIDs[5]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> },
 ];
 
 const columnID_1 = uuid();
+const columnID_2 = uuid();
+const columnID_3 = uuid();
 
 const columnsFromBackend = {
   [columnID_1]: {
     items: items1FromBackend,
   },
-  [uuid()]: {
+  [columnID_2]: {
     items: items2FromBackend,
   },
-  [uuid()]: {
+  [columnID_3]: {
     items: items3FromBackend,
   },
 };
@@ -78,27 +82,82 @@ const onDragEnd = (result, columns, setColumns) => {
   }
 };
 
+function DeleteWidget(widgetID, columns, setColumns)
+{
+  console.log("Deleting widget id ", widgetID);
+  var found = false;
+
+  for (let i = 0; i < items1FromBackend.length; i++) {
+    const element = items1FromBackend[i];
+
+    if (element.id === widgetID) {
+      items1FromBackend.splice(i, 1);
+      found = true;
+      break;
+    }
+  }
+  for (let i = 0; i < items2FromBackend.length; i++) {
+    const element = items2FromBackend[i];
+
+    if (found)
+      break;
+    if (element.id === widgetID) {
+      items2FromBackend.splice(i, 1);
+      found = true;
+      break;
+    }
+  }
+  for (let i = 0; i < items3FromBackend.length; i++) {
+    const element = items3FromBackend[i];
+
+    if (found)
+      break;
+    if (element.id === widgetID) {
+      items3FromBackend.splice(i, 1);
+      found = true;
+      break;
+    }
+  }
+
+  // * update all columns
+  setColumns({
+    ...columns,
+    [columnID_1]: {
+      ...columns[columnID_1],
+      items: items1FromBackend,
+    },
+    [columnID_2]: {
+      ...columns[columnID_2],
+      items: items2FromBackend,
+    },
+    [columnID_3]: {
+      ...columns[columnID_3],
+      items: items3FromBackend,
+    },
+  });
+}
+
 function AddWidget(index, columns, setColumns)
 {
   var newID = uuid();
   switch (index) {
     case 0:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<NBATeamWidget widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> });
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<NBATeamWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> });
       break;
     case 1:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<NBAPlayerWidget widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> });
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<NBAPlayerWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> });
       break;
     case 2:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<CryptoConverterWidget widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> });
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<CryptoConverterWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> });
       break;
     case 3:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<BackgroundWidget widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> });
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<BackgroundWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> });
       break;
     case 4:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<HearthstoneWidget widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> });
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<HearthstoneWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> });
       break;
     case 5:
-        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<QuoteWidget widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> });
+        items1FromBackend.push({ id: newID, content: <WidgetInterface item={<QuoteWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> });
       break;
     default:
       break;
@@ -111,15 +170,38 @@ function AddWidget(index, columns, setColumns)
       items: items1FromBackend,
     },
   });
+}
 
-  console.log("Updated items1FromBackend", items1FromBackend);
+var SelectedWidgets = [];
+
+function ToggleWidgetSelection(WidgetID)
+{
+  if (SelectedWidgets.includes(WidgetID)) {
+    var index = SelectedWidgets.indexOf(WidgetID);
+    SelectedWidgets.splice(index, 1);
+    console.log("Unselecting widget ", WidgetID);
+  } else {
+    SelectedWidgets.push(WidgetID);
+    console.log("Selecting widget ", WidgetID);
+  }
+}
+
+function DeleteSelectedWidgets(columns, setColumns)
+{
+  console.log("Deleting widgets");
+  for (let i = 0; i < SelectedWidgets.length; i++) {
+    const element = SelectedWidgets[i];
+    console.log("Deleting selected widgets: ", element);
+
+    DeleteWidget(element, columns, setColumns);
+  }
 }
 
 function Home() {
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
     <Wrapper className="App">
-      <HeaderHomePage toggleWidgetsButton={(index) => AddWidget(index, columns, setColumns)} />
+      <HeaderHomePage DeleteSelectedWidgets={() => DeleteSelectedWidgets(columns, setColumns)} toggleWidgetsButton={(index) => AddWidget(index, columns, setColumns)} />
       <Container>
         <div
           style={{

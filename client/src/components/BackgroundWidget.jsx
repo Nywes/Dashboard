@@ -117,9 +117,8 @@ class BackgroundWidget extends Component {
                     className={styles.rightButton}
                     onClick={this.changeToRightImg}
                 >&gt;</button>
-                {boolean?<button 
-                    className={ styles.Quit }
-                >X</button>:null}
+
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
             </div>
         )
     }
