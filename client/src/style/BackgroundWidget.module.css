@@ -48,3 +48,12 @@
     align-self: center;
     justify-self: right;
 }
+
+.Quit {
+    grid-row: 1;
+    grid-column: 1 / max;
+    width: 4%;
+    align-self: flex-start;
+    justify-self: flex-end;
+    color: red;
+}
