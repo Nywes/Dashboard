@@ -29,9 +29,9 @@ const items3FromBackend = [
   { id: initialItemIDs[5], content: <WidgetInterface item={<QuoteWidget WidgetID={initialItemIDs[5]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> },
 ];
 
-const columnID_1 = uuid();
-const columnID_2 = uuid();
-const columnID_3 = uuid();
+const columnID_1 = 0;
+const columnID_2 = 1;
+const columnID_3 = 2;
 
 const columnsFromBackend = {
   [columnID_1]: {
@@ -89,12 +89,14 @@ const onDragEnd = (result, columns, setColumns) => {
 
 function DeleteWidget(widgetID, columns, setColumns)
 {
-  var found = false;
-
   var sourceColumn = null;
   var indexToSplice = 0;
 
-  columns.forEach(column => {
+  var columnIndex = 0;
+
+  for (let i = 0; i <= columnID_3; i++) {
+    const column = columns[i];
+
     for (let i = 0; i < column.items.length; i++) {
       const item = column.items[i];
 
@@ -104,20 +106,29 @@ function DeleteWidget(widgetID, columns, setColumns)
         break;
       }
     }
-  });
+    if (sourceColumn != null) {
+      break;
+    }
+    columnIndex++;
+  }
 
   if (sourceColumn != null) {
 
+    console.log("Found and deleting", widgetID);
     const sourceItems = [...sourceColumn.items];
     sourceItems.splice(indexToSplice, 1);
 
-    setColumns({
-      ...columns,
-      [columnID_1]: {
-        ...sourceColumn,
-        items: sourceItems,
-      },
-    });
+    columns[columnIndex].items = sourceItems;
+
+    // setColumns({
+    //   ...columns,
+    //   [columnIndex]: {
+    //     ...sourceColumn,
+    //     items: sourceItems,
+    //   },
+    // });
+  } else {
+    console.log("Did not find nor delete", widgetID);
   }
 }
 
@@ -178,14 +189,33 @@ function ToggleWidgetSelection(WidgetID)
 
 function DeleteSelectedWidgets(columns, setColumns)
 {
-  console.log("Deleting widgets");
-  for (let i = 0; i < SelectedWidgets.length; i++) {
-    const element = SelectedWidgets[i];
-    console.log("Deleting selected widgets: ", element);
+  console.log("Deleting widgets: ", SelectedWidgets);
 
-    DeleteWidget(element, columns, setColumns);
-  }
-  SelectedWidgets = [];
+
+  for (let i = 0; i < SelectedWidgets.length; i++) {
+      const element = SelectedWidgets[i];
+      console.log("Deleting selected widgets: ", element);
+
+      DeleteWidget(element, columns, setColumns);
+    }
+    SelectedWidgets = [];
+
+    setColumns({
+      ...columns,
+      [columnID_1]: {
+        ...columns[columnID_1],
+        items: columns[columnID_1].items,
+      },
+      [columnID_2]: {
+        ...columns[columnID_2],
+        items: columns[columnID_2].items,
+      },
+      [columnID_3]: {
+        ...columns[columnID_3],
+        items: columns[columnID_3].items,
+      },
+
+    });
 }
 
 function Home() {
