@@ -65,6 +65,10 @@ class NBATeamWidget extends Component {
 
     }
 
+    componentWillUnmount()
+    {
+    }
+
     render() {
         // * get state
         const {abbreviation, city, conference, division, full_name, name, searchWord} = this.state;

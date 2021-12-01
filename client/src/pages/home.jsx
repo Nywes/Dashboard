@@ -56,6 +56,9 @@ const onDragEnd = (result, columns, setColumns) => {
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
     destItems.splice(destination.index, 0, removed);
+
+    ToggleWidgetSelection(destItems[destination.index].id);
+
     setColumns({
       ...columns,
       [source.droppableId]: {
@@ -179,10 +182,8 @@ function ToggleWidgetSelection(WidgetID)
   if (SelectedWidgets.includes(WidgetID)) {
     var index = SelectedWidgets.indexOf(WidgetID);
     SelectedWidgets.splice(index, 1);
-    console.log("Unselecting widget ", WidgetID);
   } else {
     SelectedWidgets.push(WidgetID);
-    console.log("Selecting widget ", WidgetID);
   }
 }
 
@@ -199,6 +200,7 @@ function DeleteSelectedWidgets(columns, setColumns)
 
 function Home() {
   const [columns, setColumns] = useState(columnsFromBackend);
+
   return (
     <Wrapper className="App">
       <HeaderHomePage DeleteSelectedWidgets={() => DeleteSelectedWidgets(columns, setColumns)} toggleWidgetsButton={(index) => AddWidget(index, columns, setColumns)} />

@@ -6,6 +6,7 @@ import styles from "../style/HomePage.module.css";
 class WidgetInterface extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             isManager: this.props.isManager,
             display: true,
@@ -24,7 +25,6 @@ class WidgetInterface extends Component {
         let temp = this.props.isManager;
         let tempDisplay = this.state.display;
 
-        console.log(this.state.display);
         if (temp) {
             if (tempDisplay) {
                 return (seekWidget);
