@@ -118,8 +118,10 @@ class HeaderHomePage extends Component {
                 />:null}
                 {widgetManager?<p className= { styles.widgetText }>Quote</p>:null}
 
+
                 <Widgets onClick={() => this.changeWidgetManagerState()} className={styles.HeaderIcon}/>
                 {/* <ProfileButton loginPath={'/login'}/> */}
+                <Delete onClick={() => this.props.DeleteSelectedWidgets()} className={styles.HeaderIcon}/>
 
                 {loggedIn ? <Logout onClick={this.DeleteSession} className={styles.HeaderIcon} /> : <LogoButton path={ '/login' } icon={AccountCircle}/>}
                 {/* <LogoButton path={ '/login' } icon={AccountCircle}/> */}

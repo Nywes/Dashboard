@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import api from '../api';
 import styles from "../style/BackgroundWidget.module.css";
 import Select from 'react-select';
+import { background, SetBackground } from "../globals/globalsVariables.js";
 import { style } from '@mui/system';
 
 class BackgroundWidget extends Component {
@@ -112,7 +113,7 @@ class BackgroundWidget extends Component {
                     className={styles.leftButton}
                     onClick={this.changeToLeftImg}
                 >&lt;</button>
-                <img src={currentImg} className={styles.Img}/>
+                <img src={currentImg} onClick={() => SetBackground(currentImg)} className={styles.Img}/>
                 <button
                     className={styles.rightButton}
                     onClick={this.changeToRightImg}
