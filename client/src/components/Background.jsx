@@ -6,6 +6,12 @@ class Background extends Component {
     constructor(props) {
         super(props);
 
+        // * if in local storage
+        var storedBackground = localStorage.getItem("dashboard_background");
+        if (storedBackground === null || storedBackground.length === 0) {
+            storedBackground = this.props.background;
+        }
+
         SetCallback(newBG => {
             this.setState({
                 backgroundImage: newBG
@@ -13,7 +19,7 @@ class Background extends Component {
         })
 
         this.state = {
-            backgroundImage: this.props.background
+            backgroundImage: storedBackground
         };
     }
 

@@ -12,6 +12,8 @@ function SetBackground(NewSrc)
     background = NewSrc;
     console.log("New background", background);
 
+    localStorage.setItem("dashboard_background", background);
+
     if (callBack != null) {
         callBack(background);
     }
