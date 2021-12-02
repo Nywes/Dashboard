@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AccountCircle, Widgets, Logout, Delete } from '@mui/icons-material';
 import { grey } from '@mui/material/colors';
 import styles from "../style/HomePage.module.css"
+import neon from "../style/NeonEffect.module.css"
 import api from '../api'
 
 class LogoButton extends Component {
@@ -77,55 +78,58 @@ class HeaderHomePage extends Component {
 
         return (
             <header className={styles.HeaderHomePage}>
-                {widgetManager?<p className= { styles.widgetText }> Click on a Logo to add a Widget </p>:null}
+                {widgetManager?<p className={neon.text}> Click on a Logo to add a Widget </p>:null}
                 {widgetManager?<img
                     src='https://assets.materialup.com/uploads/347c48be-3ed3-4e80-87a0-3353405f0239/0x0ss-85.jpg'
                     className={ styles.widgetManager }
                     onClick={() => this.props.toggleWidgetsButton(0)}
                 />:null}
-                {widgetManager?<p className= { styles.widgetText }>NBA Team</p>:null}
+
+                {widgetManager?<p className={neon.text}>NBA Team</p>:null}
+
+                {/*widgetManager?<p className= { styles.widgetText }>NBA Team</p>:null*/}
 
                 {widgetManager?<img
                     src='https://assets.materialup.com/uploads/347c48be-3ed3-4e80-87a0-3353405f0239/0x0ss-85.jpg'
                     className={ styles.widgetManager }
                     onClick={() => this.props.toggleWidgetsButton(1)}
                 ></img>:null}
-                {widgetManager?<p className= { styles.widgetText }>NBA Player</p>:null}
+                {widgetManager?<p className={neon.text}>NBA Player</p>:null}
 
                 {widgetManager?<img
                     src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1024px-Bitcoin.svg.png'
                     className={ styles.widgetManager }
                     onClick={() => this.props.toggleWidgetsButton(2)}
                 />:null}
-                {widgetManager?<p className= { styles.widgetText }>Cryptocurrencies</p>:null}
+                {widgetManager?<p className={neon.text}>Cryptocurrencies</p>:null}
 
                 {widgetManager?<img
                     src='https://icon-library.com/images/ios-gallery-icon/ios-gallery-icon-29.jpg'
                     className={ styles.widgetManager }
                     onClick={() => this.props.toggleWidgetsButton(3)}
                 />:null}
-                {widgetManager?<p className= { styles.widgetText }>Background</p>:null}
+                {widgetManager?<p className={neon.text}>Background</p>:null}
 
                 {widgetManager?<img
                     src='https://objectifsmartphone.fr/wp-content/uploads/2020/06/hearthstonelogo-bb3x.png'
                     className={ styles.widgetManager }
                     onClick={() => this.props.toggleWidgetsButton(4)}
                 />:null}
-                {widgetManager?<p className= { styles.widgetText }>Hearthstone</p>:null}
+                {widgetManager?<p className={neon.text}>Hearthstone</p>:null}
 
                 {widgetManager?<img
                     src='https://image.flaticon.com/icons/png/512/61/61961.png'
                     className={ styles.widgetManager }
                     onClick={() => this.props.toggleWidgetsButton(5)}
                 />:null}
-                {widgetManager?<p className= { styles.widgetText }>Quote</p>:null}
+                {widgetManager?<p className={neon.text}>Quote</p>:null}
 
 
                 <Widgets onClick={() => this.changeWidgetManagerState()} className={styles.HeaderIcon}/>
                 {/* <ProfileButton loginPath={'/login'}/> */}
                 <Delete onClick={() => this.props.DeleteSelectedWidgets()} className={styles.HeaderIcon}/>
 
-                {loggedIn ? <Logout onClick={this.DeleteSession} className={styles.HeaderIcon} /> : <LogoButton path={ '/login' } icon={AccountCircle}/>}
+                {loggedIn ? <Logout onClick={this.DeleteSession} className={styles.HeaderIcon} /> : <LogoButton className={styles.HeaderIcon} path={ '/login' } icon={AccountCircle}/>}
                 {/* <LogoButton path={ '/login' } icon={AccountCircle}/> */}
             </header>
         )

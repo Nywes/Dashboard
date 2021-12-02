@@ -538,17 +538,10 @@ function Home() {
     <Wrapper className="App">
       <HeaderHomePage DeleteSelectedWidgets={() => DeleteSelectedWidgets(columns, setColumns)} toggleWidgetsButton={(index) => AddWidget(index, columns, setColumns)} />
       <Container>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            height: "100%",
-            overflow: "hidden",
-          }}
-        >
 
-          <StartButton Refresh={() => RefreshWidgetColumns(columns, setColumns)}/>
+        <StartButton Refresh={() => RefreshWidgetColumns(columns, setColumns)}/>
 
+        <div className={ styles.columnDesigner }>
           <DragDropContext onDragEnd={(result) => onDragEnd(result, columns, setColumns)}>
             {Object.entries(columns).map(([columnId, column], index) => {
               return (

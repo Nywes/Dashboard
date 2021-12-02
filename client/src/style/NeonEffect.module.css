@@ -1,0 +1,73 @@
+.text {
+  font-family: Tahoma, sans-serif;
+  color: rgba(120, 0, 0, .5);
+  animation: text-flicker 2s linear forwards;
+  background-color: black;
+  box-shadow: 0px 0px 3px 3px black;
+  border-radius: 15px;
+  place-self: center;
+  padding: 0.45%;
+}
+
+@keyframes text-flicker {
+  2% { 
+    color: rgb(230, 0, 0);
+    text-shadow: 0 0 15px rgb(230, 0, 0);
+  }
+  3% {
+    color: rgba(120, 0, 0, 0.5);
+    text-shadow: none;
+  }
+  6% {
+    color: rgb(230, 0, 0);
+    text-shadow: 0 0 15px rgb(230, 0, 0);
+  }
+  9% {
+    color: rgba(120, 0, 0, .5);
+    text-shadow: none;
+  }
+  11% {
+    color: rgb(230, 0, 0);
+    text-shadow: 0 0 15px rgb(230, 0, 0);
+  }
+  14% {
+    color: rgba(120, 0, 0, .5);
+    text-shadow: none;
+  }
+  18% {
+    color: rgb(230, 0, 0);
+    text-shadow: 0 0 15px rgb(230, 0, 0);
+  }
+  32% {
+    color: rgb(230, 0, 0);
+    text-shadow: 0 0 15px rgb(230, 0, 0);
+  }
+  33% {
+    color: rgba(120, 0, 0, .5);
+    text-shadow: none;
+  }
+  37% {
+    color: rgb(230, 0, 0);
+    text-shadow: 0 0 15px rgb(230, 0, 0);
+  }
+  39% {
+    color: rgba(120, 0, 0, .5);
+    text-shadow: none;
+  }
+  43% {
+    color: rgb(230, 0, 0);
+    text-shadow: 0 0 15px rgb(230, 0, 0);
+  }
+  46% {
+    color: rgba(120, 0, 0, .5);
+    text-shadow: none;
+  }
+  47% {
+    color: rgb(230, 0, 0);
+    text-shadow: 0 0 15px rgb(230, 0, 0);
+  }
+  100% {
+    color: rgb(230, 0, 0);
+    text-shadow: 0 0 15px rgb(230, 0, 0);
+  }
+}
