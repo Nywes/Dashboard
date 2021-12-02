@@ -9,10 +9,25 @@ const client = new W3CWebSocket(`ws://127.0.0.1:${webSocketPort}`);
 
 class CryptoConverterWidget extends Component {
 
-    //options = [];
+    tickerOptions = [];
+
+    currentTickerInterval = null;
 
     constructor(props) {
         super(props);
+
+        // * nomics updates every 10 seconds!
+        // *https://nomics.com/docs/#section/Authentication
+        this.tickerOptions = [
+            { label: "10 Seconds", value: 10000 },
+            { label: "30 Seconds", value: 30000 },
+            { label: "1 Minute", value: 60000 },
+            { label: "5 Minutes", value: 300000 },
+            { label: "10 Minutes", value: 600000 },
+        ];
+
+        // * default 1 minute
+        this.currentTickerInterval = setInterval(this.updateValues, 60000);
 
         this.state = {
             searchWord: '',
@@ -23,6 +38,8 @@ class CryptoConverterWidget extends Component {
             secondComparatorLabel: 'Bitcoin (BTC)',
             firstComparatorResult: '1 Bitcoin (BTC)',
             secondComparatorResult: '1 Bitcoin (BTC)',
+            currentTickerValue: 60000,
+            currentTickerLabel: "1 Minute",
             options: []
         }
     }
@@ -36,6 +53,17 @@ class CryptoConverterWidget extends Component {
         console.log("Event", event);
         this.setState({ firstComparator: event.value, firstComparatorLabel:event.label });
 
+    }
+
+    handleTickerInput = async event => {
+        console.log("Event", event);
+
+        clearInterval(this.currentTickerInterval);
+        this.currentTickerInterval = setInterval(this.updateValues, event.value);
+        this.setState({
+            currentTickerValue: event.value,
+            currentTickerLabel: event.label
+        });
     }
 
     handleSecondComparatorInput = async event => {
@@ -72,7 +100,7 @@ class CryptoConverterWidget extends Component {
             this.setState({
                 firstComparatorResult: `${this.state.amountToConvert} ${this.state.firstComparator}`,
                 secondComparatorResult: `${parseInt(this.state.amountToConvert) * parseFloat(dataFromServer.price)} ${this.state.secondComparator}`
-            })
+            });
         };
 
         // * query server to get the options
@@ -84,7 +112,6 @@ class CryptoConverterWidget extends Component {
             })
         });
         // * can't really fail so no catch
-
     }
 
     convertValue = async () => {
@@ -130,7 +157,7 @@ class CryptoConverterWidget extends Component {
     }
 
     render() {
-        const {amountToConvert, firstComparator, secondComparator, firstComparatorLabel, secondComparatorLabel, firstComparatorResult, secondComparatorResult, options} = this.state
+        const {currentTickerValue, currentTickerLabel, amountToConvert, firstComparator, secondComparator, firstComparatorLabel, secondComparatorLabel, firstComparatorResult, secondComparatorResult, options} = this.state
         const title = "Crypto-currency converter calculator"
 
         return (
@@ -146,15 +173,14 @@ class CryptoConverterWidget extends Component {
                     onChange={this.handleAmountToConvertBar}
                     //onKeyPress={?} pas sur de faire quelque chose
                 />
-                {/* <input
-                    type="text"
-                    placeholder="First Value"
-                    className={styles.FirstBar}
-                    value={firstComparator}
-                    onChange={this.handleFirstComparatorInput}
-                    //onKeyPress={?} pas sur de faire quelque chose
-                /> */}
-                {/* //todo https://react-select.com/home */}
+                <Select
+                    placeholder={currentTickerLabel}
+                    options={this.tickerOptions}
+                    //className={styles.FirstBar}
+                    value={currentTickerValue}
+                    onChange={this.handleTickerInput}
+                />
+
                 <Select
                     placeholder={firstComparatorLabel}
                     options={options}
@@ -162,7 +188,6 @@ class CryptoConverterWidget extends Component {
                     value={firstComparatorLabel}
                     onChange={this.handleFirstComparatorInput}
                 />
-
                 <Select
                     placeholder={secondComparatorLabel}
                     options={options}

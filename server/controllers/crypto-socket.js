@@ -37,12 +37,15 @@ wsServer.on('request', function(request) {
             const json = { success: true };
 
             await cryptoCTRL.getCryptoValueRawData(dataFromClient.currencyA, dataFromClient.currencyB, result => {
-                console.log("Response.data ", result.data);
-                if (result != null && result.data.length > 0) {
-                    json.price = result.data[0].price;
+                if (result != null) {
 
-                    console.log("Sending json to connection: ", json);
-                    connection.sendUTF(JSON.stringify(json));
+                    console.log("Response.data ", result.data);
+                    if (result != null && result.data.length > 0) {
+                        json.price = result.data[0].price;
+
+                        console.log("Sending json to connection: ", json);
+                        connection.sendUTF(JSON.stringify(json));
+                    }
                 }
             })
         }
