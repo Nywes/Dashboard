@@ -9,6 +9,7 @@ import { CryptoConverterWidget } from "../components/CryptoConverterWidget";
 import { HearthstoneWidget } from "../components/HearthstoneWidget";
 import { QuoteWidget } from "../components/QuoteWidget";
 import styles from "../style/HomePage.module.css";
+import neon from "../style/NeonStartButton.module.css";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from "uuid/v4";
 import api from '../api';
@@ -508,9 +509,9 @@ class StartButton extends Component
     if (this.state.display) {
 
       return (
-          <button onClick={() => this.ClickAction()}>
-            Start
-          </button>
+        <button onClick={() => this.ClickAction()} className={neon.text}>
+          Welcome to your doucheboard
+        </button>
       );
     } else {
       return (<div/>);

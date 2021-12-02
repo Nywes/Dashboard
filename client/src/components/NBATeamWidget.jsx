@@ -142,6 +142,22 @@ class NBATeamWidget extends Component {
         // * get state
         const {currentLabel, abbreviation, city, conference, division, full_name, name, searchWord} = this.state;
 
+        const colourStyles = {
+            control: styles => ({ ...styles, 
+                backgroundColor: 'transparent',
+                borderRadius: '10px',
+                border: '3px solid rgb(0, 180, 230)',
+                boxShadow: '0 0 15px -1px rgb(0, 180, 230), 0 0 12px -1px rgb(0, 180, 230) inset',
+                color: 'black,'
+            }),
+            option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+              return {
+                ...styles,
+                backgroundColor: isDisabled ? 'red' : 'transparent',
+                cursor: isDisabled ? 'not-allowed' : 'default',
+              };
+            },
+        };
         var namePath = name;
 
         // ! attention si le site arrete d'être maintenu on est ken
@@ -162,7 +178,7 @@ class NBATeamWidget extends Component {
                 <Select
                     placeholder={currentLabel}
                     options={this.teamOptions}
-                    className={styles.SearchBar}
+                    styles={colourStyles}
                     value={currentLabel}
                     onChange={this.handleTeamInput}
                 />

@@ -75,6 +75,10 @@
     -webkit-animation: fadein 4s;
 }
 
+.SearchButton {
+    text-decoration: none;
+}
+
 @keyframes fadein {
     from {
         opacity:0;
