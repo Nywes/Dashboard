@@ -36,6 +36,20 @@ class NBAPlayerWidget extends Component {
                 if (res.status === 200) {
 
                     var player = res.data.player.data[0];
+                    var position = '?';
+                    switch(player.position) {
+                        case 'G':
+                            position = "Guard";
+                            break;
+                        case 'F':
+                            position = "Forward";
+                            break;
+                        case 'C':
+                            position = "Center";
+                            break;
+                        default:
+                            break;
+                    }
 
                     console.log("Got player data", player);
                     // todo translate position letters to actual words
@@ -49,7 +63,7 @@ class NBAPlayerWidget extends Component {
                             height_feet: player.height_feet === null ? "?" : player.height_feet,
                             height_inches: player.height_inches === null ? "?" : player.height_inches,
                             last_name: player.last_name,
-                            position: player.position === "" ? "?" : player.position,
+                            position: player.position === "" ? "?" : position,
                             name: player.name,
                             team_full_name: player.team.full_name == null ? "?" : player.team.full_name,
                             weight_pounds: player.weight_pounds === null ? "?" : player.weight_pounds,
@@ -63,7 +77,7 @@ class NBAPlayerWidget extends Component {
                             height_feet: player.height_feet === null ? "?" : player.height_feet,
                             height_inches: player.height_inches === null ? "?" : player.height_inches,
                             last_name: player.last_name,
-                            position: player.position === "" ? "?" : player.position,
+                            position: player.position === "" ? "?" : position,
                             name: player.name,
                             team_full_name: player.team.full_name == null ? "?" : player.team.full_name,
                             weight_pounds: player.weight_pounds === null ? "?" : player.weight_pounds,

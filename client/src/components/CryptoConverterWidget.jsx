@@ -176,7 +176,7 @@ class CryptoConverterWidget extends Component {
                 <Select
                     placeholder={currentTickerLabel}
                     options={this.tickerOptions}
-                    //className={styles.FirstBar}
+                    className={styles.Minutes}
                     value={currentTickerValue}
                     onChange={this.handleTickerInput}
                 />
@@ -224,7 +224,7 @@ class CryptoConverterWidget extends Component {
                     placeholder="="
                     className={styles.ValidateButton}
                     onClick={this.convertValue}
-                />
+                >Validate</button>
                 <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
             </div>
         )

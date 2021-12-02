@@ -1,4 +1,4 @@
-var background = "https://images6.alphacoders.com/352/352456.jpg";
+var background = "https://img.wallpapic.fr/i1862-037-811/medium/espace-violet-bleus-astronomie-fond-d-ecran.jpg";
 
 var callBack = null;
 

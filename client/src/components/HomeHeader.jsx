@@ -87,8 +87,6 @@ class HeaderHomePage extends Component {
 
                 {widgetManager?<p className={neon.text}>NBA Team</p>:null}
 
-                {/*widgetManager?<p className= { styles.widgetText }>NBA Team</p>:null*/}
-
                 {widgetManager?<img
                     src='https://assets.materialup.com/uploads/347c48be-3ed3-4e80-87a0-3353405f0239/0x0ss-85.jpg'
                     className={ styles.widgetManager }

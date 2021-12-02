@@ -26,7 +26,7 @@
     border-radius: 15px;
     margin: 0.2vw 0.2vw 0.2vw 1.5vw;
     align-items: center;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.5);
     border: 0;
     box-sizing: border-box;
     color: white;
@@ -40,10 +40,16 @@
     touch-action: manipulation;
     white-space: nowrap;
     cursor: pointer;
+    border: 3px solid rgb(0, 180, 230);
+    box-shadow: 0 0 15px -1px rgb(0, 180, 230), 
+    0 0 12px -1px rgb(0, 180, 230) inset;
 }
 
 .HeaderIcon:hover {
     outline: 0;
+    border: 3px solid rgb(230, 0, 120);
+    box-shadow: 0 0 15px -1px rgb(230, 0, 120), 
+    0 0 12px -1px rgb(230, 0, 120) inset;
 }
 
 .HeaderIcon span {   
@@ -65,19 +71,8 @@
     width: 2.5%;
     margin: 0.2% 1%;
     border-radius: 10px;
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
-}
-
-.widgetText {
-    animation: fadein 2s;
-    -webkit-animation: fadein 2s;
-    background-color: white;
-    border-radius: 10px;
-    color: black;
-    padding: 0.25% 0.10% 0.25% 0.10%;
-    place-self: center;
-    margin: 0;
+    animation: fadein 4s;
+    -webkit-animation: fadein 4s;
 }
 
 @keyframes fadein {

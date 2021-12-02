@@ -3,15 +3,18 @@
     background-color: rgba(0,0,0,0.9);
     color: white;
     padding-left: 0.5vh;
-    border-radius: 5px;
-    border-color: blue;
-    border-width: 0.15vw;
     grid-row: 1; 
     grid-column: 1;
+    border-radius: 8px;
+    border: 2px solid rgb(0, 180, 230);
+    box-shadow: 0 0 15px -1px rgb(0, 180, 230), 
+    0 0 12px -1px rgb(0, 180, 230) inset;
 }
 
 .SearchBar:hover {
-    border-color: red;
+    border-color: rgb(230, 0, 120);
+    box-shadow: 0 0 15px -1px rgb(230, 0, 120),
+    0 0 12px -1px rgb(230, 0, 120) inset;
 }
 
 .NBATeamLogo {
