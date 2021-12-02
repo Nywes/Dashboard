@@ -32,6 +32,10 @@ const quotesapi = axios.create({
     baseURL: `http://localhost:${serverPort}/quotes_api`,
 });
 
+const prefsapi = axios.create({
+    baseURL: `http://localhost:${serverPort}/prefs_api`,
+});
+
 export const createUser = payload => api.post(`/user`, payload)
 // export const getAllMovies = () => api.get(`/movies`)
 // export const updateMovieById = (id, payload) => api.put(`/movie/${id}`, payload)
@@ -68,6 +72,11 @@ export const searchCard = query => hearthstoneapi.get(`/cards/${query}`);
 export const searchQuote = query => quotesapi.get(`/quotes/${query}`);
 export const searchQuoteByTag = tag => quotesapi.get(`/quotes-tag/${tag}`);
 
+//* prefs api
+export const getUserPrefs = token => prefsapi.get(`/prefs/${token}`);
+export const setUserPrefs = payload => prefsapi.post(`/prefs`, payload);
+export const updateUserPrefs = payload => prefsapi.put(`/update_prefs`, payload);
+
 const apis = {
     // * user
     createUser,
@@ -92,7 +101,11 @@ const apis = {
     searchCard,
     // * quotes
     searchQuote,
-    searchQuoteByTag
+    searchQuoteByTag,
+    // * prefs
+    getUserPrefs,
+    setUserPrefs,
+    updateUserPrefs
 }
 
 export default apis

@@ -11,13 +11,27 @@ createJWT = (data) => {
 
     // * Synchronous Sign with default (HMAC SHA256)
     // * cf: https://github.com/auth0/node-jsonwebtoken
+    console.log("Creating JWT for userName: ", data.userName)
     var token = jwt.sign({data: data.userName}, secret, { expiresIn: '1h' });
 
     // * To change hashing algorithm:
     // var token = jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256' });
 
-
     return (token);
+}
+
+validateJWTRaw = (token) => {
+    const secret = process.env.JWT_SECRET;
+
+    try {
+        var decoded = jwt.verify(token, secret);
+
+        return (decoded);
+    } catch(err) {
+        // err
+        console.log("Error decoding token " + err);
+        return (null);
+    }
 }
 
 // * validate token
@@ -43,5 +57,6 @@ validateJWT = (req, res) => {
 module.exports = {
 
     createJWT,
-    validateJWT
+    validateJWT,
+    validateJWTRaw
 }

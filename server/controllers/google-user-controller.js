@@ -59,7 +59,8 @@ connectGoogleUser = (req, res) => {
         })
     }
 
-    var jwt = jwtCtrl.createJWT(email);
+    var data = {userName: email};
+    var jwt = jwtCtrl.createJWT(data);
 
     console.log("Got JWT " + jwt);
     // * return jwt

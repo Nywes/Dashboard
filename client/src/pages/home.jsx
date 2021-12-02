@@ -11,39 +11,283 @@ import { QuoteWidget } from "../components/QuoteWidget";
 import styles from "../style/HomePage.module.css";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from "uuid/v4";
+import api from '../api';
 
-const initialItemIDs = [uuid(), uuid(), uuid(), uuid(), uuid(), uuid()]
+var initialItemIDs = [];
 
-const items1FromBackend = [
-  { id: initialItemIDs[0], content: <WidgetInterface item={<NBATeamWidget WidgetID={initialItemIDs[0]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> },
-  { id: initialItemIDs[1], content: <WidgetInterface item={<NBAPlayerWidget WidgetID={initialItemIDs[1]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> },
-];
+var allItemsArray = [[], [], []];
 
-const items2FromBackend = [
-  { id: initialItemIDs[2], content: <WidgetInterface item={<CryptoConverterWidget WidgetID={initialItemIDs[2]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> },
-  { id: initialItemIDs[3], content: <WidgetInterface item={<BackgroundWidget WidgetID={initialItemIDs[3]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> },
-];
+// var items1FromBackend = [
+//   // { id: initialItemIDs[0], content: <WidgetInterface item={<NBATeamWidget WidgetID={initialItemIDs[0]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> },
+//   // { id: initialItemIDs[1], content: <WidgetInterface item={<NBAPlayerWidget WidgetID={initialItemIDs[1]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> },
+// ];
 
-const items3FromBackend = [
-  { id: initialItemIDs[4], content: <WidgetInterface item={<HearthstoneWidget WidgetID={initialItemIDs[4]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> },
-  { id: initialItemIDs[5], content: <WidgetInterface item={<QuoteWidget WidgetID={initialItemIDs[5]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> },
-];
+// var items2FromBackend = [
+//   // { id: initialItemIDs[2], content: <WidgetInterface item={<CryptoConverterWidget WidgetID={initialItemIDs[2]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> },
+//   // { id: initialItemIDs[3], content: <WidgetInterface item={<BackgroundWidget WidgetID={initialItemIDs[3]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> },
+// ];
+
+// var items3FromBackend = [
+//   // { id: initialItemIDs[4], content: <WidgetInterface item={<HearthstoneWidget WidgetID={initialItemIDs[4]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> },
+//   // { id: initialItemIDs[5], content: <WidgetInterface item={<QuoteWidget WidgetID={initialItemIDs[5]} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> },
+// ];
+
+function GetNewWidget(name, widgetID)
+{
+  switch (name) {
+    case "NBA_Team":
+      return({ id: widgetID, name: "NBA_Team", content: <WidgetInterface item={<NBATeamWidget WidgetID={widgetID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> });
+    case "NBA_Players":
+      return({ id: widgetID, name: "NBA_Players", content: <WidgetInterface item={<NBAPlayerWidget WidgetID={widgetID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> });
+    case "Crypto":
+      return({ id: widgetID, name: "Crypto", content: <WidgetInterface item={<CryptoConverterWidget WidgetID={widgetID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> });
+    case "Background":
+      return({ id: widgetID, name: "Background", content: <WidgetInterface item={<BackgroundWidget WidgetID={widgetID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> });
+    case "Hearthstone":
+      return({ id: widgetID, name: "Hearthstone", content: <WidgetInterface item={<HearthstoneWidget WidgetID={widgetID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> });
+    case "Quotes":
+      return ({ id: widgetID, name: "Quotes", content: <WidgetInterface item={<QuoteWidget WidgetID={widgetID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> });
+    default:
+      return (null);
+  }
+}
 
 const columnID_1 = 0;
 const columnID_2 = 1;
 const columnID_3 = 2;
 
-const columnsFromBackend = {
+// * keep track of widget names
+var widgetNames = [];
+// * keep track of widgetInfo (may not be used)
+var widgetInfo = [];
+
+// * keep track of widget index within column
+var widgetIndexes = [];
+// * keep track of widget column index
+var columnIndexes = [];
+
+var prefsSaved = false;
+
+async function SaveWidgetLayout()
+{
+  // ! if not logged in, scram
+  var jwt = localStorage.getItem("dashboard_jwt");
+
+  if (jwt === undefined) {
+    return;
+  }
+
+  var payload = {token: jwt, widgetNames: widgetNames, widgetIndexes: widgetIndexes, widgetInfo: widgetInfo, columnIndexes: columnIndexes}
+
+  if (prefsSaved === false) {
+
+    // * create them,
+    console.log("Saving widgetLayout in database: ", payload);
+
+    await api.setUserPrefs(payload)
+    .then(res => {
+      if (res.status === 200) {
+        console.log("Successfully saved prefs", res);
+      }
+    })
+    .catch(err => {
+      console.log("Error saving prefs", err);
+    })
+    prefsSaved = true;
+  } else {
+    // * patch 'em
+    console.log("Updating widgetLayout in database: ", payload);
+
+    await api.updateUserPrefs(payload)
+    .then(res => {
+      if (res.status === 200) {
+        console.log("Successfully updated prefs", res);
+      }
+    })
+    .catch(err => {
+      console.log("Error updating prefs", err);
+    })
+  }
+}
+
+function UpdateWidgetInfo(columns)
+{
+  widgetNames = [];
+  widgetInfo = [];
+  widgetIndexes = [];
+  columnIndexes = [];
+
+  for (let i = 0; i <= columnID_3; i++) {
+    const column = columns[i];
+
+    for (let j = 0; j < column.items.length; j++) {
+      const item = column.items[j];
+
+      widgetNames.push(item.name);
+      widgetIndexes.push(j);
+      columnIndexes.push(i);
+    }
+  }
+  SaveWidgetLayout();
+}
+
+function LoadDefaultWidgets(columns, setColumns)
+{
+    // #region DefaultWidgets
+    initialItemIDs = [uuid(), uuid(), uuid(), uuid(), uuid(), uuid()];
+    allItemsArray[0] = new Array(2);
+    allItemsArray[0][0] =  GetNewWidget("NBA_Team", initialItemIDs[0]);
+    widgetNames.push("NBA_Team");
+    widgetIndexes.push(0);
+    columnIndexes.push(0);
+    allItemsArray[0][1] = GetNewWidget("NBA_Players", initialItemIDs[1]);
+    widgetNames.push("NBA_Players");
+    widgetIndexes.push(1);
+    columnIndexes.push(0);
+
+    allItemsArray[1] = new Array(2);
+    allItemsArray[1][0] = GetNewWidget("Crypto", initialItemIDs[2]);
+    widgetNames.push("Crypto");
+    widgetIndexes.push(0);
+    columnIndexes.push(1);
+    allItemsArray[1][1] = GetNewWidget("Background", initialItemIDs[3]);
+    widgetNames.push("Background");
+    widgetIndexes.push(1);
+    columnIndexes.push(1);
+
+    allItemsArray[2] = new Array(2);
+    allItemsArray[2][0] = GetNewWidget("Hearthstone", initialItemIDs[4]);
+    widgetNames.push("Hearthstone");
+    widgetIndexes.push(0);
+    columnIndexes.push(2);
+    allItemsArray[2][1] = GetNewWidget("Quotes", initialItemIDs[5]);
+    widgetNames.push("Quotes");
+    widgetIndexes.push(1);
+    columnIndexes.push(2);
+    //#endregion
+
+    SetInitialColumnData(columns, setColumns);
+}
+
+function LoadWidgetsFromPrefs(prefs, columns, setColumns)
+{
+  columns[columnID_1] = [];
+  columns[columnID_2] = [];
+  columns[columnID_3] = [];
+
+  allItemsArray[0] = [];
+  allItemsArray[1] = [];
+  allItemsArray[2] = [];
+
+  for (let i = 0; i < prefs.widgetNames.length; i++) {
+    const widgetName = prefs.widgetNames[i];
+    const widgetIndex = prefs.widgetIndexes[i];
+    const widgetColumnIndex = prefs.columnIndexes[i];
+
+    var widgetID = uuid();
+    widgetIndexes.push(widgetIndex);
+    columnIndexes.push(widgetColumnIndex);
+
+    // ! here's to hoping splice works on empty arrays
+    switch (widgetName) {
+      case "NBA_Team":
+        allItemsArray[widgetColumnIndex].splice(widgetIndex, 0, GetNewWidget("NBA_Team", widgetID));
+        widgetNames.push("NBA_Team");
+        break;
+      case "NBA_Players":
+        allItemsArray[widgetColumnIndex].splice(widgetIndex, 0, GetNewWidget("NBA_Players", widgetID));
+        widgetNames.push("NBA_Players");
+        break;
+      case "Crypto":
+        allItemsArray[widgetColumnIndex].splice(widgetIndex, 0, GetNewWidget("Crypto", widgetID));
+        widgetNames.push("Crypto");
+        break;
+      case "Background":
+        allItemsArray[widgetColumnIndex].splice(widgetIndex, 0, GetNewWidget("Background", widgetID));
+        widgetNames.push("Background");
+        break;
+      case "Hearthstone":
+        allItemsArray[widgetColumnIndex].splice(widgetIndex, 0, GetNewWidget("Hearthstone", widgetID));
+        widgetNames.push("Hearthstone");
+        break;
+      case "Quotes":
+        allItemsArray[widgetColumnIndex].splice(widgetIndex, 0, GetNewWidget("Quotes", widgetID));
+        widgetNames.push("Quotes");
+        break;
+      default:
+        break;
+    }
+  }
+  SetInitialColumnData(columns, setColumns);
+}
+
+// * initialize itemsFromBackend by requesting the API
+async function InitWidgets(columns, setColumns)
+{
+  // * if no prefs are found, or not logged in
+  var jwt = localStorage.getItem("dashboard_jwt");
+
+  if (jwt !== undefined) {
+    // * try/load
+    await api.getUserPrefs(jwt)
+    .then(res => {
+      if (res.status === 200) {
+        console.log("Found widgets prefs", res.data.data);
+        LoadWidgetsFromPrefs(res.data.data[0], columns, setColumns);
+      }
+    })
+    .catch(err => {
+      console.log("Either server error or you didn't have any widgets", err);
+      LoadDefaultWidgets(columns, setColumns);
+    });
+  } else {
+    LoadDefaultWidgets(columns, setColumns);
+  }
+}
+
+
+var columnsFromBackend = {
   [columnID_1]: {
-    items: items1FromBackend,
+    items: allItemsArray[0],
   },
   [columnID_2]: {
-    items: items2FromBackend,
+    items: allItemsArray[1],
   },
   [columnID_3]: {
-    items: items3FromBackend,
+    items: allItemsArray[2],
   },
 };
+
+function SetInitialColumnData(columns, setColumns)
+{
+
+  if (columns === null && setColumns === null) {
+    return;
+  }
+  console.log("Setting columns (2): ", allItemsArray[1]);
+
+  for (let i = 0; i <= columnID_3; i++) {
+    columns[i].items = allItemsArray[i];
+  }
+
+  console.log("columns[1] values: ", columns[1]);
+
+  setColumns({
+    ...columns,
+    [columnID_1]: {
+      ...columns[columnID_1],
+      items: columns[columnID_1].items,
+    },
+    [columnID_2]: {
+      ...columns[columnID_2],
+      items: columns[columnID_2].items,
+    },
+    [columnID_3]: {
+      ...columns[columnID_3],
+      items: columns[columnID_3].items,
+    },
+  });
+}
 
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
@@ -72,11 +316,13 @@ const onDragEnd = (result, columns, setColumns) => {
         items: destItems,
       },
     });
+
   } else {
     const column = columns[source.droppableId];
     const copiedItems = [...column.items];
     const [removed] = copiedItems.splice(source.index, 1);
     copiedItems.splice(destination.index, 0, removed);
+
     setColumns({
       ...columns,
       [source.droppableId]: {
@@ -141,22 +387,22 @@ function AddWidget(index, columns, setColumns)
 
   switch (index) {
     case 0:
-        item = { id: newID, content: <WidgetInterface item={<NBATeamWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> };
+        item = GetNewWidget("NBA_Team", newID);
       break;
     case 1:
-        item = { id: newID, content: <WidgetInterface item={<NBAPlayerWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.NBAWidgetItem} />} isManager={true}/> };
+        item = GetNewWidget("NBA_Players", newID);
       break;
     case 2:
-        item ={ id: newID, content: <WidgetInterface item={<CryptoConverterWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.CryptoWidgetItem} />} isManager={true}/> };
+        item = GetNewWidget("Crypto", newID);
       break;
     case 3:
-        item = { id: newID, content: <WidgetInterface item={<BackgroundWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.BackgroundWidgetItem} />} isManager={true}/> };
+        item = GetNewWidget("Background", newID);
       break;
     case 4:
-        item = { id: newID, content: <WidgetInterface item={<HearthstoneWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.HearthstoneWidgetItem} />} isManager={true}/> };
+        item = GetNewWidget("Hearthstone", newID);
       break;
     case 5:
-        item = { id: newID, content: <WidgetInterface item={<QuoteWidget WidgetID={newID} SelectWidget={(index) => ToggleWidgetSelection(index)} widgetStyle={styles.QuoteWidgetItem} />} isManager={true}/> };
+        item = GetNewWidget("Quotes", newID);
       break;
     default:
       break;
@@ -166,6 +412,7 @@ function AddWidget(index, columns, setColumns)
   const destItems = [...destColumn.items];
   destItems.splice(0, 0, item);
 
+  console.log("Columns before set; ", columns);
   setColumns({
     ...columns,
     [columnID_1]: {
@@ -173,6 +420,7 @@ function AddWidget(index, columns, setColumns)
       items: destItems,
     },
   });
+  console.log("Columns after set; ", columns);
 }
 
 var SelectedWidgets = [];
@@ -190,7 +438,6 @@ function ToggleWidgetSelection(WidgetID)
 function DeleteSelectedWidgets(columns, setColumns)
 {
   console.log("Deleting widgets: ", SelectedWidgets);
-
 
   for (let i = 0; i < SelectedWidgets.length; i++) {
       const element = SelectedWidgets[i];
@@ -214,12 +461,78 @@ function DeleteSelectedWidgets(columns, setColumns)
         ...columns[columnID_3],
         items: columns[columnID_3].items,
       },
-
     });
 }
 
+function RefreshWidgetColumns(columns, setColumns)
+{
+  setColumns({
+    ...columns,
+    [columnID_1]: {
+      ...columns[columnID_1],
+      items: columns[columnID_1].items,
+    },
+    [columnID_2]: {
+      ...columns[columnID_2],
+      items: columns[columnID_2].items,
+    },
+    [columnID_3]: {
+      ...columns[columnID_3],
+      items: columns[columnID_3].items,
+    },
+  });
+}
+
+var initialColumnsSet = false;
+
+class StartButton extends Component
+{
+  constructor(props)
+  {
+    super(props);
+
+    this.state = {
+      display: true,
+    }
+  }
+
+  ClickAction = () => {
+    this.setState({
+      display: false
+    });
+    this.props.Refresh();
+  }
+
+  render()
+  {
+    if (this.state.display) {
+
+      return (
+          <button onClick={() => this.ClickAction()}>
+            Start
+          </button>
+      );
+    } else {
+      return (<div/>);
+    }
+  }
+}
+
 function Home() {
-  const [columns, setColumns] = useState(columnsFromBackend);
+
+  console.log("Home starting");
+  var [columns, setColumns] = useState(columnsFromBackend);
+
+  if (initialColumnsSet === false) {
+    initialColumnsSet = true;
+    console.log("Initializing widgets");
+    InitWidgets(columns, setColumns);
+  } else {
+    // * most likely reloaded from using setColumns: hence
+    UpdateWidgetInfo(columns);
+
+    console.log("Columns already set: ", columns);
+  }
 
   return (
     <Wrapper className="App">
@@ -233,6 +546,9 @@ function Home() {
             overflow: "hidden",
           }}
         >
+
+          <StartButton Refresh={() => RefreshWidgetColumns(columns, setColumns)}/>
+
           <DragDropContext onDragEnd={(result) => onDragEnd(result, columns, setColumns)}>
             {Object.entries(columns).map(([columnId, column], index) => {
               return (
@@ -288,6 +604,7 @@ function Home() {
       </Container>
     </Wrapper>
   );
+
 }
 
 export default Home;

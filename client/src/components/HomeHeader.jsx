@@ -56,10 +56,12 @@ class HeaderHomePage extends Component {
                 }
             } else {
                 console.log("Invalid token");
+                localStorage.removeItem("dashboard_jwt");
             }
         })
         .catch(err => {
             console.log("Error " + err);
+            localStorage.removeItem("dashboard_jwt");
         })
     }
 

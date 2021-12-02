@@ -89,12 +89,12 @@ class Login extends Component {
     googleSuccessLogin = async (response) => {
         console.log("Google log in success", response.profileObj);
 
-        await api.findUserByUserName(response.profileObj.givenName)
+        await api.findUserByUserName(response.profileObj.email)
         .then(async (res) => {
             if (res.status === 200) {
                 console.log("User found ", res);
 
-                await api.connectGoogleUser(response.email)
+                await api.connectGoogleUser(response.profileObj.email)
                 .then(res => {
                     var jwt = res.data.token;
 
