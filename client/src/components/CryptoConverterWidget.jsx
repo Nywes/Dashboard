@@ -40,7 +40,8 @@ class CryptoConverterWidget extends Component {
             secondComparatorResult: '1 Bitcoin (BTC)',
             currentTickerValue: 60000,
             currentTickerLabel: "1 Minute",
-            options: []
+            options: [],
+            cryptoOptions: []
         }
     }
 
@@ -51,7 +52,7 @@ class CryptoConverterWidget extends Component {
 
     handleFirstComparatorInput = async event => {
         console.log("Event", event);
-        this.setState({ firstComparator: event.value, firstComparatorLabel:event.label });
+        this.setState({ firstComparator: event.value, firstComparatorLabel: event.label });
 
     }
 
@@ -74,6 +75,10 @@ class CryptoConverterWidget extends Component {
     invertValues = () => {
         const firstComparator = this.state.secondComparator;
         const secondComparator = this.state.firstComparator;
+
+        console.log("First comp: ", firstComparator);
+        console.log("Second comp: ", secondComparator);
+
         this.setState({ firstComparator: firstComparator, secondComparator: secondComparator });
 
         this.updateValues();
@@ -97,6 +102,8 @@ class CryptoConverterWidget extends Component {
             console.log("Message from server ", JSON.parse(message.data));
             const dataFromServer = JSON.parse(message.data);
 
+            console.log("Second comparator:", this.state.secondComparator);
+
             this.setState({
                 firstComparatorResult: `${this.state.amountToConvert} ${this.state.firstComparator}`,
                 secondComparatorResult: `${parseInt(this.state.amountToConvert) * parseFloat(dataFromServer.price)} ${this.state.secondComparator}`
@@ -111,6 +118,14 @@ class CryptoConverterWidget extends Component {
                 options: res.data.options
             })
         });
+        await api.getOnlyCryptoOptions()
+        .then(res => {
+            console.log("Got options", res.data.options);
+            this.setState({
+                cryptoOptions: res.data.options
+            })
+        });
+
         // * can't really fail so no catch
     }
 
@@ -119,6 +134,7 @@ class CryptoConverterWidget extends Component {
 
             var params = {cryptoID: this.state.firstComparator, targetCurrencyID: this.state.secondComparator}
 
+            console.log(`Converting: ${params.cryptoID} to ${params.targetCurrencyID}`);
             await api.getCryptoValue(params)
             .then(res => {
                 if (res.status === 200) {
@@ -157,7 +173,7 @@ class CryptoConverterWidget extends Component {
     }
 
     render() {
-        const {currentTickerValue, currentTickerLabel, amountToConvert, firstComparator, secondComparator, firstComparatorLabel, secondComparatorLabel, firstComparatorResult, secondComparatorResult, options} = this.state
+        const {cryptoOptions, currentTickerValue, currentTickerLabel, amountToConvert, firstComparator, secondComparator, firstComparatorLabel, secondComparatorLabel, firstComparatorResult, secondComparatorResult, options} = this.state
         const title = "Crypto-currency converter calculator"
 
         return (
@@ -183,7 +199,7 @@ class CryptoConverterWidget extends Component {
 
                 <Select
                     placeholder={firstComparatorLabel}
-                    options={options}
+                    options={cryptoOptions}
                     className={styles.FirstBar}
                     value={firstComparatorLabel}
                     onChange={this.handleFirstComparatorInput}
@@ -203,13 +219,13 @@ class CryptoConverterWidget extends Component {
                     onChange={this.handleSecondComparatorInput}
                     //onKeyPress={?} pas sur de faire quelque chose
                 /> */}
-                <input
+                {/* <input
                     type="button"
                     placeholder="="
                     className={styles.InvertButton}
                     value="⇆"
                     onClick={this.invertValues}
-                />
+                /> */}
                 <p className={styles.FirstComparator}>
                     {firstComparatorResult}
                 </p>
@@ -217,7 +233,7 @@ class CryptoConverterWidget extends Component {
                     =
                 </p>
                 <p className={styles.SecondComparator}>
-                    {`${Math.round((parseFloat(secondComparatorResult) + Number.EPSILON) * 100) / 100} ${secondComparatorLabel}`}
+                    {`${Math.round((parseFloat(secondComparatorResult) + Number.EPSILON) * 100) / 100} ${secondComparator}`}
                 </p>
                 <button
                     type="submit"

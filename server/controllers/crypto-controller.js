@@ -4,6 +4,30 @@ fs = require('fs');
 
 const CRYPTO_API_KEY = process.env.CRYPTO_API_KEY;
 
+getOnlyCryptoOptions = async (req, res) => {
+    // * {value: x, label: y}
+    var totalOptions = []
+
+    // * open file
+    await fs.readFile(require('path').resolve(__dirname, '../resources/cryptocurrencies.json'), 'utf8', async function (err, data) {
+        if (!err) {
+            var cryptoCurrenciesJSON = JSON.parse(data);
+
+            for (const [abbreviation, cryptocurrency] of Object.entries(cryptoCurrenciesJSON)) {
+                totalOptions.push({value: abbreviation, label: cryptocurrency});
+            }
+        }
+
+        console.log("Finished cryptos");
+        console.log("Finished currencies");
+        console.log("After awaits");
+        return res.status(200).json({
+            success: totalOptions.length > 0 ? true : false,
+            options: totalOptions,
+        });
+    });
+}
+
 getCryptoOptions = async (req, res) =>
 {
     // * {value: x, label: y}
@@ -116,5 +140,6 @@ getCryptoValue = async (req, res) =>
 module.exports = {
     getCryptoValue,
     getCryptoOptions,
-    getCryptoValueRawData
+    getCryptoValueRawData,
+    getOnlyCryptoOptions
 }
