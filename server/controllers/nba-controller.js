@@ -21,6 +21,7 @@ const teamDict = {
     "nuggets": 8,
     "detroit": 9,
     "pistons": 9,
+    "golden state": 10,
     "san francisco": 10,
     "warriors": 10,
     "houston": 11,

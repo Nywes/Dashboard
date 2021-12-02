@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import api from '../api';
 import styles from "../style/BackgroundWidget.module.css";
+import selector from "../style/SelectButton.module.css";
 import Select from 'react-select';
 import { background, SetBackground } from "../globals/globalsVariables.js";
 import { style } from '@mui/system';
@@ -91,7 +92,7 @@ class BackgroundWidget extends Component {
     }
 
     render() {
-        const title = "Small Title please";
+        const title = "Background Manager";
         const { searchWord, currentImg } = this.state;
         let boolean = true;
         //<img src={imgLink1} className={styles.Img}/>
@@ -100,7 +101,7 @@ class BackgroundWidget extends Component {
             <div className={this.props.widgetStyle}>
                 <input
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Search a theme ..."
                     className={styles.SearchBar}
                     value={searchWord}
                     onChange={this.handleSearchBarInput}
@@ -119,7 +120,9 @@ class BackgroundWidget extends Component {
                     onClick={this.changeToRightImg}
                 >&gt;</button>
 
-                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={selector.button}>
+
+                </input>
             </div>
         )
     }

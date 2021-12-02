@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import api from '../api';
 import styles from "../style/QuoteWidget.module.css";
+import selector from "../style/SelectButton.module.css";
 import Select from 'react-select';
 
 class QuoteWidget extends Component {
@@ -34,10 +35,10 @@ class QuoteWidget extends Component {
 
         this.state = {
             selection: '',
-            selectionLabel: '',
+            selectionLabel: 'Select a  theme',
             possibleQuotes: [],
-            currentQuote: "Lorem ipsum...",
-            currentAuthor: "JuL"
+            currentQuote: "...",
+            currentAuthor: ""
         }
     }
 
@@ -83,12 +84,40 @@ class QuoteWidget extends Component {
 
         const { selection, selectionLabel, currentQuote, currentAuthor } = this.state;
 
+        const colourStyles = {
+            placeholder: (defaultStyles) => {
+                return {
+                    ...defaultStyles,
+                    color: 'white',
+                    textShadow: '0 0 15px white',
+                    fontWeight: 700,
+                    fontSize: '2vmin',
+                }
+            },
+            control: styles => ({ ...styles,
+                backgroundColor: 'transparent',
+                borderRadius: '10px',
+                border: '3px solid rgb(0, 180, 230)',
+                boxShadow: '0 0 15px -1px rgb(0, 180, 230), 0 0 12px -1px rgb(0, 180, 230) inset',
+                color: 'black',
+            }),
+            option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+              return {
+                ...styles,
+                backgroundColor: isDisabled ? 'red' : 'transparent',
+                cursor: isDisabled ? 'not-allowed' : 'default',
+                color: 'black',
+              };
+            },
+        };
+
         return (
             <div className={this.props.widgetStyle}>
                 <Select
                     placeholder={selectionLabel}
                     options={this.options}
                     className={styles.FirstBar}
+                    styles={colourStyles}
                     value={selection}
                     onChange={this.handleThemeInput}
                 />
@@ -98,7 +127,7 @@ class QuoteWidget extends Component {
                 <p className={styles.author}>
                    {currentAuthor}
                 </p>
-                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={selector.button}></input>
             </div>
         )
 

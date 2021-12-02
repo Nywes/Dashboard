@@ -1,8 +1,17 @@
 .ValueBar {
     grid-row: 2;
     grid-column: 1;
+    background-color: rgba(0,0,0,0.9);
+    color: white;
     place-self: center;
-    width: 90%;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 2px solid rgb(230, 0, 120);
+    box-shadow: 0 0 15px -1px rgb(230, 0, 120), 
+    0 0 12px -1px rgb(230, 0, 120) inset;
+    width: 65%;
+    height: 50%;
 }
 
 .FirstBar {
@@ -26,6 +35,8 @@
     align-self: center;
     font-size: 2.5vmin;
     color: white;
+    text-shadow: 0 0 15px white;
+    font-weight: 700;
 }
 
 .Equal {
@@ -34,6 +45,8 @@
     place-self: center;
     font-size: 2.5vmin;
     color: white;
+    text-shadow: 0 0 15px white;
+    font-weight: 700;
 }
 
 .SecondComparator {
@@ -43,6 +56,8 @@
     align-self: center;
     font-size: 2.5vmin;
     color: white;
+    text-shadow: 0 0 15px white;
+    font-weight: 700;
 }
 
 .Title {
@@ -50,7 +65,12 @@
     grid-row: 1;
     place-self: center;
     font-size: 2.5vmin;
+    color: 'white';
+    text-shadow: '0 0 15px white';
+    font-weight: 700;
     color: white;
+    text-shadow: 0 0 15px white;
+    font-weight: 700;
 }
 
 .InvertButton {
@@ -58,7 +78,9 @@
     grid-column: 2;
     background-color: rgba(0, 200, 255, 0.35);
     border-radius: 15px;
-    color: white;
+    color: 'white';
+    text-shadow: '0 0 15px white';
+    font-weight: 700;
     font-size: 150%;
     border: 2px solid rgb(0, 180, 230);
     box-shadow: 0 0 15px -1px rgb(0, 180, 230), 
@@ -81,10 +103,13 @@
     background-color: rgba(230, 0, 119, 0.35);
     border-radius: 10px;
     justify-self: center;
+    border: 3px solid rgb(230, 0, 120);
     border-color: rgb(230, 0, 120);
     box-shadow: 0 0 15px -1px rgb(230, 0, 120),
     0 0 12px -1px rgb(230, 0, 120) inset;
     color: white;
+    text-shadow: 0 0 15px white;
+    font-weight: 700;
     font-size: 100%;
 }
 
@@ -93,14 +118,8 @@
 }
 
 .ValidateButton:active {
-    background-color: rgb(161, 0, 0);
+    background-color: rgba(230, 0, 119, 0.35);
     border: 2px solid grey;
-}
-
-.Quit {
-    grid-row: 1;
-    grid-column: 3;
-    justify-self: end;
 }
 
 .Minutes {
@@ -108,105 +127,4 @@
     grid-column: 2 / span 2;
     width: 50%;
     justify-self: left;
-}
-
-/* CSS */
-.button-49,
-.button-49:after {
-  width: 150px;
-  height: 76px;
-  line-height: 78px;
-  font-size: 20px;
-  font-family: 'Bebas Neue', sans-serif;
-  background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
-  border: 0;
-  color: #fff;
-  letter-spacing: 3px;
-  box-shadow: 6px 0px 0px #00E6F6;
-  outline: transparent;
-  position: relative;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-49:after {
-  --slice-0: inset(50% 50% 50% 50%);
-  --slice-1: inset(80% -6px 0 0);
-  --slice-2: inset(50% -6px 30% 0);
-  --slice-3: inset(10% -6px 85% 0);
-  --slice-4: inset(40% -6px 43% 0);
-  --slice-5: inset(80% -6px 5% 0);
-  
-  content: 'ALTERNATE TEXT';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #FF013C 5%);
-  text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
-  clip-path: var(--slice-0);
-}
-
-.button-49:hover:after {
-  animation: 1s glitch;
-  animation-timing-function: steps(2, end);
-}
-
-@keyframes glitch {
-  0% {
-    clip-path: var(--slice-1);
-    transform: translate(-20px, -10px);
-  }
-  10% {
-    clip-path: var(--slice-3);
-    transform: translate(10px, 10px);
-  }
-  20% {
-    clip-path: var(--slice-1);
-    transform: translate(-10px, 10px);
-  }
-  30% {
-    clip-path: var(--slice-3);
-    transform: translate(0px, 5px);
-  }
-  40% {
-    clip-path: var(--slice-2);
-    transform: translate(-5px, 0px);
-  }
-  50% {
-    clip-path: var(--slice-3);
-    transform: translate(5px, 0px);
-  }
-  60% {
-    clip-path: var(--slice-4);
-    transform: translate(5px, 10px);
-  }
-  70% {
-    clip-path: var(--slice-2);
-    transform: translate(-10px, 10px);
-  }
-  80% {
-    clip-path: var(--slice-5);
-    transform: translate(20px, -10px);
-  }
-  90% {
-    clip-path: var(--slice-1);
-    transform: translate(-10px, 0px);
-  }
-  100% {
-    clip-path: var(--slice-1);
-    transform: translate(0);
-  }
-}
-
-@media (min-width: 768px) {
-  .button-49,
-  .button-49:after {
-    width: 200px;
-    height: 86px;
-    line-height: 88px;
-  }
 }

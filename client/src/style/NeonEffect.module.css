@@ -1,3 +1,23 @@
+.loginTitle {
+  font-family: Tahoma, sans-serif;
+  color: rgba(120, 0, 0, .5);
+  font-weight: 700;
+  width: 20%;
+  animation: text-flicker 4s linear forwards;
+  background-color: black;
+  box-shadow: 0px 0px 3px 3px black;
+  place-self: center;
+  margin: 0.5% 0% 0% 0%;
+  padding: 0.45%;
+  border-radius: 8px;
+  border: 2% solid rgb(0, 40, 70);
+  cursor: pointer;
+}
+
+.loginTitle:hover {
+  animation: text-flicker 3.5s linear infinite;
+}
+
 .text {
   font-family: Tahoma, sans-serif;
   color: rgba(120, 0, 0, .5);

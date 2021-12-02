@@ -1,0 +1,29 @@
+.inputtext {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 3px solid white;
+    box-shadow: 0 0 15px -1px white, 
+    0 0 12px -1px white inset;
+    color: white;
+    text-shadow: 0 0 12px white;
+}
+
+.inputtext::placeholder {
+    color: grey;
+    text-shadow: 0 0 12px grey;
+}
+
+.button {
+    color: white;
+    text-shadow: 0 0 12px white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 3px solid rgb(0, 180, 230);
+    box-shadow: 0 0 15px -1px rgb(0, 180, 230), 
+    0 0 12px -1px rgb(0, 180, 230) inset;
+}
+
+.button:hover {
+    outline: 0;
+    border: 3px solid rgb(230, 0, 120);
+    box-shadow: 0 0 15px -1px rgb(230, 0, 120), 
+    0 0 12px -1px rgb(230, 0, 120) inset;
+}

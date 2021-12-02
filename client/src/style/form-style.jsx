@@ -14,11 +14,12 @@ const Title = styled.h1`
 const InputText = styled.input`
     vertical-align: middle;
     text-align: center;
+    align-self: center;
     margin: 15px;
     padding: 5px 15px 5px 15px;
     border-radius: 25px;
     font-size: 200%;
-    opacity: 0.8;
+    width: 120%;
 `
 
 const Button = styled.button`

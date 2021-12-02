@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import styles from "../style/NBAWidgets.module.css";
+import selector from "../style/SelectButton.module.css";
 import api from '../api';
 
 class NBAPlayerWidget extends Component {
@@ -143,13 +144,13 @@ class NBAPlayerWidget extends Component {
                 <div/>
                 <img src={img_url} className={ styles.playerImg } style={{ width: '12vw', height: '17vh'}}/>
                 <ul className={styles.NBATeamInfo}>
-                    <p className={styles.NBAFullName}>Full name: {`${first_name} ${last_name}`}</p>
-                    <p>Height: {height_feet === "?" ? "?" : `${height_feet}\' ${height_inches}\"`}</p>
-                    <p>Position: {position}</p>
-                    <p>Team: {team_full_name}</p>
-                    <p>Weight: {weight_pounds} lbs</p>
+                    <p className={styles.NBAFullName}>Full name:<span className={styles.NBATeamInfo2}> {`${first_name} ${last_name}`}</span></p>
+                    <p>Position:<span className={styles.NBATeamInfo2}> {position}</span></p>
+                    <p>Height:<span className={styles.NBATeamInfo2}> {height_feet === "?" ? "?" : `${height_feet}\' ${height_inches}\"`}</span></p>
+                    <p>Weight:<span className={styles.NBATeamInfo2}> {weight_pounds} lbs</span></p>
+                    <p className={styles.NBAFullName}>Team:<span className={styles.NBATeamInfo2}> {team_full_name}</span></p>
                 </ul>
-                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={selector.button}></input>
             </div>
         )
     }

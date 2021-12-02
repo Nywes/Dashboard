@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import api from '../api'
 import {Wrapper, Title, InputText, HorBar, Button, FormButtons} from "../style/form-style";
+import styles from "../style/LoginPage.module.css";
+import neon from "../style/NeonEffect.module.css";
 
 class SignUp extends Component {
     constructor({props}) {
@@ -132,35 +134,39 @@ class SignUp extends Component {
         const { userName, displayName, password, confirmPass } = this.state
         return (
             <Wrapper>
-                <Title>Sign In</Title>
+                <Title className={ neon.loginTitle }>Sign In</Title>
                 <FormButtons>
                     <InputText
                         type="text"
                         placeholder="UserName"
                         value={userName}
                         onChange={this.handleChangeInputUserName}
+                        className={ styles.inputtext }
                     />
                     <InputText
                         type="text"
                         placeholder="DisplayName"
                         value={displayName}
                         onChange={this.handleChangeInputDisplayName}
+                        className={ styles.inputtext }
                     />
                     <InputText
                         type="password"
                         placeholder="Password"
                         value={password}
                         onChange={this.handleChangePassword}
+                        className={ styles.inputtext }
                     />
                     <InputText
                         type="password"
                         placeholder="Confirm Password"
                         value={confirmPass}
                         onChange={this.handleChangeConfirmPassword}
+                        className={ styles.inputtext }
                     />
-                    <Button onClick={this.handleSignUp}>Sign Up</Button>
+                    <Button onClick={this.handleSignUp} className={ styles.button }>Sign Up</Button>
                     <Link to="/login">
-                        <Button>Log in</Button>
+                        <Button className={ styles.button }>Log in</Button>
                     </Link>
 
                 </FormButtons>

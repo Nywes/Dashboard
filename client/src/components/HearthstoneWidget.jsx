@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import api from '../api';
 import styles from "../style/HearthstoneWidget.module.css";
+import selector from "../style/SelectButton.module.css";
 import Select, { components } from 'react-select';
 import HearthstoneLogo from '../img/hearthstoneLogo.png';
 import textBg from '../img/wood_planch_bg.png';
@@ -11,8 +12,8 @@ class HearthstoneWidget extends Component {
         super(props);
         this.state = {
             searchWord: '',
-            cardImage: 'https://www.hearthstone-decks.com/upload/carte/59.jpg',
-            cardFlavor: "Au moins, il a un poulet furieux"
+            cardImage: 'https://d15f34w2p8l1cc.cloudfront.net/hearthstone/cf014c0c9363f70cb7e4f7f7c4086ab42bc5d2afecf421f35b9c87c81943d9d4.png',
+            cardFlavor: "At least he has Angry Chicken."
         }
     }
 
@@ -59,7 +60,7 @@ class HearthstoneWidget extends Component {
                 <img src={HearthstoneLogo} className={styles.HSLogo} />
                 <input
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Search a card ..."
                     className={styles.SearchBar}
                     value={searchWord}
                     onChange={this.handleSearchBarInput}
@@ -69,7 +70,7 @@ class HearthstoneWidget extends Component {
                     {cardFlavor}
                 </p>
                 <img src={cardImage} className={styles.cardImage}/>
-                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={selector.button}></input>
             </div>
         )
 

@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import api from '../api';
 import {Wrapper, Title, InputText, Button, FormButtons, HorBar} from "../style/form-style";
+import styles from "../style/LoginPage.module.css";
+import neon from "../style/NeonEffect.module.css";
 import { GoogleLogin } from 'react-google-login';
+import styled from 'styled-components';
 
 class Login extends Component {
     constructor({props}) {
@@ -141,7 +144,7 @@ class Login extends Component {
 
         return (
             <Wrapper>
-                <Title>Log In</Title>
+                <Title className={ neon.loginTitle }>Log In</Title>
 
 
                 <FormButtons>
@@ -150,29 +153,25 @@ class Login extends Component {
                         placeholder="userName"
                         value={userName}
                         onChange={this.handleChangeInputName}
+                        className={ styles.inputtext }
                     />
                     <InputText
                         type="password"
                         placeholder="Password"
                         value={password}
                         onChange={this.handleChangePassword}
+                        className={ styles.inputtext }
                     />
-                    <Button onClick={this.handleLogin}>Log In</Button>
+                    <Button
+                        onClick={this.handleLogin}
+                        className={ styles.button }
+                    >Log In</Button>
                     {/* <CancelButton href={'/movies/list'}>Cancel</CancelButton> */}
                     <Link to={'/signup'}>
-                        <Button >Sign Up</Button>
+                        <Button className={ styles.button }>Sign Up</Button>
                     </Link>
                 </FormButtons>
                 <HorBar/>
-                {/* {googleClientID !== undefined ?
-                    <GoogleLogin
-                        clientId={googleClientID}
-                        buttonText="Login"
-                        onSuccess={this.googleSuccessLogin}
-                        onFailure={this.googleFailLogin}
-                        cookiePolicy={'single_host_origin'}
-                    />
-                : <div/>} */}
                 <GoogleLogin
                     clientId={googleClientID}
                     buttonText="Login with google"

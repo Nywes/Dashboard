@@ -1,7 +1,8 @@
 import React, { Component, useState } from 'react';
 import styles from "../style/NBAWidgets.module.css";
+import selector from "../style/SelectButton.module.css";
 import api from '../api';
-import { height } from '@mui/system';
+import { height, style } from '@mui/system';
 import Select from 'react-select';
 
 class NBATeamWidget extends Component {
@@ -21,7 +22,7 @@ class NBATeamWidget extends Component {
             {label: "Dallas Mavericks", value: "mavericks"},
             {label: "Denver Nuggets", value: "nuggets"},
             {label: "Detroit Pistons", value: "pistons"},
-            {label: "San Francisco Warriors", value: "warriors"},
+            {label: "Golden State Warriors", value: "warriors"},
             {label: "Houston Rockets", value: "rockets"},
             {label: "Indiana Pacers", value: "pacers"},
             {label: "L.A. Clippers", value: "Clippers"},
@@ -143,18 +144,27 @@ class NBATeamWidget extends Component {
         const {currentLabel, abbreviation, city, conference, division, full_name, name, searchWord} = this.state;
 
         const colourStyles = {
-            control: styles => ({ ...styles, 
+            placeholder: (defaultStyles) => {
+                return {
+                    ...defaultStyles,
+                    color: 'white',
+                    textShadow: '0 0 15px white',
+                    fontWeight: 700,
+                }
+            },
+            control: styles => ({ ...styles,
                 backgroundColor: 'transparent',
                 borderRadius: '10px',
                 border: '3px solid rgb(0, 180, 230)',
                 boxShadow: '0 0 15px -1px rgb(0, 180, 230), 0 0 12px -1px rgb(0, 180, 230) inset',
-                color: 'black,'
+                color: 'black',
             }),
             option: (styles, { data, isDisabled, isFocused, isSelected }) => {
               return {
                 ...styles,
                 backgroundColor: isDisabled ? 'red' : 'transparent',
                 cursor: isDisabled ? 'not-allowed' : 'default',
+                color: 'black',
               };
             },
         };
@@ -179,20 +189,21 @@ class NBATeamWidget extends Component {
                     placeholder={currentLabel}
                     options={this.teamOptions}
                     styles={colourStyles}
+                    className={styles.Dropdown}
                     value={currentLabel}
                     onChange={this.handleTeamInput}
                 />
 
                 <img src={imgLink} className={styles.NBATeamLogo} style={{width: "12vw", height:"17vh"}}/>
                 <ul className={styles.NBATeamInfo}>
-                    <p>City: {city}</p>
-                    <p>Name: {name}</p>
-                    <p>Abbreviation: {abbreviation}</p>
-                    <p>Conference: {conference}</p>
-                    <p>Division: {division}</p>
-                    <p className={styles.NBAFullName}>Full name: {full_name}</p>
+                    <p>City: <span className={styles.NBATeamInfo2}>{city}</span></p>
+                    <p>Name: <span className={styles.NBATeamInfo2}>{name}</span></p>
+                    <p>Abbreviation: <span className={styles.NBATeamInfo2}>{abbreviation}</span></p>
+                    <p>Conference: <span className={styles.NBATeamInfo2}>{conference}</span></p>
+                    <p>Division: <span className={styles.NBATeamInfo2}>{division}</span></p>
+                    <p className={styles.NBAFullName}>Full name: <span className={styles.NBATeamInfo2}>{full_name}</span></p>
                 </ul>
-                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={selector.button}></input>
             </div>
         )
     }

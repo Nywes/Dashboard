@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import api from '../api';
 import styles from "../style/CryptoWidget.module.css";
+import selector from "../style/SelectButton.module.css";
 import Select from 'react-select';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
@@ -176,6 +177,32 @@ class CryptoConverterWidget extends Component {
         const {cryptoOptions, currentTickerValue, currentTickerLabel, amountToConvert, firstComparator, secondComparator, firstComparatorLabel, secondComparatorLabel, firstComparatorResult, secondComparatorResult, options} = this.state
         const title = "Crypto-currency converter calculator"
 
+        const colourStyles = {
+            placeholder: (defaultStyles) => {
+                return {
+                    ...defaultStyles,
+                    color: 'white',
+                    textShadow: '0 0 15px white',
+                    fontWeight: 700,
+                }
+            },
+            control: styles => ({ ...styles,
+                backgroundColor: 'transparent',
+                borderRadius: '10px',
+                border: '3px solid rgb(0, 180, 230)',
+                boxShadow: '0 0 15px -1px rgb(0, 180, 230), 0 0 12px -1px rgb(0, 180, 230) inset',
+                color: 'black',
+            }),
+            option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+              return {
+                ...styles,
+                backgroundColor: isDisabled ? 'red' : 'transparent',
+                cursor: isDisabled ? 'not-allowed' : 'default',
+                color: 'black',
+              };
+            },
+        };
+
         return (
             <div className={this.props.widgetStyle}>
                 <p className={styles.Title}>
@@ -193,6 +220,7 @@ class CryptoConverterWidget extends Component {
                     placeholder={currentTickerLabel}
                     options={this.tickerOptions}
                     className={styles.Minutes}
+                    styles={colourStyles}
                     value={currentTickerValue}
                     onChange={this.handleTickerInput}
                 />
@@ -201,6 +229,7 @@ class CryptoConverterWidget extends Component {
                     placeholder={firstComparatorLabel}
                     options={cryptoOptions}
                     className={styles.FirstBar}
+                    styles={colourStyles}
                     value={firstComparatorLabel}
                     onChange={this.handleFirstComparatorInput}
                 />
@@ -208,24 +237,10 @@ class CryptoConverterWidget extends Component {
                     placeholder={secondComparatorLabel}
                     options={options}
                     className={styles.SecondBar}
+                    styles={colourStyles}
                     value={secondComparatorLabel}
                     onChange={this.handleSecondComparatorInput}
                 />
-                {/* <input
-                    type="text"
-                    placeholder="Second Value"
-                    className={styles.SecondBar}
-                    value={secondComparator}
-                    onChange={this.handleSecondComparatorInput}
-                    //onKeyPress={?} pas sur de faire quelque chose
-                /> */}
-                {/* <input
-                    type="button"
-                    placeholder="="
-                    className={styles.InvertButton}
-                    value="⇆"
-                    onClick={this.invertValues}
-                /> */}
                 <p className={styles.FirstComparator}>
                     {firstComparatorResult}
                 </p>
@@ -241,7 +256,7 @@ class CryptoConverterWidget extends Component {
                     className={styles.ValidateButton}
                     onClick={this.convertValue}
                 >Validate</button>
-                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={styles.Quit}></input>
+                <input type="checkbox" onClick={() => this.props.SelectWidget(this.props.WidgetID)} className={selector.button}></input>
             </div>
         )
     }
