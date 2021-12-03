@@ -2,7 +2,7 @@
 
 La première étape pour se connecter, est de cliquer sur le <span style="color:red">l'icone profil</span> située en haut à droite du dashboard
 
-![widgetdestructor](images/widgetremoverbutton.png)
+![widgetdestructor](images/buttonlogin.png)
 
 Si vous disposez déjà d'un compte vous pouvez vous `Log In`, sinon vous pouvez créer votre compte en cliquant sur `Sign Up`.
 Dans le second cas, il vous suffira de remplir les informations essentielles puis de recliquer sur `Sign Up` afin de valider la création de votre compte.
@@ -13,7 +13,7 @@ Il est également possible pour vous de vous connecter avec votre compte <span s
 
 Pour se déconnecter, rien de plus simple que de cliquer sur l'icone de déconnection en haut à droite.
 
-![widgetdestructor](images/widgetremoverbutton.png)
+![widgetdestructor](images/buttonslogout.png)
 
 
 # WIDGET
@@ -37,7 +37,7 @@ Son fonctionnement est très simple, il suffit d'écrire correctement le nom de 
 ![cryptowidget](images/cryptowidget.png)
 Ce widget permet de connaître le taux de change en direct entre deux types de monnaies, que ce soit des crypto-monnaies ou des monnaies fiduciaires.
 Plusieurs zones de saisies sont à disposition :
-- <span style="color:cyan">la première</span> (en haut à gauche) permet de choisir le montant que l'on veut comparer
+- <span style="color:red">la première</span> (en haut à gauche) permet de choisir le montant que l'on veut comparer
 - <span style="color:yellow">la seconde</span> (au milieu en haut) permet de choisir la vitesse de rafraîchissement du taux de change
 - <span style="color:lightgreen">la troisième et la quatrième</span> (aux deux extrêmités du mileu) permettent de choisir les monnaies que l'on souhaite comparer
 Il y a également le boutton bleu qui permet d'inverser de place les deux monnaies, et le bouton rouge qui permet de valider afin calculer le taux de change
@@ -63,13 +63,13 @@ Pour supprimer un ou des widgets, il suffit tout d'abord de séléctionner les w
 
 Une fois les widgets séléctionnés il ne reste plus qu'à cliquer sur <span style="color:red">l'icone poubelle</span> placée en haut à droite du dashboard
 
-![widgetdestructor](images/widgetremoverbutton.png)
+![widgetdestructor](images/buttondelete.png)
 
 ## AJOUTER DES WIDGETS
 
 Pour ajouter un widget il faut tout d'abord cliquer sur <span style="color:red">l'icone widget</span> située en haut à droite du dashboard
 
-![widgetdestructor](images/widgetremoverbutton.png)
+![widgetdestructor](images/buttonwidget.png)
 
 Ainsi plusieurs nouveaux bouttons apparaiteront.
 Pour ajouter un ajouter il ne suffit ainsi plus que de cliquer sur logo du widget souhaité
