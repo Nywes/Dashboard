@@ -12,6 +12,7 @@ const unsplashRouter = require('./routes/unsplash-router');
 const hearthstoneRouter = require('./routes/hearthstone-router');
 const quotesRouter = require('./routes/quotes-router');
 const prefsRouter = require('./routes/user-prefs-router');
+const aboutRouter = require('./routes/about-router');
 
 const cryptoSocket = require('./controllers/crypto-socket');
 
@@ -33,7 +34,15 @@ app.get('/', (req, res) => {
 
 // app.use('/api', userRouter);
 // app.use('/jwt', jwtRouter);
-app.use(userRouter, jwtRouter, nbaRouter, cryptoRouter, unsplashRouter, hearthstoneRouter, quotesRouter, prefsRouter);
-
+app.use(
+    userRouter,
+    jwtRouter,
+    nbaRouter,
+    cryptoRouter,
+    unsplashRouter,
+    hearthstoneRouter,
+    quotesRouter,
+    prefsRouter,
+    aboutRouter);
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))

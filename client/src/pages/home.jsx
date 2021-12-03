@@ -59,7 +59,8 @@ async function SaveWidgetLayout()
   // ! if not logged in, scram
   var jwt = localStorage.getItem("dashboard_jwt");
 
-  if (jwt === undefined) {
+  if (jwt === undefined || jwt === null) {
+    console.log("Not logged in, not even trying to save widgets")
     return;
   }
 
@@ -74,6 +75,8 @@ async function SaveWidgetLayout()
     .then(res => {
       if (res.status === 200) {
         console.log("Successfully saved prefs", res);
+      } else {
+        console.log("DId not save widgets");
       }
     })
     .catch(err => {
