@@ -114,10 +114,7 @@ getDashboardInfo = async (req, res) =>
 
     var dashboardInfo = {};
 
-    console.log("Req = ", req);
-    console.log("Res = ", res);
-
-    var hostIP = "";
+    var hostIP = req.ip;
     dashboardInfo.client = {host: hostIP};
 
     var serverInfo = getServerInfo();
