@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import styles from "../style/NBAWidgets.module.css";
 import selector from "../style/SelectButton.module.css";
+import neon from "../style/NeonEffect.module.css";
 import api from '../api';
 import { height, style } from '@mui/system';
 import Select from 'react-select';
@@ -199,7 +200,7 @@ class NBATeamWidget extends Component {
                     <p>City: <span className={styles.NBATeamInfo2}>{city}</span></p>
                     <p>Name: <span className={styles.NBATeamInfo2}>{name}</span></p>
                     <p>Abbreviation: <span className={styles.NBATeamInfo2}>{abbreviation}</span></p>
-                    <p>Conference: <span className={styles.NBATeamInfo2}>{conference}</span></p>
+                    <p>Con<span className={ neon.letter3 }>f</span>erence: <span className={styles.NBATeamInfo2}>{conference}</span></p>
                     <p>Division: <span className={styles.NBATeamInfo2}>{division}</span></p>
                     <p className={styles.NBAFullName}>Full name: <span className={styles.NBATeamInfo2}>{full_name}</span></p>
                 </ul>

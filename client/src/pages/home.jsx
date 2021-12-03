@@ -498,7 +498,7 @@ class StartButton extends Component
 
       return (
         <button onClick={() => this.ClickAction()} className={neon.text}>
-          Welcome to your doucheboard
+          W<span className={ neon.letter1 }>e</span>lcome t<span className={ neon.letter4 }>o</span> your douc<span className={ neon.letter2 }>h</span>eboa<span className={ neon.letter3 }>r</span>d
         </button>
       );
     } else {

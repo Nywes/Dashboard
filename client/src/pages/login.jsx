@@ -144,7 +144,7 @@ class Login extends Component {
 
         return (
             <Wrapper>
-                <Title className={ neon.loginTitle }>Log In</Title>
+                <Title className={ neon.loginTitle }>L<span className={ neon.letter1 }>o</span>g I<span className={ neon.letter2 }>n</span></Title>
 
 
                 <FormButtons>

@@ -5,6 +5,11 @@ import { grey } from '@mui/material/colors';
 import styles from "../style/HomePage.module.css"
 import neon from "../style/NeonEffect.module.css"
 import api from '../api'
+import NBALogo from '../img/nbaLogo.png'
+import CryptoLogo from '../img/bitcoinLogo.png'
+import BackgroundLogo from '../img/bgLogo.png'
+import HSLogo from '../img/hearthstoneLogo.png'
+import QuoteLogo from '../img/quoteLogo.png'
 
 class LogoButton extends Component {
     render() {
@@ -78,49 +83,43 @@ class HeaderHomePage extends Component {
 
         return (
             <header className={styles.HeaderHomePage}>
-                {widgetManager?<p className={neon.text}> Click on a Logo to add a Widget </p>:null}
+                {widgetManager?<p className={neon.text}> Click on a neon to add a Widget </p>:null}
                 {widgetManager?<img
-                    src='https://assets.materialup.com/uploads/347c48be-3ed3-4e80-87a0-3353405f0239/0x0ss-85.jpg'
-                    className={ styles.widgetManager }
-                    onClick={() => this.props.toggleWidgetsButton(0)}
+                    src={NBALogo}
+                    className={ styles.NBAWidgetManager }
                 />:null}
 
-                {widgetManager?<p className={neon.text}>NBA Team</p>:null}
+                {widgetManager?<p className={neon.text} onClick={() => this.props.toggleWidgetsButton(0)}><span className={ neon.letter2 }>N</span>BA T<span className={ neon.letter2 }>e</span>am</p>:null}
 
                 {widgetManager?<img
-                    src='https://assets.materialup.com/uploads/347c48be-3ed3-4e80-87a0-3353405f0239/0x0ss-85.jpg'
-                    className={ styles.widgetManager }
-                    onClick={() => this.props.toggleWidgetsButton(1)}
+                    src={NBALogo}
+                    className={ styles.NBAWidgetManager }
                 ></img>:null}
-                {widgetManager?<p className={neon.text}>NBA Player</p>:null}
+                {widgetManager?<p className={neon.text} onClick={() => this.props.toggleWidgetsButton(1)}>NBA Player</p>:null}
 
                 {widgetManager?<img
-                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1024px-Bitcoin.svg.png'
+                    src={CryptoLogo}
                     className={ styles.widgetManager }
-                    onClick={() => this.props.toggleWidgetsButton(2)}
                 />:null}
-                {widgetManager?<p className={neon.text}>Cryptocurrencies</p>:null}
+                {widgetManager?<p className={neon.text} onClick={() => this.props.toggleWidgetsButton(2)}>Cryptocur<span className={ neon.letter4 }>r</span>encies</p>:null}
 
                 {widgetManager?<img
-                    src='https://icon-library.com/images/ios-gallery-icon/ios-gallery-icon-29.jpg'
+                    src={BackgroundLogo}
                     className={ styles.widgetManager }
-                    onClick={() => this.props.toggleWidgetsButton(3)}
                 />:null}
-                {widgetManager?<p className={neon.text}>Background</p>:null}
+                {widgetManager?<p className={neon.text} onClick={() => this.props.toggleWidgetsButton(3)}>Background</p>:null}
 
                 {widgetManager?<img
-                    src='https://objectifsmartphone.fr/wp-content/uploads/2020/06/hearthstonelogo-bb3x.png'
+                    src={HSLogo}
                     className={ styles.widgetManager }
-                    onClick={() => this.props.toggleWidgetsButton(4)}
                 />:null}
-                {widgetManager?<p className={neon.text}>Hearthstone</p>:null}
+                {widgetManager?<p className={neon.text} onClick={() => this.props.toggleWidgetsButton(4)}>Hearthstone</p>:null}
 
                 {widgetManager?<img
-                    src='https://image.flaticon.com/icons/png/512/61/61961.png'
+                    src={QuoteLogo}
                     className={ styles.widgetManager }
-                    onClick={() => this.props.toggleWidgetsButton(5)}
                 />:null}
-                {widgetManager?<p className={neon.text}>Quote</p>:null}
+                {widgetManager?<p className={neon.text} onClick={() => this.props.toggleWidgetsButton(5)}>Q<span className={ neon.letter3 }>u</span>ot<span className={ neon.letter5 }>e</span></p>:null}
 
 
                 <Widgets onClick={() => this.changeWidgetManagerState()} className={styles.HeaderIcon}/>

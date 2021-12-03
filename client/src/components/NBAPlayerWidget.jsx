@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import styles from "../style/NBAWidgets.module.css";
 import selector from "../style/SelectButton.module.css";
+import neon from "../style/NeonEffect.module.css"
 import api from '../api';
 
 class NBAPlayerWidget extends Component {
@@ -145,7 +146,7 @@ class NBAPlayerWidget extends Component {
                 <img src={img_url} className={ styles.playerImg } style={{ width: '12vw', height: '17vh'}}/>
                 <ul className={styles.NBATeamInfo}>
                     <p className={styles.NBAFullName}>Full name:<span className={styles.NBATeamInfo2}> {`${first_name} ${last_name}`}</span></p>
-                    <p>Position:<span className={styles.NBATeamInfo2}> {position}</span></p>
+                    <p>Posit<span className={ neon.letter2 }>i</span>on:<span className={styles.NBATeamInfo2}> {position}</span></p>
                     <p>Height:<span className={styles.NBATeamInfo2}> {height_feet === "?" ? "?" : `${height_feet}\' ${height_inches}\"`}</span></p>
                     <p>Weight:<span className={styles.NBATeamInfo2}> {weight_pounds} lbs</span></p>
                     <p className={styles.NBAFullName}>Team:<span className={styles.NBATeamInfo2}> {team_full_name}</span></p>
