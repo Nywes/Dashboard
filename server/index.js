@@ -1,5 +1,9 @@
 const express = require('express')
 const cors = require('cors')
+const swaggerUi = require('swagger-ui-express');
+
+
+const swaggerDocument = require('./doc/swagger');
 
 const port = process.env.DASHBOARD_SERVER_PORT;
 
@@ -25,6 +29,7 @@ const apiPort = port
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.json())
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
