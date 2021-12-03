@@ -1,0 +1,83 @@
+.Title {
+    grid-column: 3 / span 2;
+    grid-row: 1;
+    place-self: center;
+    font-size: 2.5vmin;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 0 12px white;
+}
+
+.SearchBar {
+    grid-column: 2;
+    grid-row: 1;
+    height: 2vh;
+    background-color: rgba(0,0,0,0.9);
+    color: white;
+    font-weight: 800;
+    align-self: center;
+    padding-left: 0.5vh;
+    border-radius: 8px;
+    border: 2px solid rgb(0, 180, 230);
+    box-shadow: 0 0 15px -1px rgb(0, 180, 230), 
+    0 0 12px -1px rgb(0, 180, 230) inset;
+}
+
+.SearchBar:hover {
+    border-color: rgb(230, 0, 120);
+    box-shadow: 0 0 15px -1px rgb(230, 0, 120),
+    0 0 12px -1px rgb(230, 0, 120) inset;
+}
+
+.Img {
+    grid-column: 2 / span 3;
+    grid-row: 2 / span 2;
+    padding: 2px;
+    width: 65%;
+    height: 90%;
+    place-self: center;
+    border-radius: 15px;
+}
+
+.leftButton, .rightButton {
+    grid-column: 2 / span 3;
+    grid-row: 2 / span 2;
+    width: 8%;
+    height: 20%;
+    font-weight: 900;
+    font-size: 150%;
+    align-self: center;
+    justify-self: right;
+    border-radius: 8px;
+    border: 3px solid rgb(230, 0, 120);
+    box-shadow: 0 0 15px -1px rgb(230, 0, 120), 
+    0 0 12px -1px rgb(230, 0, 120) inset;
+    color:rgb(230, 0, 120);
+    text-shadow: rgb(230, 0, 120);
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.leftButton {
+    justify-self: left;
+}
+
+.rightButton {
+    justify-self: right;
+}
+
+.leftButton:hover, .rightButton:hover {
+    border: 2px solid rgb(0, 180, 230);
+    box-shadow: 0 0 15px -1px rgb(0, 180, 230), 
+    0 0 12px -1px rgb(0, 180, 230) inset;
+    color:rgb(0, 180, 230);
+    text-shadow: rgb(0, 180, 230);
+}
+
+.leftButton:active, .rightButton:active {
+    border: 2px solid rgb(0, 180, 230, .35);
+    box-shadow: 0 0 15px -1px rgb(0, 180, 230, .35), 
+    0 0 12px -1px rgb(0, 180, 230, .35) inset;
+    color:rgb(0, 180, 230, .35);
+    text-shadow: rgb(0, 180, 230, .35);
+}

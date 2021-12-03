@@ -1,0 +1,15 @@
+name: server_test
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: docker-compose up -d --build
+    - run: cd server && npm install --silent
+    - run: echo "DASHBOARD_SERVER_PORT=${{ secrets.DASHBOARD_PRODUCTION_SERVER_PORT }}" >> .env.production # create env file with github secrets
+    - run: npm run test
+

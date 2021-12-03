@@ -3,17 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.1.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.24.0",
+    "dotenv": "^8.2.0",
+    "dotenv-cli": "^4.1.1",
+    "http-proxy-middleware": "^0.19.1",
     "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
+    "react-bootstrap": "^2.0.2",
     "react-dom": "^17.0.2",
+    "react-google-login": "^5.2.2",
+    "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "react-select": "^5.2.1",
+    "styled-components": "^5.3.3",
+    "web-vitals": "^1.0.1",
+    "websocket": "^1.0.34"
   },
   "scripts": {
-    "start": "PORT=3001 react-scripts start",
-    "dev": "PORT=4001 react-scripts start",
+    "start": "./node_modules/.bin/dotenv -e .env.production ./node_modules/.bin/react-scripts start",
+    "dev": "./node_modules/.bin/dotenv -e .env.development ./node_modules/.bin/react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -35,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.3"
   }
 }

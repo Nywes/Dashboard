@@ -1,0 +1,130 @@
+.ValueBar {
+    grid-row: 2;
+    grid-column: 1;
+    background-color: rgba(0,0,0,0.9);
+    color: white;
+    place-self: center;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 2px solid rgb(230, 0, 120);
+    box-shadow: 0 0 15px -1px rgb(230, 0, 120), 
+    0 0 12px -1px rgb(230, 0, 120) inset;
+    width: 65%;
+    height: 50%;
+}
+
+.FirstBar {
+    grid-row: 3;
+    grid-column: 1;
+    place-self: center;
+    width: 90%;
+}
+
+.SecondBar {
+    grid-row: 3;
+    grid-column: 3;
+    place-self: center;
+    width: 90%
+}
+
+.FirstComparator {
+    grid-row: 4;
+    grid-column: 1;
+    justify-self: end;
+    align-self: center;
+    font-size: 2.5vmin;
+    color: white;
+    text-shadow: 0 0 15px white;
+    font-weight: 700;
+}
+
+.Equal {
+    grid-row: 4;
+    grid-column: 2;
+    place-self: center;
+    font-size: 2.5vmin;
+    color: white;
+    text-shadow: 0 0 15px white;
+    font-weight: 700;
+}
+
+.SecondComparator {
+    grid-row: 4;
+    grid-column: 3;
+    justify-self: start;
+    align-self: center;
+    font-size: 2.5vmin;
+    color: white;
+    text-shadow: 0 0 15px white;
+    font-weight: 700;
+}
+
+.Title {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    place-self: center;
+    font-size: 2.5vmin;
+    color: 'white';
+    text-shadow: '0 0 15px white';
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 0 15px white;
+    font-weight: 700;
+}
+
+.InvertButton {
+    grid-row: 3;
+    grid-column: 2;
+    background-color: rgba(0, 200, 255, 0.35);
+    border-radius: 15px;
+    color: 'white';
+    text-shadow: '0 0 15px white';
+    font-weight: 700;
+    font-size: 150%;
+    border: 2px solid rgb(0, 180, 230);
+    box-shadow: 0 0 15px -1px rgb(0, 180, 230), 
+    0 0 12px -1px rgb(0, 180, 230) inset;
+}
+
+.InvertButton:hover {
+    border: 2px solid white;
+}
+
+.InvertButton:active {
+    background-color: rgb(0, 0, 133);
+    border: 2px solid grey;
+}
+
+.ValidateButton {
+    grid-column: 1 / span 3;
+    grid-row: 5;
+    width: 25%;
+    background-color: rgba(230, 0, 119, 0.35);
+    border-radius: 10px;
+    justify-self: center;
+    border: 3px solid rgb(230, 0, 120);
+    border-color: rgb(230, 0, 120);
+    box-shadow: 0 0 15px -1px rgb(230, 0, 120),
+    0 0 12px -1px rgb(230, 0, 120) inset;
+    color: white;
+    text-shadow: 0 0 15px white;
+    font-weight: 700;
+    font-size: 100%;
+}
+
+.ValidateButton:hover {
+    border: 2px solid white;
+}
+
+.ValidateButton:active {
+    background-color: rgba(230, 0, 119, 0.35);
+    border: 2px solid grey;
+}
+
+.Minutes {
+    grid-row: 2;
+    grid-column: 2 / span 2;
+    width: 50%;
+    justify-self: left;
+}

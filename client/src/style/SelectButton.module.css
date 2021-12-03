@@ -1,0 +1,7 @@
+.button {
+    grid-row: 1;
+    grid-column: 1 / max;
+    width: 4%;
+    align-self: flex-start;
+    justify-self: flex-end;
+}

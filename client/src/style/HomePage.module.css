@@ -1,0 +1,138 @@
+.HeaderHomePage {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+    margin-right: 5vw;
+}
+
+.columnDesigner {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    overflow: hidden;
+}
+
+.VisibilityIcon {
+    color: black;
+    font-size: 15vh !important;
+    padding: 0.8 !important;
+}
+
+.HeaderIcon {
+    color: black;
+    font-size: 6vh !important;
+    padding: 0.8 !important;
+    border-radius: 15px;
+    margin: 0.2vw 0.2vw 0.2vw 1.5vw;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    color: white;
+    display: flex;
+    justify-content: center;
+    line-height: 1em;
+    padding: 3px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 3px solid rgb(0, 180, 230);
+    box-shadow: 0 0 15px -1px rgb(0, 180, 230), 
+    0 0 12px -1px rgb(0, 180, 230) inset;
+}
+
+.HeaderIcon:hover {
+    outline: 0;
+    border: 3px solid rgb(230, 0, 120);
+    box-shadow: 0 0 15px -1px rgb(230, 0, 120), 
+    0 0 12px -1px rgb(230, 0, 120) inset;
+}
+
+.HeaderIcon span {   
+    background-color: rgb(5, 6, 45);  
+    padding: 16px 24px;   
+    border-radius: 6px;   
+    width: 100%;   
+    height: 100%;   
+    transition: 300ms; 
+}  
+
+.HeaderIcon:hover span {
+    background: none;
+}
+
+
+.widgetManager, .NBAWidgetManager {
+    height: 5vmin;
+    width: 2.5vmin;
+    margin: 0.5% 1% 0.2% 1%;
+    animation: fadein 4s;
+    -webkit-animation: fadein 4s;
+}
+
+.widgetManager {
+    height: 4vmin;
+    width: 4vmin;
+}
+
+.SearchButton {
+    text-decoration: none;
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+@-webkit-keyframes fadein { /* Safari & Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+.NBAWidgetItem, .CryptoWidgetItem, .BackgroundWidgetItem, .HearthstoneWidgetItem, .QuoteWidgetItem {
+    display: grid;
+    height: 24vh;
+    width: 28vw;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 15px;
+    box-shadow: 0 0 8px -1px rgb(255, 255, 255), 
+    0 0 8px -1px rgb(255, 255, 255) inset;
+    margin: 2vh;
+    padding: 1vh;
+}
+
+.NBAWidgetItem {
+    grid-template-columns: 1fr minmax(auto, 50%);
+}
+
+.CryptoWidgetItem {
+    grid-template-columns: 45% 10% 45%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+.BackgroundWidgetItem {
+    grid-template-columns: 2% 32% 32% 32% 2%;
+    grid-template-rows: 20% 40% 40%;
+}
+
+.HearthstoneWidgetItem {
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 25% 25% 25% 25%;
+}
+
+.QuoteWidgetItem {
+    flex-direction: column;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 25% 25% 25% 25%;
+}

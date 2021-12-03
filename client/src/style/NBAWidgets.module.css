@@ -1,0 +1,63 @@
+.SearchBar {
+    grid-row: 1; 
+    grid-column: 1;
+    height: 2vh;
+    font-weight: 800;
+    background-color: rgba(0,0,0,0.9);
+    color: white;
+    padding-left: 0.5vh;
+    border-radius: 8px;
+    border: 2px solid rgb(0, 180, 230);
+    box-shadow: 0 0 15px -1px rgb(0, 180, 230), 
+    0 0 12px -1px rgb(0, 180, 230) inset;
+}
+
+.SearchBar:hover {
+    border-color: rgb(230, 0, 120);
+    box-shadow: 0 0 15px -1px rgb(230, 0, 120),
+    0 0 12px -1px rgb(230, 0, 120) inset;
+}
+
+.Dropdown {
+    grid-row: 1; 
+    grid-column: 1;
+}
+
+.NBATeamLogo {
+    grid-row: 2; 
+    grid-column: 1;
+    place-self: center;
+}
+
+.NBATeamInfo {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    margin: unset;
+    padding: 0% 0% 0% 10%;
+    font-size: 2vh;
+    line-height: 0.4;
+    text-align: left;
+    font-weight: 600;
+    color: rgb(230, 0, 120);
+    text-shadow: 0 0 12px rgb(230, 0, 120);
+}
+
+.NBATeamInfo2 {
+    color: rgb(0, 180, 230);
+    text-shadow: 0 0 12px rgb(0, 180, 230);
+}
+
+.NBAFullName {
+    line-height: 1;
+}
+
+.playerImg {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.Quit {
+    grid-row: 1;
+    grid-column: 2;
+    justify-self: end;
+}
