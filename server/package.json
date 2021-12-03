@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "dotenv -f .env.production run node_modules/.bin/nodemon index.js",
-    "dev": "dotenv -f .env.development run node_modules/.bin/nodemon index.js",
-    "test": "dotenv -f .env.production run node_modules/.bin/jest",
-    "devtest": "dotenv -f .env.development run node_modules/.bin/jest"
+    "start": "./node_modules/.bin/dotenv -e .env.production node_modules/.bin/nodemon index.js",
+    "dev": "./node_modules/.bin/dotenv -e .env.development node_modules/.bin/nodemon index.js",
+    "test": "./node_modules/.bin/dotenv -e .env.production node_modules/.bin/jest",
+    "devtest": "./node_modules/.bin/dotenv -e .env.development node_modules/.bin/jest"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +18,7 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "dotenv-cli": "^4.1.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.12",

@@ -11,6 +11,8 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
     "dotenv": "^8.2.0",
+    "dotenv-cli": "^4.1.1",
+    "http-proxy-middleware": "^0.19.1",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-bootstrap": "^2.0.2",
@@ -24,8 +26,8 @@
     "websocket": "^1.0.34"
   },
   "scripts": {
-    "start": "dotenv -f .env.production run ./node_modules/.bin/react-scripts start",
-    "dev": "dotenv -f .env.development run ./node_modules/.bin/react-scripts start",
+    "start": "./node_modules/.bin/dotenv -e .env.production ./node_modules/.bin/react-scripts start",
+    "dev": "./node_modules/.bin/dotenv -e .env.development ./node_modules/.bin/react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,4 +1,5 @@
 const serverPort = process.env.DASHBOARD_SERVER_PORT;
+const serverHost = process.env.DASHBOARD_SERVER_HOST;
 
 const swaggerDocument = {
     openapi: '3.0.1',
@@ -10,7 +11,7 @@ const swaggerDocument = {
     },
     servers: [
         {
-            url: `http://localhost:${serverPort}/`,
+            url: `http://${serverHost}:${serverPort}/`,
             description: 'Local server'
         }
     ],

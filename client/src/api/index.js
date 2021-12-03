@@ -1,39 +1,41 @@
 import axios from 'axios'
 
+var serverHost = process.env.REACT_APP_SERVER_HOST;
+var clientPort = process.env.REACT_APP_CLIENT_PORT;
 var serverPort = process.env.REACT_APP_SERVER_PORT;
 
 console.log("Server port " + serverPort);
 // ! needs a port environment
 const api = axios.create ({
-    baseURL: `http://localhost:${serverPort}/user_api`,
+    baseURL: `http://localhost:${clientPort}/api/user_api`,
 });
 
 const jwt = axios.create({
-    baseURL: `http://localhost:${serverPort}/jwt_api`,
+    baseURL: `http://localhost:${clientPort}/api/jwt_api`,
 });
 
 const nbaapi = axios.create({
-    baseURL: `http://localhost:${serverPort}/nba_api`,
+    baseURL: `http://localhost:${clientPort}/api/nba_api`,
 });
 
 const cryptoapi = axios.create({
-    baseURL: `http://localhost:${serverPort}/crypto_api`,
+    baseURL: `http://localhost:${clientPort}/api/crypto_api`,
 });
 
 const unsplashapi = axios.create({
-    baseURL: `http://localhost:${serverPort}/unsplash_api`,
+    baseURL: `http://localhost:${clientPort}/api/unsplash_api`,
 });
 
 const hearthstoneapi = axios.create({
-    baseURL: `http://localhost:${serverPort}/hs_api`,
+    baseURL: `http://localhost:${clientPort}/api/hs_api`,
 });
 
 const quotesapi = axios.create({
-    baseURL: `http://localhost:${serverPort}/quotes_api`,
+    baseURL: `http://localhost:${clientPort}/api/quotes_api`,
 });
 
 const prefsapi = axios.create({
-    baseURL: `http://localhost:${serverPort}/prefs_api`,
+    baseURL: `http://localhost:${clientPort}/api/prefs_api`,
 });
 
 export const createUser = payload => api.post(`/user`, payload)

@@ -4,7 +4,7 @@ const Joi = require('joi');
 const LoggedUser = require('../models/user-model');
 
 const serverPort = process.env.DASHBOARD_SERVER_PORT;
-
+const serverHost = process.env.DASHBOARD_SERVER_HOST;
 // todo set port according to environment here
 
 var testUserID = -1;
@@ -15,7 +15,7 @@ describe('Users', function () {
         // todo add a test user to the database
         const payload = { userName: "testUserName", displayName: "testDisplayName", password: "password" };
 
-        var response = await frisby.post(`http://localhost:${serverPort}/api/user`, payload)
+        var response = await frisby.post(`http://${serverHost}:${serverPort}/api/user`, payload)
         .expect("status", 200)
         .then(function(res) {
             testUserID = res.json.id;
@@ -40,12 +40,12 @@ describe('Users', function () {
 
     // Use our new custom expect handler
     it('Should get user', function () {
-        return frisby.get(`http://localhost:${serverPort}/api/user/${testUserID}`)
+        return frisby.get(`http://${serverHost}:${serverPort}/api/user/${testUserID}`)
         .expect('isTestUser');
     });
 
     afterAll(async function () {
-        var response = await frisby.del(`http://localhost:${serverPort}/api/user/${testUserID}`).expect("status", 200);
+        var response = await frisby.del(`http://${serverHost}:${serverPort}/api/user/${testUserID}`).expect("status", 200);
 
         // Remove said custom handler (if needed)
         frisby.removeExpectHandler('isUser1');

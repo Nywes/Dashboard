@@ -21,19 +21,21 @@ const aboutRouter = require('./routes/about-router');
 const cryptoSocket = require('./controllers/crypto-socket');
 
 const app = express();
-if (port == undefined)
+if (port == undefined) {
+    console.log("DASHBOARD SERVER PORT NOT FOUND");
     port = 3000;
+}
 
 const apiPort = port
 
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.json())
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send('Hello World!')
 })
 
