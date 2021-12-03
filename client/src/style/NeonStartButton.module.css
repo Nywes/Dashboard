@@ -20,8 +20,24 @@
     animation: text-flicker 4s linear infinite;
 }
 
-.letter {
+.letter1 {
   animation: letter-flicker 3s linear infinite;
+}
+
+.letter2 {
+  animation: letter-flicker 3.5s linear infinite;
+}
+
+.letter3 {
+  animation: letter-flicker 4s linear infinite;
+}
+
+.letter4 {
+  animation: letter-flicker 4.5s linear infinite;
+}
+
+.letter5 {
+  animation: letter-flicker 5s linear infinite;
 }
   
 @keyframes text-flicker {
@@ -137,4 +153,59 @@
     box-shadow: 0 0 15px -1px rgb(0, 180, 230), 
     0 0 12px -1px rgb(0, 180, 230) inset;
   }
+}
+
+@keyframes letter-flicker {
+  2% { 
+  color: rgb(230, 0, 120);
+  text-shadow: 0 0 15px rgb(230, 0, 120);
+}
+3% {
+  color: rgba(120, 0, 50, .5);
+  text-shadow: none;
+}
+6% {
+  color: rgb(230, 0, 120);
+  text-shadow: 0 0 15px rgb(230, 0, 120);
+}
+9% {
+  color: rgba(120, 0, 50, .5);
+  text-shadow: none;
+}
+11% {
+  color: rgb(230, 0, 120);
+  text-shadow: 0 0 15px rgb(230, 0, 120);
+}
+14% {
+  color: rgba(120, 0, 50, .5);
+  text-shadow: none;
+}
+18% {
+  color: rgb(230, 0, 120);
+  text-shadow: 0 0 15px rgb(230, 0, 120);
+}
+32% {
+  color: rgb(230, 0, 120);
+  text-shadow: 0 0 15px rgb(230, 0, 120);
+}
+33% {
+  color: rgba(120, 0, 50, .5);
+  text-shadow: none;
+}
+37% {
+  color: rgb(230, 0, 120);
+  text-shadow: 0 0 15px rgb(230, 0, 120);
+}
+39% {
+  color: rgba(120, 0, 50, .5);
+  text-shadow: none;
+}
+40% {
+  color: rgb(230, 0, 120);
+  text-shadow: 0 0 15px rgb(230, 0, 120);
+}
+100% {
+  color: rgb(230, 0, 120);
+  text-shadow: 0 0 15px rgb(230, 0, 120);
+}
 }

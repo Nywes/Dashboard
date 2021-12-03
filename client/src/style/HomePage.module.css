@@ -65,13 +65,17 @@
 }
 
 
-.widgetManager {
-    height: 2.5%;
-    width: 2.5%;
-    margin: 0.2% 1%;
-    border-radius: 10px;
+.widgetManager, .NBAWidgetManager {
+    height: 5vmin;
+    width: 2.5vmin;
+    margin: 0.5% 1% 0.2% 1%;
     animation: fadein 4s;
     -webkit-animation: fadein 4s;
+}
+
+.widgetManager {
+    height: 4vmin;
+    width: 4vmin;
 }
 
 .SearchButton {

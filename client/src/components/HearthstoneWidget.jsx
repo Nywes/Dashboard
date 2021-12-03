@@ -3,7 +3,7 @@ import api from '../api';
 import styles from "../style/HearthstoneWidget.module.css";
 import selector from "../style/SelectButton.module.css";
 import Select, { components } from 'react-select';
-import HearthstoneLogo from '../img/hearthstoneLogo.png';
+import HearthstoneLogo from '../img/hearthstoneLogo2.png';
 import textBg from '../img/wood_planch_bg.png';
 
 class HearthstoneWidget extends Component {

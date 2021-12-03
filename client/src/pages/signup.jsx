@@ -134,7 +134,7 @@ class SignUp extends Component {
         const { userName, displayName, password, confirmPass } = this.state
         return (
             <Wrapper>
-                <Title className={ neon.loginTitle }>Sign In</Title>
+                <Title className={ neon.loginTitle }>Si<span className={ neon.letter1 }>g</span>n <span className={ neon.letter2 }>I</span>n</Title>
                 <FormButtons>
                     <InputText
                         type="text"
