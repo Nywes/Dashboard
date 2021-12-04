@@ -28,7 +28,12 @@ createGoogleUser = (req, res) => {
     user
         .save()
         .then(() => {
-            var jwt = jwtCtrl.createJWT(user.userName);
+
+            console.log("Got user, ", user);
+            console.log("Sending username to jwt", user.userName);
+
+            // * just send data here, createJWT looks for userName inside object
+            var jwt = jwtCtrl.createJWT(user);
 
             console.log("Got JWT " + jwt);
             // * return jwt
