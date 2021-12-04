@@ -23,6 +23,12 @@ updateUserPrefs = (req, res) => {
     console.log("Decoded token: ", decodedToken);
     var userName = decodedToken.data;
 
+    if (userName === undefined) {
+        return (res.status(404).json({
+            message: "Username is undefined",
+        }))
+    }
+
     // * save
     UserPrefs.findOne({ userName: userName }, (err, prefs) => {
         if (err) {

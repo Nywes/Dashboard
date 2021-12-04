@@ -102,7 +102,7 @@ class Login extends Component {
                     var jwt = res.data.token;
 
                     localStorage.setItem('dashboard_jwt', jwt);
-                    window.location.href = "/";
+                    //window.location.href = "/";
                 })
             }
         })

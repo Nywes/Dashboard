@@ -9,7 +9,8 @@ const server = http.createServer();
 server.listen(webSocketPort);
 
 const wsServer = new webSocketServer({
-  httpServer: server
+  httpServer: server,
+  path: "/cryptosocket"
 });
 
 // I'm maintaining all active connections in this object
@@ -56,7 +57,7 @@ wsServer.on('request', function(request) {
     })
 });
 
-console.log("Started websocket");
+console.log("Started websocket: ", wsServer);
 
 module.exports = {
     wsServer

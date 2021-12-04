@@ -6,9 +6,11 @@ import Select from 'react-select';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 const serverHostName = process.env.REACT_APP_SERVER_HOST;
+var clientPort = process.env.REACT_APP_CLIENT_PORT;
 
 const webSocketPort = process.env.REACT_APP_WEBSOCKET_PORT;
-const client = new W3CWebSocket(`ws://${serverHostName}:${webSocketPort}`);
+//const client = new W3CWebSocket(`ws://${serverHostName}:${webSocketPort}`);
+const client = new W3CWebSocket(`ws://localhost:${clientPort}/cryptosocket`);
 
 class CryptoConverterWidget extends Component {
 
